@@ -1,0 +1,6 @@
+
+elimina todas las tablas de la base de datos ProgreSQL
+    npx sequelize-cli db:migrate:undo:all
+
+volver a migrar las tablas que se encuentran aca en migrations
+    npx sequelize-cli db:migrate    

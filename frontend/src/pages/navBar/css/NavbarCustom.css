@@ -1,0 +1,13 @@
+@media (max-width: 760px) {
+  .custom-navbar .navbar-collapse {
+    display: none !important;
+  }
+
+  .custom-navbar .navbar-toggler {
+    display: block !important;
+  }
+
+  .custom-navbar.collapsed .navbar-collapse {
+    display: block !important;
+  }
+}
