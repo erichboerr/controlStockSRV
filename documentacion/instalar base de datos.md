@@ -19,7 +19,7 @@ sudo -u postgres psql
 
 Dentro del prompt psql:
 -- Crear usuario para tu proyecto
-CREATE USER erich WITH PASSWORD 'tu_password_segura';
+CREATE USER erich WITH PASSWORD 'Locuras438';
 
 -- Crear base de datos para controlStock
 CREATE DATABASE controlstock OWNER erich;

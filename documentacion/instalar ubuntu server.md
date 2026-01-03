@@ -86,18 +86,18 @@ mkdir -p ~/controlstock/backend
 mkdir -p ~/controlstock/frontend
 
 ## 8. Configuración del frontend con Nginx
-cd ~/controlstock/frontend
+cd ~/controlstockv2/frontend
 npm install
 npm run build
 
 Crear archivo de configuración:
-sudo nano /etc/nginx/sites-available/controlStock.conf
+sudo nano /etc/nginx/sites-available/controlStockv2.conf
 
 server {
     listen 80;
     server_name intranet.local;
 
-    root /home/erich/controlstock/frontend/build;
+    root /home/erich/controlstockv2/frontend/build;
     index index.html;
 
     # Frontend (SPA)
@@ -117,11 +117,11 @@ server {
 
 Activar sitio:
 
-sudo ln -s /etc/nginx/sites-available/controlStock.conf /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/controlStockv2.conf /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 
 ## 9. Correr PM2
-pm2 start ecosystem.config.js --env production
+pm2 start ecosystem.config.cjs --env production
 pm2 save
 pm2 startup

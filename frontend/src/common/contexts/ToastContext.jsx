@@ -1,12 +1,14 @@
 import { useState, useCallback } from "react";
 import ToastFeedback from "../components/ToastFeedback.jsx";
 import { ToastContext } from "./ToastContextCreate.jsx";
+import { v4 as uuidv4 } from "uuid";
+
 
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
   const addToast = useCallback((message, type = "info", duration = 3000) => {
-    const id = crypto.randomUUID();
+    const id = uuidv4();
     setToasts((prev) => [...prev, { id, message, type, duration }]);
   }, []);
 

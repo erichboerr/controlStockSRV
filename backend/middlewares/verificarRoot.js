@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import logger from "../utils/Logger.js";
+import logger from "../utils/logger.js";
 
 export function verificarRoot(req, res, next) {
   const authHeader = req.headers.authorization;

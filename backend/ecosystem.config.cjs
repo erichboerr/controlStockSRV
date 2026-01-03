@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: "controlStock-backend",
-      script: "./src/index.js",
+      script: "./server.js",
       env: {
         NODE_ENV: "development",
         PORT: 3000,
@@ -15,8 +15,11 @@ module.exports = {
         PORT: 3000,
         DB_NAME: "controlstock",
         DB_USER: "erich",
-        DB_PASS: "prod_password"
+        DB_PASS: "Locuras438",
+        DB_SYNC: "false",
+        DB_SEED: "false"
       }
+
     }
   ]
 };

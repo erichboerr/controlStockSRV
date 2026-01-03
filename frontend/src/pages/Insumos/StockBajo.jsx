@@ -1,5 +1,5 @@
-import { useBajoStock } from "./hooks/useBajoStock";
-import { generarPdfBajoStock } from "./utils/pdfBajoStock";
+import { useBajoStock } from "./hooks/useBajoStock.js";
+import { generarPdfBajoStock } from "./utils/PdfBajoStock.js";
 
 export default function StockBajo() {
   const { data, loading } = useBajoStock();

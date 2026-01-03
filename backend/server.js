@@ -15,9 +15,9 @@ async function startServer() {
     await ensureDatabaseExists();
 
     // Solo sincronizar en desarrollo si está habilitado
-    if (process.env.NODE_ENV === "development" && process.env.DB_SYNC === "true") {
+    if (process.env.DB_SYNC === "true") {
       await sequelize.sync({ force: true });
-      console.log("🧬 Base sincronizada (DEV)");
+      console.log("🧬 Base sincronizada");
     }
 
     // Cargar seeds si está habilitado
