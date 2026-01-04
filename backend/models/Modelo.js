@@ -1,7 +1,9 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-  const Modelo = sequelize.define("Modelo", {
+const Modelo = sequelize.define(
+  "Modelo",
+  {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -19,19 +21,19 @@ import sequelize from "../config/db.js";
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
-  }, {
+  },
+  {
+    tableName: "modelos", // fuerza minúscula
+    freezeTableName: true, // evita pluralización automática
+    timestamps: true,
+    paranoid: true,
     indexes: [
       {
         unique: true,
         fields: ["modelo", "marcaId"],
       },
     ],
-  },{
-  tableName: "modelos",
-  freezeTableName: true,
-  timestamps: true,
-  paranoid: true,
-}
+  }
 );
 
-  export default Modelo;
+export default Modelo;
