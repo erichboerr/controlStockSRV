@@ -13,6 +13,7 @@ export async function getAll() {
 export async function getByModelo(modeloId) {
   const modelo = await Modelo.findByPk(modeloId, {
     include: { model: Insumo, as: "insumos" },
+    
   });
   return modelo ? modelo.insumos : [];
 }

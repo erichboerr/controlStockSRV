@@ -25,7 +25,8 @@ async function startServer() {
       console.log("🧬 Base sincronizada");
     }
 
-    //await seed_inicial(); // Cargar datos iniciales
+    await cargarSeeds(); // Cargar seeds básicas
+   await seed_inicial(); // Cargar datos iniciales
 
     // Cargar seeds si está habilitado
     if (String(process.env.DB_SEED).toLowerCase() === "true") {

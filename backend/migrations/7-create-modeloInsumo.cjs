@@ -4,11 +4,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("modelo_insumo", {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       modeloId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -20,7 +15,7 @@ module.exports = {
         allowNull: false,
         references: { model: "insumos", key: "id" },
         onDelete: "CASCADE",
-      }
+      },
     });
 
     // Opcional: índice único para evitar duplicados

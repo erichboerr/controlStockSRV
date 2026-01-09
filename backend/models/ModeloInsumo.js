@@ -5,7 +5,6 @@ import sequelize from "../config/db.js";
 const ModeloInsumo = sequelize.define(
   "ModeloInsumo",
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     modeloId: { type: DataTypes.INTEGER, allowNull: false },
     insumoId: { type: DataTypes.INTEGER, allowNull: false },
   },
