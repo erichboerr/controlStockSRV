@@ -10,7 +10,7 @@ export default function useAltaInsumoForm() {
   const [stockMinimo, setStockMinimo] = useState("");
   const [modelos, setModelos] = useState([]);
   const { addToast } = useToast();
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios

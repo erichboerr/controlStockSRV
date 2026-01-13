@@ -15,6 +15,7 @@ const router = express.Router();
 router.get("/", listarInsumos);
 router.get("/modelo", listarInsumosPorModelo);
 router.get("/stock-bajo", obtenerInsumosBajoStock);
+
 router.post("/modelo/:id/insumos", asociarInsumosAModelo);
 
 router.put("/:id/stock-minimo", actualizarStockMinimo);

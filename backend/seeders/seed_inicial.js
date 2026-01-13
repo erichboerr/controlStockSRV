@@ -10,6 +10,7 @@ const {
   Proveedor,
   Impresora,
   ImpresoraFisica,
+  Repuesto,
 } = models;
 
 export async function seed_inicial() {
@@ -33,14 +34,14 @@ export async function seed_inicial() {
     { id: 1, modelo: "LASERJET 1102W", marcaId: 1 },
     { id: 2, modelo: "LASERJET 1606DN", marcaId: 1 },
     { id: 3, modelo: "LASERJET 2205N", marcaId: 1 },
-    { id: 4, modelo: "LASERJET 5L/6L", marcaId: 1 , flagHabilitado : false},
+    { id: 4, modelo: "LASERJET 5L/6L", marcaId: 1, flagHabilitado: false },
     { id: 5, modelo: "LASERJET 1010/12/15/20/22", marcaId: 1 },
     { id: 6, modelo: "LASERJET M401 PRO", marcaId: 1 },
     { id: 7, modelo: "LASERJET PRO 201DW", marcaId: 1 },
     { id: 8, modelo: "LASERJET P1005/P1006", marcaId: 1 },
-    { id: 9, modelo: "LASERJET 1320", marcaId: 1 },
+    { id: 9, modelo: "LASERJET 1320", marcaId: 1, flagHabilitado: false },
     { id: 10, modelo: "LASERJET PRO M521DN", marcaId: 1 },
-    { id: 11, modelo: "LASERJET P2055DN", marcaId: 1 },
+    { id: 11, modelo: "LASERJET P2055DN", marcaId: 1, flagHabilitado: false },
     { id: 12, modelo: "LASERJET P1505", marcaId: 1 },
     { id: 13, modelo: "LASERJET M12W", marcaId: 1 },
     { id: 14, modelo: "LASERJET 107W", marcaId: 1 },
@@ -139,25 +140,25 @@ export async function seed_inicial() {
     { id: 31, insumo: "101R0435 DRUMS", stock_minimo: 5 }, //31
     {
       id: 32,
-      insumo: "106R03478 MAGENTA TONER {XL}",
+      insumo: "106R03478 MAGENTA TONER (XL)",
       stock_minimo: 5,
       flagHabilitado: false,
     }, //32
     {
       id: 33,
-      insumo: "106R03479 AMARILLO TONER {XL}",
+      insumo: "106R03479 AMARILLO TONER (XL)",
       stock_minimo: 5,
       flagHabilitado: false,
     }, //33
     {
       id: 34,
-      insumo: "106R03477 CYAN TONER {XL}",
+      insumo: "106R03477 CYAN TONER (XL)",
       stock_minimo: 5,
       flagHabilitado: false,
     }, //34
     {
       id: 35,
-      insumo: "106R03480 NEGRO TONER {XL}",
+      insumo: "106R03480 NEGRO TONER (XL)",
       stock_minimo: 5,
       flagHabilitado: false,
     }, //35
@@ -173,7 +174,6 @@ export async function seed_inicial() {
       id: 39,
       insumo: "006R04404 / B230 TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //39
     { id: 40, insumo: "013R00691 / B230 DRUM", stock_minimo: 2 }, //40
     { id: 41, insumo: "6R04730 / B415 TONER", stock_minimo: 5 }, //41
@@ -182,25 +182,21 @@ export async function seed_inicial() {
       id: 43,
       insumo: "106R03945 / B610 TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //43
     {
       id: 44,
       insumo: "101R00582 / B610 DRUM",
       stock_minimo: 2,
-      flagHabilitado: true,
     }, //44
     {
       id: 45,
       insumo: "006R01683 / B8075 TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //45
     {
       id: 46,
       insumo: "013R00675 / B8075 DRUM",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //46
     { id: 47, insumo: "TN1060 TONER", stock_minimo: 5 }, //47
     { id: 48, insumo: "DR1060 DRUMS", stock_minimo: 5 }, //48
@@ -234,56 +230,47 @@ export async function seed_inicial() {
       id: 70,
       insumo: "108R01418 MAGENTA DRUMS",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //70
     {
       id: 71,
       insumo: "108R01419 AMARILLO DRUMS",
-      stock_minimo: 5,
-      flagHabilitado: true,
+      stock_minimo: 3,
     }, //71
     { id: 72, insumo: "108R01420 NEGRO DRUMS", stock_minimo: 5 }, //72
     {
       id: 73,
       insumo: "106R3488/92 NEGRO TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //73
     {
       id: 74,
       insumo: "106R3694AL MAGENTA TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //74
     {
       id: 75,
       insumo: "106R3489/93 CYAN TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //75
     {
       id: 76,
       insumo: "106R3695AL YELLOW TONER",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //76
     {
       id: 77,
       insumo: "JC91-01034B FUSOR XEROX 3225",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //77
     {
       id: 78,
       insumo: "115R00085 KIT MANTENIMIENTO FUSOR",
-      stock_minimo: 5,
-      flagHabilitado: true,
+      stock_minimo: 2,
     }, //78
     {
       id: 79,
       insumo: "CBT-CB435A/436A/CE285A/CE278A",
       stock_minimo: 5,
-      flagHabilitado: true,
     }, //79
     { id: 80, insumo: "M300/M320", stock_minimo: 5 }, //!<averiguar>
     { id: 81, insumo: "3020 TONER", stock_minimo: 5 }, //!<averiguar>
@@ -403,11 +390,11 @@ export async function seed_inicial() {
       telefono: null,
       email: null,
     },
-    { 
-      id: 5, 
-      proveedor: "STAPLES", 
-      telefono: "0114136-6666", 
-      email: null, 
+    {
+      id: 5,
+      proveedor: "STAPLES",
+      telefono: "0114136-6666",
+      email: null,
     },
     {
       id: 6,
@@ -574,7 +561,7 @@ export async function seed_inicial() {
     { id: 33, servicio: "E.C.I." },
     { id: 34, servicio: "ESTADISTICA" },
     { id: 35, servicio: "ESTERILIZACIÓN" },
-    { id: 36, servicio: "FACTURACION" },
+    { id: 36, servicio: "FACTURACIÓN" },
     { id: 37, servicio: "FARMACIA CENTRAL" },
     { id: 38, servicio: "FARMACIA COBERTURA PORTEÑA" },
     { id: 39, servicio: "GINECOLOGIA" },
@@ -618,7 +605,7 @@ export async function seed_inicial() {
     { id: 77, servicio: "SALUD DEL ESCOLAR" },
     { id: 78, servicio: "SISTEMAS" },
     { id: 79, servicio: "SOPORTE TECNICO" },
-    { id: 80, servicio: "SUBGERENCIA RR HH" },
+    { id: 80, servicio: "SUBGERENCIA RRHH" },
     { id: 81, servicio: "SUTECBA" },
     { id: 82, servicio: "TRAUMATOLOGIA U09" },
     { id: 83, servicio: "TRAUMATOLOGIA U10" },
@@ -648,7 +635,7 @@ export async function seed_inicial() {
     { id: 107, servicio: "DEPARTAMENTO ENFERMERIA" },
     { id: 108, servicio: "BOMBERO" },
     { id: 109, servicio: "OBSTETRICIA DORMITORIO" },
-    { id: 110, servicio: "TOPOGINECO" },
+    { id: 110, servicio: "TOCOGINECO" },
     { id: 111, servicio: "ECOGRAFIA" },
     { id: 112, servicio: "FONOAUDIOLOGIA" },
     { id: 113, servicio: "VACUNATORIO" },
@@ -703,15 +690,15 @@ export async function seed_inicial() {
     { marcaId: 3, modeloId: 32 }, //BROTHER HL-1200
     { marcaId: 4, modeloId: 33 }, // LEXMARK E260DN
     { marcaId: 4, modeloId: 34 }, //LEXMARK E250DN/E350DN
-    { marcaId: 5, modeloId: 35 },
-    { marcaId: 5, modeloId: 36 },
+    { marcaId: 5, modeloId: 35 }, 
+    { marcaId: 5, modeloId: 36 }, 
     { marcaId: 5, modeloId: 37 },
     { marcaId: 6, modeloId: 38 },
     { marcaId: 6, modeloId: 39 }, //SAMSUNG ML-2525
     { marcaId: 7, modeloId: 40 },
     { marcaId: 7, modeloId: 41 },
     { marcaId: 7, modeloId: 42 },
-    { marcaId: 7, modeloId: 43 },
+    { marcaId: 7, modeloId: 43 }, 
   ];
 
   const impresoraFisica = [
@@ -1017,7 +1004,7 @@ export async function seed_inicial() {
     },
     {
       id: 43,
-      numeroSerie: "E.C.I.-001 ",
+      numeroSerie: "ECI-001 ",
       remito: null,
       proveedorId: 1,
       impresoraId: 29,
@@ -1451,7 +1438,7 @@ export async function seed_inicial() {
     },
     {
       id: 105,
-      numeroSerie: "U.C.I-001 ",
+      numeroSerie: "UCIM-001 ",
       remito: null,
       proveedorId: 1,
       impresoraId: 1,
@@ -2254,7 +2241,7 @@ export async function seed_inicial() {
       proveedorId: 7,
       impresoraId: 43,
     },
-    { 
+    {
       id: 220,
       numeroSerie: "5874ZA30141",
       remito: null,
@@ -2275,7 +2262,7 @@ export async function seed_inicial() {
       proveedorId: 7,
       impresoraId: 2,
     },
-    { 
+    {
       id: 223,
       numeroSerie: "5160ZC30034",
       remito: null,
@@ -2340,37 +2327,82 @@ export async function seed_inicial() {
     },
   ];
 
+  const Repuestos = [
+    { id: 1,
+      repuesto: "Fuente 500W ATX",
+    },
+    { id: 2,
+      repuesto: "Teclado USB",
+    },
+    { id: 3,
+      repuesto: "Mouse Óptico USB",
+    },
+    { id: 4,
+      repuesto: "Disco SSD 240GB",
+    },
+  ];
+
   async function runSeeder() {
     try {
       await sequelize.authenticate();
       console.log("✅ Conectado a la base");
 
       await Proveedor.bulkCreate(proveedores, { ignoreDuplicates: true });
+      await sequelize.query(
+        "SELECT setval('proveedores_id_seq', (SELECT MAX(id) FROM proveedores))"
+      );
       console.log("✅ Proveedores cargados");
 
       await Servicio.bulkCreate(servicios, { ignoreDuplicates: true });
+     await sequelize.query(
+        "SELECT setval('servicios_id_seq', (SELECT MAX(id) FROM servicios))"
+      );
       console.log("✅ Servicios cargados");
 
       await Marca.bulkCreate(marcas, { ignoreDuplicates: true });
+      await sequelize.query(
+        "SELECT setval('marcas_id_seq', (SELECT MAX(id) FROM marcas))"
+      );
       console.log("✅ Marcas cargadas");
 
       await Modelo.bulkCreate(modelos, { ignoreDuplicates: true });
+      await sequelize.query(
+        "SELECT setval('modelos_id_seq', (SELECT MAX(id) FROM modelos))"
+      );
       console.log("✅ Modelos cargados");
 
       await Insumo.bulkCreate(insumos, { ignoreDuplicates: true });
-      console.log("✅ insumo cargados");
+      await sequelize.query(
+        "SELECT setval('insumos_id_seq', (SELECT MAX(id) FROM insumos))"
+      );
+      console.log("✅ insumos cargados");
 
       await ModeloInsumo.bulkCreate(modelosInsumos, { ignoreDuplicates: true });
       console.log("✅ modelos insumos cargados");
 
       await Impresora.bulkCreate(impresoras, { ignoreDuplicates: true });
-      console.log("✅ impresoras cargadas");
+       await sequelize.query(
+        "SELECT setval('impresoras_id_seq', (SELECT MAX(id) FROM impresoras))"
+      );
+      console.log("✅ Impresoras cargadas");
 
       await ImpresoraFisica.bulkCreate(impresoraFisica, {
         ignoreDuplicates: true,
       });
-      console.log("✅ impresoras físicas cargadas");
+       await sequelize.query(
+        "SELECT setval(pg_get_serial_sequence('impresora_Fisica','id'), (SELECT MAX(id) FROM impresora_Fisica));"
+      );
+      console.log("✅ Impresoras físicas cargadas");
 
+     await Repuesto.bulkCreate(Repuestos, {
+        ignoreDuplicates: true,
+      });
+       await sequelize.query(
+        "SELECT setval(pg_get_serial_sequence('repuestos','id'), (SELECT MAX(id) FROM repuestos));"
+      );
+      console.log("✅ Repuestos cargados");
+
+      
       await sequelize.close();
     } catch (err) {
       console.error("❌ Error en el seeder:", err);

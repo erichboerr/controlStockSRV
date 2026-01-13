@@ -17,6 +17,7 @@ export default function AgregarInsumo() {
     handleCancelar,
   } = useAltaInsumosForm();
 
+  
   return (
     <FormularioMarco titulo="Agregar Insumo">
       <form onSubmit={handleSubmit} className="space-y-4">

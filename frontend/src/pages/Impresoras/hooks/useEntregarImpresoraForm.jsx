@@ -105,7 +105,7 @@ export default function useEntregarImpresoraForm() {
       .map((i) => ({
         id: i.id,
         numeroSerie: i.numeroSerie,
-      }));
+      })).sort((a, b) => a.numeroSerie.localeCompare(b.numeroSerie)); 
 
     setSeries(nuevasSeries);
 

@@ -18,8 +18,8 @@ export async function getByModelo(modeloId) {
   return modelo ? modelo.insumos : [];
 }
 
-export async function createOrAssociate(modeloId, nombresInsumos, stock_minimo) {
-  if (!modeloId || !Array.isArray(nombresInsumos)) {
+export async function createOrAssociate(modeloId, insumos, stock_minimo) {
+  if (!modeloId || !Array.isArray(insumos)) {
     const error = new Error("Datos incompletos para asociar insumos");
     error.isCustom = true;
     error.httpStatus = 400;
@@ -28,12 +28,12 @@ export async function createOrAssociate(modeloId, nombresInsumos, stock_minimo) 
   }
 
   const resultados = [];
-  for (const nombre of nombresInsumos) {
+  for (const nombre of insumos) {
     const normalizado = nombre.trim().toUpperCase();
 
     let insumo = await Insumo.findOne({ where: { insumo: normalizado } });
     if (!insumo) {
-      insumo = await Insumo.create({
+        insumo = await Insumo.create({
         insumo: normalizado,
         stock_minimo: stock_minimo ?? 5,
       });
@@ -131,8 +131,10 @@ export async function getInsumosBajoStock() {
       i.stock_minimo
     FROM insumos i
     LEFT JOIN stock_calculado AS m ON m."insumoId" = i.id
-    WHERE COALESCE(m.stock_actual, 0) < i.stock_minimo
-    ORDER BY i.insumo`;
+    WHERE i."flagHabilitado" = true
+      AND COALESCE(m.stock_actual, 0) < i.stock_minimo
+  ORDER BY i.insumo;`
+
 
   return await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
 }
