@@ -29,6 +29,7 @@ import IngresarImpresora from "../pages/Impresoras/IngresarImpresora.jsx";
 import EntrgarImpresora from "../pages/Impresoras/EntregarImpresora.jsx";
 import RetirarImpresora from "../pages/Impresoras/RetirarImpresora.jsx";
 import BajaImpresora from "../pages/Impresoras/BajaImpresora.jsx";
+import CambioSerieImpresora from "../pages/Impresoras/CambioSerieImpresora.jsx";
 
 //Marcas
 import AgregarMarca from "../pages/Marcas/AgregarMarca.jsx";
@@ -103,6 +104,8 @@ export default function AppRouter() {
         <Route path="/EntregarImpresora" element={<EntrgarImpresora />} />
         <Route path="/RetirarImpresora" element={<RetirarImpresora />} />
         <Route path="/BajaImpresora" element={<BajaImpresora />} />
+        <Route path="/CambioSerieImpresora" element= {<CambioSerieImpresora/>} />
+        
         {/* marcas */}
         <Route path="/AgregarMarca" element={<AgregarMarca />} />
         <Route path="/EditarMarca" element={<EditarMarca />} />

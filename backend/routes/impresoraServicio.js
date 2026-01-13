@@ -1,5 +1,5 @@
 import express from "express";
-import { entregarImpresoraServicio, retirarImpresoraServicio, listarImpresorasActivasPorServicio  } from "../controllers/impresoraServicioController.js";
+import { entregarImpresoraServicio, retirarImpresoraServicio, listarImpresorasActivasPorServicio, getImpresorasPorServicio  } from "../controllers/impresoraServicioController.js";
 
 const router = express.Router();
 
@@ -8,16 +8,13 @@ router.post("/", entregarImpresoraServicio);
 
 //GET
 router.get("/activas/:servicioId", (req, res, next) => {
-  //console.log("Entró a /activas con servicioId:", req.params.servicioId);
   next();
 }, listarImpresorasActivasPorServicio);
+router.get("/servicio/:servicioId", getImpresorasPorServicio);
 
 
 //PUT
 router.put("/retirar", retirarImpresoraServicio);
-
-
-
 
 
 export default router;

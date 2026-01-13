@@ -92,3 +92,36 @@ export async function listarImpresorasActivasService(servicioId) {
     ],
   });
 }
+
+export async function getImpresorasPorServicioService (servicioId) {
+  try {
+    const impresorasEntregadas = await ServicioImpresora.findAll({
+      where: {
+        servicioId: servicioId,
+        fechaRetiro: null, // Filtramos las que aún no han sido retiradas
+        flagHabilitado: true,
+      },
+      include: [
+        {
+          model: ImpresoraFisica,
+          as: "impresoraFisica",
+          include: [
+            {
+              model: Impresora,
+              as: "impresora",
+              include: [
+                { model: Marca, as: "marca" },
+                { model: Modelo, as: "modelo" },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    return impresorasEntregadas;
+  } catch (error) {
+    throw new Error("Error al obtener las impresoras del servicio: " + error.message);
+  }
+};
+

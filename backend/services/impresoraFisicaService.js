@@ -21,7 +21,12 @@ export async function getAll() {
   });
 }
 
-export async function create({ proveedorId, numeroSerie, remito, impresoraId }) {
+export async function create({
+  proveedorId,
+  numeroSerie,
+  remito,
+  impresoraId,
+}) {
   if (!proveedorId || !numeroSerie || !remito || !impresoraId) {
     const error = new Error("Datos incompletos");
     error.isCustom = true;
@@ -90,4 +95,34 @@ export async function darDeBajaImpresoraService(impresoraFisicaId) {
   await impresora.save();
 
   return impresora;
+}
+
+export async function updateSerie(id, numeroSerie) {
+  try {
+    const impresora = await ImpresoraFisica.findByPk(id);
+
+    if (!impresora) {
+      const error = new Error("La impresora física seleccionada no existe");
+      error.isCustom = true;
+      error.httpStatus = 404;
+      throw error;
+    }
+
+    // El método update guarda automáticamente y maneja el updatedAt
+    await impresora.update({ numeroSerie: numeroSerie });
+
+    return impresora;
+  } catch (error) {
+    // Si es error de Sequelize (como UniqueConstraint), lo lanzamos para que el controller lo vea
+    if (error.name === 'SequelizeUniqueConstraintError') throw error;
+
+    if (!error.isCustom) {
+      console.error("Error Interno:", error);
+      const customError = new Error("No se pudo actualizar la serie");
+      customError.isCustom = true;
+      customError.httpStatus = 500;
+      throw customError;
+    }
+    throw error;
+  }
 }

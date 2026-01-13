@@ -25,6 +25,7 @@ const routeMap = {
   "Entregar Impresora": "/EntregarImpresora",
   "Retirar Impresora": "/RetirarImpresora",
   "Baja Impresora": "/BajaImpresora",
+  "Actualizar Serie": "/cambioSerieImpresora",
 
   // Marcas
   "Agregar Marca": "/AgregarMarca",
@@ -125,6 +126,7 @@ export default function Sidebar() {
               "Entregar Impresora",
               "Retirar Impresora",
               "Baja Impresora",
+              "Actualizar Serie"
             ]}
           />
 
