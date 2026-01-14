@@ -89,7 +89,7 @@ export async function seed_inicial() {
     { id: 10, insumo: "55A", stock_minimo: 5, flagHabilitado: false }, //10
     { id: 11, insumo: "36A", stock_minimo: 5, flagHabilitado: false }, //11
     { id: 12, insumo: "79A", stock_minimo: 5 }, //12
-    { id: 13, insumo: "105A / 1105A", stock_minimo: 5 }, //13
+    { id: 13, insumo: "105A / 1105A TONER", stock_minimo: 5 }, //13
     { id: 14, insumo: "106R02778 TONER", stock_minimo: 5 }, //14
     { id: 15, insumo: "101R474 DRUMS", stock_minimo: 5 }, //15
     { id: 16, insumo: "106R02773 TONER", stock_minimo: 5 }, //16
@@ -97,7 +97,7 @@ export async function seed_inicial() {
     { id: 18, insumo: "113R00762 DRUMS", stock_minimo: 5 }, //18
     {
       id: 19,
-      insumo: "115R00070X UNIDAD DE IMAGEN",
+      insumo: "115R00070 FUSOR XEROX 4600",
       stock_minimo: 0,
       flagHabilitado: false,
     }, //19
@@ -127,7 +127,7 @@ export async function seed_inicial() {
     }, //23
     {
       id: 24,
-      insumo: "676k05360 Unidad de imagen",
+      insumo: "676K05360 XEROX 6505 DRUM",
       stock_minimo: 0,
       flagHabilitado: false,
     }, //24
@@ -168,8 +168,8 @@ export async function seed_inicial() {
       stock_minimo: 0,
       flagHabilitado: false,
     }, //36
-    { id: 37, insumo: "106R04347 TONER B210/B215 ", stock_minimo: 5 }, //37
-    { id: 38, insumo: "101R00664 DRUM B210/B215 ", stock_minimo: 2 }, //38
+    { id: 37, insumo: "106R04347 B210/B215 TONER", stock_minimo: 5 }, //37
+    { id: 38, insumo: "101R00664 B210/B215 DRUM", stock_minimo: 2 }, //38
     {
       id: 39,
       insumo: "006R04404 / B230 TONER",
@@ -200,9 +200,9 @@ export async function seed_inicial() {
     }, //46
     { id: 47, insumo: "TN1060 TONER", stock_minimo: 5 }, //47
     { id: 48, insumo: "DR1060 DRUMS", stock_minimo: 5 }, //48
-    { id: 49, insumo: "TN450 TONER {XL}", stock_minimo: 5 }, //49
+    { id: 49, insumo: "TN450 TONER", stock_minimo: 5 }, //49
     { id: 50, insumo: "DR420 DRUMS", stock_minimo: 2 }, //50
-    { id: 51, insumo: "TN650 TONER {XL}", stock_minimo: 5 }, //51
+    { id: 51, insumo: "TN650 TONER", stock_minimo: 5 }, //51
     { id: 52, insumo: "DR620 DRUMS", stock_minimo: 5 }, //52
     { id: 53, insumo: "E260A11L", stock_minimo: 5 }, //53
     { id: 54, insumo: "E260X22G DRUMS", stock_minimo: 5 }, //54
@@ -220,10 +220,10 @@ export async function seed_inicial() {
     }, //61
     { id: 62, insumo: "TK-5232Y YELLOW TONER", stock_minimo: 5 }, //62
     { id: 63, insumo: "TK-1150/52 TONER", stock_minimo: 5 }, //63
-    { id: 64, insumo: "MLT203 TONER|", stock_minimo: 5 }, //64
+    { id: 64, insumo: "MLT203 TONER", stock_minimo: 5 }, //64
     { id: 65, insumo: "MLT-D105L TONER", stock_minimo: 5 }, //65
     { id: 66, insumo: "SP3710 TONER", stock_minimo: 5 }, //66
-    { id: 67, insumo: "M600", stock_minimo: 5 }, //67
+    { id: 67, insumo: "M600 TONER", stock_minimo: 5 }, //67
     { id: 68, insumo: "101R00555N DRUM", stock_minimo: 2 }, //68
     { id: 69, insumo: "108R01417 CYAN DRUMS", stock_minimo: 5 }, //69
     {
@@ -244,7 +244,7 @@ export async function seed_inicial() {
     }, //73
     {
       id: 74,
-      insumo: "106R3694AL MAGENTA TONER",
+      insumo: "106R3690/94 MAGENTA TONER",
       stock_minimo: 5,
     }, //74
     {
@@ -254,7 +254,7 @@ export async function seed_inicial() {
     }, //75
     {
       id: 76,
-      insumo: "106R3695AL YELLOW TONER",
+      insumo: "106R3691/95 YELLOW TONER",
       stock_minimo: 5,
     }, //76
     {
@@ -264,16 +264,16 @@ export async function seed_inicial() {
     }, //77
     {
       id: 78,
-      insumo: "115R00085 KIT MANTENIMIENTO FUSOR",
+      insumo: "115R00085 FUSOR XEROX 3615",
       stock_minimo: 2,
     }, //78
     {
       id: 79,
-      insumo: "CBT-CB435A/436A/CE285A/CE278A",
+      insumo: "CBT-CB435A/436A/CE285A/CE278A TONER",
       stock_minimo: 5,
     }, //79
-    { id: 80, insumo: "M300/M320", stock_minimo: 5 }, //!<averiguar>
-    { id: 81, insumo: "3020 TONER", stock_minimo: 5 }, //!<averiguar>
+    { id: 80, insumo: "M300/M320 TONER", stock_minimo: 5 },
+    { id: 81, insumo: "3020 TONER", stock_minimo: 5 },
   ];
 
   const modelosInsumos = [
@@ -431,7 +431,7 @@ export async function seed_inicial() {
     { id: 13, proveedor: "CABRAL", telefono: null, email: null },
     {
       id: 14,
-      proveedor: "SGI {SERVICIOS GLOBALES DE IMFORMATICA S.A.",
+      proveedor: "SGI (SERVICIOS GLOBALES DE IMFORMATICA S.A.)",
       telefono: "4504-0569/2601 4501-2190",
       email: null,
     },
@@ -533,11 +533,11 @@ export async function seed_inicial() {
     { id: 5, servicio: "ANESTESIOLOGIA" },
     { id: 6, servicio: "ARCHIVO" },
     { id: 7, servicio: "AREA PROGRAMATICA" },
-    { id: 8, servicio: "AREA PROGRAMATICA {LEGALES)" },
+    { id: 8, servicio: "AREA PROGRAMATICA (LEGALES)" },
     { id: 9, servicio: "BIOETICA" },
-    { id: 10, servicio: "CARDIOLOGIA {ECOCARDIO)" },
-    { id: 11, servicio: "CARDIOLOGIA {ECODOPLER)" },
-    { id: 12, servicio: "CARDIOLOGIA {JEFATURA)" },
+    { id: 10, servicio: "CARDIOLOGIA (ECOCARDIO)" },
+    { id: 11, servicio: "CARDIOLOGIA (ECODOPLER)" },
+    { id: 12, servicio: "CARDIOLOGIA (JEFATURA)" },
     { id: 13, servicio: "CC.EE. (39)" },
     { id: 14, servicio: "CC.EE. (COBERTURA PORTEÑA)" },
     { id: 15, servicio: "CC.EE. NEUROLOGIA" },
@@ -567,7 +567,7 @@ export async function seed_inicial() {
     { id: 39, servicio: "GINECOLOGIA" },
     { id: 40, servicio: "GUARDIA (HHCC)" },
     { id: 41, servicio: "GUARDIA (JEFATURA)" },
-    { id: 42, servicio: "GUARDIA (Secretaria)" },
+    { id: 42, servicio: "GUARDIA (SECRETARÍA)" },
     { id: 43, servicio: "GUARDIA (VENTANILLA)" },
     { id: 44, servicio: "HEMOTERAPIA" },
     { id: 45, servicio: "HOSPITAL DE DIA" },
@@ -615,7 +615,7 @@ export async function seed_inicial() {
     { id: 87, servicio: "CLINICA U3 (RESIDENCIA)" },
     { id: 88, servicio: "NEUROLOGIA" },
     { id: 89, servicio: "PEDIATRIA (GUARDIA)" },
-    { id: 90, servicio: "LABORATORIO ( MICRIBIOLOGIA )" },
+    { id: 90, servicio: "LABORATORIO (MICRIBIOLOGIA)" },
     { id: 91, servicio: "HEMATOLOGIA" },
     { id: 92, servicio: "CC.EE. (VENTANILLA RAYOS)" },
     { id: 93, servicio: "A.R.D." },
@@ -652,7 +652,7 @@ export async function seed_inicial() {
     { id: 124, servicio: "OBSTETRICIA OFIC. LICENCIA" },
     { id: 125, servicio: "TEPAPIA OCUPACIONAL" },
     { id: 126, servicio: "MAMOGRAFIA" },
-    { id: 127, servicio: "CC.EE. ( GENERAL )" },
+    { id: 127, servicio: "CC.EE. (GENERAL)" },
   ];
 
   const impresoras = [
@@ -745,7 +745,7 @@ export async function seed_inicial() {
     },
     {
       id: 6,
-      numeroSerie: "ANAT-002 ",
+      numeroSerie: "ANAT-002",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
@@ -878,7 +878,7 @@ export async function seed_inicial() {
     },
     {
       id: 25,
-      numeroSerie: "CLIN-003 ",
+      numeroSerie: "CLIN-003",
       remito: null,
       proveedorId: 1,
       impresoraId: 1,
@@ -913,42 +913,42 @@ export async function seed_inicial() {
     },
     {
       id: 30,
-      numeroSerie: "3248742100 ",
+      numeroSerie: "3248742100",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
     },
     {
       id: 31,
-      numeroSerie: "3373928282 ",
+      numeroSerie: "3373928282",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
     },
     {
       id: 32,
-      numeroSerie: "3248743793 ",
+      numeroSerie: "3248743793",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
     },
     {
       id: 33,
-      numeroSerie: "DEPO-001 ",
+      numeroSerie: "DEPO-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 2,
     },
     {
       id: 34,
-      numeroSerie: "3380497920 ",
+      numeroSerie: "3380497920",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 35,
-      numeroSerie: "3373933162 ",
+      numeroSerie: "3373933162",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
@@ -969,7 +969,7 @@ export async function seed_inicial() {
     },
     {
       id: 38,
-      numeroSerie: "3256771097 ",
+      numeroSerie: "3256771097",
       remito: null,
       proveedorId: 3,
       impresoraId: 21,
@@ -983,70 +983,70 @@ export async function seed_inicial() {
     },
     {
       id: 40,
-      numeroSerie: "DIRE-002 ",
+      numeroSerie: "DIRE-002",
       remito: null,
       proveedorId: 1,
       impresoraId: 6,
     },
     {
       id: 41,
-      numeroSerie: "3373928320 ",
+      numeroSerie: "3373928320",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
     },
     {
       id: 42,
-      numeroSerie: "DOCE-001 ",
+      numeroSerie: "DOCE-001",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 43,
-      numeroSerie: "ECI-001 ",
+      numeroSerie: "ECI-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 29,
     },
     {
       id: 44,
-      numeroSerie: "BRBFCCQQ55 ",
+      numeroSerie: "BRBFCCQQ55",
       remito: null,
       proveedorId: 1,
       impresoraId: 2,
     },
     {
       id: 45,
-      numeroSerie: "3248744064 ",
+      numeroSerie: "3248744064",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
     },
     {
       id: 46,
-      numeroSerie: "3256771089 ",
+      numeroSerie: "3256771089",
       remito: null,
       proveedorId: 3,
       impresoraId: 21,
     },
     {
       id: 47,
-      numeroSerie: "3248743246 ",
+      numeroSerie: "3248743246",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
     },
     {
       id: 48,
-      numeroSerie: "3373933049 ",
+      numeroSerie: "3373933049",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
     },
     {
       id: 49,
-      numeroSerie: "FARM-COBPOR-001 ",
+      numeroSerie: "FARM-COBPOR-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 5,
@@ -1060,63 +1060,63 @@ export async function seed_inicial() {
     },
     {
       id: 51,
-      numeroSerie: "VW68803330 ",
+      numeroSerie: "VW68803330",
       remito: null,
       proveedorId: 6,
       impresoraId: 35,
     },
     {
       id: 52,
-      numeroSerie: "GUAR-001 ",
+      numeroSerie: "GUAR-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 1,
     },
     {
       id: 53,
-      numeroSerie: "3373928240 ",
+      numeroSerie: "3373928240",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
     },
     {
       id: 54,
-      numeroSerie: "GUAR-002 ",
+      numeroSerie: "GUAR-002",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 55,
-      numeroSerie: "HEMO-001 ",
+      numeroSerie: "HEMO-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 30,
     },
     {
       id: 56,
-      numeroSerie: "3248742894 ",
+      numeroSerie: "3248742894",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
     },
     {
       id: 57,
-      numeroSerie: "INFE-001 ",
+      numeroSerie: "INFE-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 1,
     },
     {
       id: 58,
-      numeroSerie: "JURI-001 ",
+      numeroSerie: "JURI-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 19,
     },
     {
       id: 59,
-      numeroSerie: "KINE-001 ",
+      numeroSerie: "KINE-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 5,
@@ -1137,7 +1137,7 @@ export async function seed_inicial() {
     },
     {
       id: 62,
-      numeroSerie: "LABO-003 ",
+      numeroSerie: "LABO-003",
       remito: null,
       proveedorId: 1,
       impresoraId: 3,
@@ -1158,7 +1158,7 @@ export async function seed_inicial() {
     },
     {
       id: 65,
-      numeroSerie: "LIBRERIA-001 ",
+      numeroSerie: "LIBRERIA-001",
       remito: null,
       proveedorId: 3,
       impresoraId: 22,
@@ -1179,7 +1179,7 @@ export async function seed_inicial() {
     },
     {
       id: 68,
-      numeroSerie: "3373921806 ",
+      numeroSerie: "3373921806",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
@@ -1193,7 +1193,7 @@ export async function seed_inicial() {
     },
     {
       id: 70,
-      numeroSerie: "3373929238 ",
+      numeroSerie: "3373929238",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
@@ -1214,7 +1214,7 @@ export async function seed_inicial() {
     },
     {
       id: 73,
-      numeroSerie: "3380490322 ",
+      numeroSerie: "3380490322",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
@@ -1228,14 +1228,14 @@ export async function seed_inicial() {
     },
     {
       id: 75,
-      numeroSerie: "3380499257 ",
+      numeroSerie: "3380499257",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 76,
-      numeroSerie: "BRBFCCQQ5D ",
+      numeroSerie: "BRBFCCQQ5D",
       remito: null,
       proveedorId: 1,
       impresoraId: 2,
@@ -1249,14 +1249,14 @@ export async function seed_inicial() {
     },
     {
       id: 78,
-      numeroSerie: "NEUR-001 ",
+      numeroSerie: "NEUR-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 8,
     },
     {
       id: 79,
-      numeroSerie: "NEUR-002 ",
+      numeroSerie: "NEUR-002",
       remito: null,
       proveedorId: 1,
       impresoraId: 34,
@@ -1270,14 +1270,14 @@ export async function seed_inicial() {
     },
     {
       id: 81,
-      numeroSerie: "3380483768 ",
+      numeroSerie: "3380483768",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 82,
-      numeroSerie: "ODON-001 ",
+      numeroSerie: "ODON-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 31,
@@ -1291,21 +1291,21 @@ export async function seed_inicial() {
     },
     {
       id: 84,
-      numeroSerie: "ONCO-001 ",
+      numeroSerie: "ONCO-001",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 85,
-      numeroSerie: "3380499214 ",
+      numeroSerie: "3380499214",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 86,
-      numeroSerie: "PATR-001 ",
+      numeroSerie: "PATR-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 2,
@@ -1319,42 +1319,42 @@ export async function seed_inicial() {
     },
     {
       id: 88,
-      numeroSerie: "3373921679 ",
+      numeroSerie: "3373921679",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
     },
     {
       id: 89,
-      numeroSerie: "3248743882 ",
+      numeroSerie: "3248743882",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
     },
     {
       id: 90,
-      numeroSerie: "3256771119 ",
+      numeroSerie: "3256771119",
       remito: null,
       proveedorId: 3,
       impresoraId: 21,
     },
     {
       id: 91,
-      numeroSerie: "PROG-001 ",
+      numeroSerie: "PROG-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 5,
     },
     {
       id: 92,
-      numeroSerie: "BRFSF1BKKV ",
+      numeroSerie: "BRFSF1BKKV",
       remito: null,
       proveedorId: 1,
       impresoraId: 6,
     },
     {
       id: 93,
-      numeroSerie: "3163791012 ",
+      numeroSerie: "3163791012",
       remito: null,
       proveedorId: 5,
       impresoraId: 18,
@@ -1368,7 +1368,7 @@ export async function seed_inicial() {
     },
     {
       id: 95,
-      numeroSerie: "3248743211 ",
+      numeroSerie: "3248743211",
       remito: null,
       proveedorId: 5,
       impresoraId: 17,
@@ -1382,70 +1382,70 @@ export async function seed_inicial() {
     },
     {
       id: 97,
-      numeroSerie: "RAYO-002 ",
+      numeroSerie: "RAYO-002",
       remito: null,
       proveedorId: 1,
       impresoraId: 29,
     },
     {
       id: 98,
-      numeroSerie: "3163790806 ",
+      numeroSerie: "3163790806",
       remito: null,
       proveedorId: 5,
       impresoraId: 18,
     },
     {
       id: 99,
-      numeroSerie: "3380499397 ",
+      numeroSerie: "3380499397",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
     },
     {
       id: 100,
-      numeroSerie: "ST-001 ",
+      numeroSerie: "ST-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 31,
     },
     {
       id: 101,
-      numeroSerie: "SUBG-001 ",
+      numeroSerie: "SUBG-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 1,
     },
     {
       id: 102,
-      numeroSerie: "3373928045 ",
+      numeroSerie: "3373928045",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
     },
     {
       id: 103,
-      numeroSerie: "TRAU-U9-001 ",
+      numeroSerie: "TRAU-U9-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 2,
     },
     {
       id: 104,
-      numeroSerie: "TRAU-U10-001 ",
+      numeroSerie: "TRAU-U10-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 2,
     },
     {
       id: 105,
-      numeroSerie: "UCIM-001 ",
+      numeroSerie: "UCIM-001",
       remito: null,
       proveedorId: 1,
       impresoraId: 1,
     },
     {
       id: 106,
-      numeroSerie: "3380497947 ",
+      numeroSerie: "3380497947",
       remito: null,
       proveedorId: 5,
       impresoraId: 15,
@@ -1571,7 +1571,7 @@ export async function seed_inicial() {
     },
     {
       id: 124,
-      numeroSerie: " BRBS64NG45",
+      numeroSerie: "BRBS64NG45",
       remito: null,
       proveedorId: 1,
       impresoraId: 5,
@@ -1704,7 +1704,7 @@ export async function seed_inicial() {
     },
     {
       id: 143,
-      numeroSerie: "MANTENIMIENTO -001",
+      numeroSerie: "MANTENIMIENTO-001",
       remito: null,
       proveedorId: 7,
       impresoraId: 1,
@@ -1802,7 +1802,7 @@ export async function seed_inicial() {
     },
     {
       id: 157,
-      numeroSerie: "SERV SOC 01",
+      numeroSerie: "SERVSOC-01",
       remito: null,
       proveedorId: 3,
       impresoraId: 19,
@@ -1949,7 +1949,7 @@ export async function seed_inicial() {
     },
     {
       id: 178,
-      numeroSerie: "DTO ENF 002",
+      numeroSerie: "DTOENF-002",
       remito: null,
       proveedorId: 11,
       impresoraId: 15,
@@ -1984,7 +1984,7 @@ export async function seed_inicial() {
     },
     {
       id: 183,
-      numeroSerie: "LICENCIAS 02",
+      numeroSerie: "LICENCIAS-02",
       remito: null,
       proveedorId: 6,
       impresoraId: 41,
@@ -2040,7 +2040,7 @@ export async function seed_inicial() {
     },
     {
       id: 191,
-      numeroSerie: "ARQ 1",
+      numeroSerie: "ARQ-1",
       remito: null,
       proveedorId: 11,
       impresoraId: 40,

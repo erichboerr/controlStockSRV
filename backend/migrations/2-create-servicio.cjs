@@ -8,15 +8,15 @@ module.exports = {
       servicio: { type: Sequelize.STRING, allowNull: false, unique: true },
       flagHabilitado: { type: Sequelize.BOOLEAN, defaultValue: true },
       createdAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       updatedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       deletedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
     });

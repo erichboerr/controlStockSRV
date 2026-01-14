@@ -16,8 +16,8 @@ export default function useIngresoForm() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    axios.get(proveedoresUrl).then(res => setProveedores(res.data));    
-    axios.get(insumoUrl).then(res => setInsumos(res.data));
+    axios.get(proveedoresUrl).then(res => setProveedores(res.data || [] ));    
+    axios.get(insumoUrl).then(res => setInsumos(res.data || []));
   }, []);
 
   const agregarItem = () => {
@@ -27,7 +27,7 @@ export default function useIngresoForm() {
   ...items,
   {
     idInsumo: insumoSeleccionado.id,
-    descripcion: insumoSeleccionado.insumo, // 👈 usar la propiedad correcta
+    descripcion: insumoSeleccionado.insumo, 
     cantidad
   }
 ]);

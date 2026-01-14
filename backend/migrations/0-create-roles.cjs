@@ -19,19 +19,19 @@ module.exports = {
         defaultValue: true,
       },
       systemRole: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       createdAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       updatedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       deletedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
     });

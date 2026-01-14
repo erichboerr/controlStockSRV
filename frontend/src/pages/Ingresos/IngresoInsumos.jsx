@@ -59,7 +59,7 @@ export default function IngresoInsumos() {
           <InputGeneric
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
-            requerido={true}
+            requerido={false}
             placeholder="Cantidad"
             tipo="number"
             icono="bi-hash"

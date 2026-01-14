@@ -4,9 +4,13 @@ import ServicioImpresora from "../models/ImpresoraServicio.js";
 import Impresora from "../models/Impresora.js";
 import Marca from "../models/Marca.js";
 import Modelo from "../models/Modelo.js";
+import { Op } from "sequelize";
+
 
 // Entregar impresora a un servicio
 export async function entregarImpresoraService({ numeroSerie, servicioId }) {
+  //console.log("servicioId: "+ servicioId);
+ // console.log("numeroSerie: "+ numeroSerie.trim());
   if (!numeroSerie?.trim() || !servicioId) {
     const error = new Error("Faltan datos obligatorios");
     error.isCustom = true;
@@ -16,10 +20,11 @@ export async function entregarImpresoraService({ numeroSerie, servicioId }) {
   }
 
   const impresoraFisica = await ImpresoraFisica.findOne({
-    where: { numeroSerie: numeroSerie.trim() },
-  });
+  where: { numeroSerie: { [Op.iLike]: numeroSerie.trim() } },
+});
+
   if (!impresoraFisica) {
-    const error = new Error("Impresora física no encontrada");
+    const error = new Error("Impresora física no encontrada serie numero: "+numeroSerie.trim());
     error.isCustom = true;
     error.httpStatus = 404;
     error.code = "NOT_FOUND";
@@ -29,6 +34,7 @@ export async function entregarImpresoraService({ numeroSerie, servicioId }) {
   const entregaActiva = await ImpresoraServicio.findOne({
     where: { impresoraFisicaId: impresoraFisica.id, fechaRetiro: null },
   });
+  //console.log("impresora encontrada: "+ entregaActiva)
   if (entregaActiva) {
     const error = new Error("La impresora ya está entregada a un servicio activo");
     error.isCustom = true;

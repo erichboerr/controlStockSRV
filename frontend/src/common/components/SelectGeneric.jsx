@@ -9,11 +9,13 @@ export default function SelectGeneric({
   disabled = false,
   className = "",
   labelKey = "nombre",
-  noMargin = false, // ✅ nueva prop
+  noMargin = false,
 }) {
-  const opciones = mostrarSoloHabilitados
-    ? generic.filter((s) => s.flagHabilitado === true)
-    : generic;
+  const opciones = Array.isArray(generic)
+    ? (mostrarSoloHabilitados
+        ? generic.filter((s) => s.flagHabilitado === true)
+        : generic)
+    : [];
 
   const handleChange = (e) => {
     const id = parseInt(e.target.value);
@@ -25,21 +27,17 @@ export default function SelectGeneric({
   return (
     <div className={`${noMargin ? "" : "mb-4"} ${className}`}>
       <div
-        className={`
-          flex items-center rounded-lg border 
+        className={`flex items-center rounded-lg border 
           ${disabled ? "bg-gray-100 border-gray-300" : "border-gray-300"}
-          focus-within:ring-2 focus-within:ring-blue-500
-        `}
+          focus-within:ring-2 focus-within:ring-blue-500`}
       >
         <span className="px-3 text-gray-500">
           <i className={`bi ${icono}`}></i>
         </span>
 
         <select
-          className={`
-            w-full px-3 py-2 rounded-r-lg outline-none bg-white
-            ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed" : ""}
-          `}
+          className={`w-full px-3 py-2 rounded-r-lg outline-none bg-white
+            ${disabled ? "bg-gray-100 text-gray-500 cursor-not-allowed" : ""}`}
           value={seleccionado?.id || ""}
           onChange={handleChange}
           disabled={disabled}

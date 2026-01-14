@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       stock_minimo: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 5,
       },
@@ -23,15 +23,15 @@ module.exports = {
         defaultValue: true,
       },
       createdAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       updatedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       deletedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: true,
       },
     });
