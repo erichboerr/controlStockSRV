@@ -77,24 +77,24 @@ export async function seed_inicial() {
   ];
 
   const insumos = [
-    { id: 1, insumo: "85A", stock_minimo: 5 }, //1
-    { id: 2, insumo: "78A", stock_minimo: 5 }, //2
-    { id: 3, insumo: "05A", stock_minimo: 5, flagHabilitado: false }, //3
-    { id: 4, insumo: "06A", stock_minimo: 5, flagHabilitado: false }, //4
-    { id: 5, insumo: "12A", stock_minimo: 5 }, //5
-    { id: 6, insumo: "80A", stock_minimo: 5 }, //6
-    { id: 7, insumo: "83A", stock_minimo: 5 }, //7
-    { id: 8, insumo: "35A", stock_minimo: 5, flagHabilitado: false }, //8
-    { id: 9, insumo: "49A", stock_minimo: 5, flagHabilitado: false }, //9
-    { id: 10, insumo: "55A", stock_minimo: 5, flagHabilitado: false }, //10
-    { id: 11, insumo: "36A", stock_minimo: 5, flagHabilitado: false }, //11
-    { id: 12, insumo: "79A", stock_minimo: 5 }, //12
+    { id: 1, insumo: "85A TONER", stock_minimo: 5 }, //1
+    { id: 2, insumo: "78A TONER", stock_minimo: 5 }, //2
+    { id: 3, insumo: "05A TONER", stock_minimo: 5, flagHabilitado: false }, //3
+    { id: 4, insumo: "06A TONER", stock_minimo: 5, flagHabilitado: false }, //4
+    { id: 5, insumo: "12A TONER", stock_minimo: 5 }, //5
+    { id: 6, insumo: "80A TONER", stock_minimo: 5 }, //6
+    { id: 7, insumo: "83A TONER", stock_minimo: 5 }, //7
+    { id: 8, insumo: "35A TONER", stock_minimo: 5, flagHabilitado: false }, //8
+    { id: 9, insumo: "49A TONER", stock_minimo: 5, flagHabilitado: false }, //9
+    { id: 10, insumo: "55A TONER", stock_minimo: 5, flagHabilitado: false }, //10
+    { id: 11, insumo: "36A TONER", stock_minimo: 5, flagHabilitado: false }, //11
+    { id: 12, insumo: "79A TONER", stock_minimo: 5 }, //12
     { id: 13, insumo: "105A / 1105A TONER", stock_minimo: 5 }, //13
     { id: 14, insumo: "106R02778 TONER", stock_minimo: 5 }, //14
-    { id: 15, insumo: "101R474 DRUMS", stock_minimo: 5 }, //15
+    { id: 15, insumo: "101R474 DRUM", stock_minimo: 3 }, //15
     { id: 16, insumo: "106R02773 TONER", stock_minimo: 5 }, //16
     { id: 17, insumo: "106R1536 TONER", stock_minimo: 5 }, //17
-    { id: 18, insumo: "113R00762 DRUMS", stock_minimo: 5 }, //18
+    { id: 18, insumo: "113R00762 DRUM", stock_minimo: 3 }, //18
     {
       id: 19,
       insumo: "115R00070 FUSOR XEROX 4600",
@@ -104,25 +104,25 @@ export async function seed_inicial() {
     {
       id: 20,
       insumo: "106R01601 CYAN TONER",
-      stock_minimo: 5,
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //20
     {
       id: 21,
       insumo: "106R01602 RED TONER",
-      stock_minimo: 5,
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //21
     {
       id: 22,
-      insumo: "106R01603 YELLOW TONER",
-      stock_minimo: 5,
+      insumo: "106R01603 AMARILLO TONER",
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //22
     {
       id: 23,
       insumo: "106R01604 BLACK TONER",
-      stock_minimo: 5,
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //23
     {
@@ -132,41 +132,40 @@ export async function seed_inicial() {
       flagHabilitado: false,
     }, //24
     { id: 25, insumo: "106R02732 TONER", stock_minimo: 5 }, //25
-    { id: 26, insumo: "113R00773 DRUMS", stock_minimo: 5 }, //26
-    { id: 27, insumo: "106R03623N", stock_minimo: 5 }, //27
+    { id: 26, insumo: "113R00773 DRUM", stock_minimo: 3 }, //26
+    { id: 27, insumo: "106R03623 TONER", stock_minimo: 5 }, //27
     { id: 28, insumo: "999W3550 TONER", stock_minimo: 5 }, //28
-    { id: 29, insumo: "106R1501 DRUMS", stock_minimo: 5 }, //29
+    { id: 29, insumo: "106R1501 DRUM", stock_minimo: 3 }, //29
     { id: 30, insumo: "106R01305 TONER", stock_minimo: 5 }, //30
-    { id: 31, insumo: "101R0435 DRUMS", stock_minimo: 5 }, //31
+    { id: 31, insumo: "101R0435 DRUM", stock_minimo: 3 }, //31
     {
       id: 32,
       insumo: "106R03478 MAGENTA TONER (XL)",
-      stock_minimo: 5,
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //32
     {
       id: 33,
       insumo: "106R03479 AMARILLO TONER (XL)",
-      stock_minimo: 5,
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //33
     {
       id: 34,
       insumo: "106R03477 CYAN TONER (XL)",
-      stock_minimo: 5,
+      stock_minimo: 2,
       flagHabilitado: false,
     }, //34
     {
       id: 35,
       insumo: "106R03480 NEGRO TONER (XL)",
-      stock_minimo: 5,
+      stock_minimo: 3,
       flagHabilitado: false,
     }, //35
     {
       id: 36,
-      insumo: "108R01416 CARTUCHO DE RESIDUOS",
-      stock_minimo: 0,
-      flagHabilitado: false,
+      insumo: "108R01416 CART. RESIDUOS XEROX 6515",
+      stock_minimo: 1,
     }, //36
     { id: 37, insumo: "106R04347 B210/B215 TONER", stock_minimo: 5 }, //37
     { id: 38, insumo: "101R00664 B210/B215 DRUM", stock_minimo: 2 }, //38
@@ -193,79 +192,82 @@ export async function seed_inicial() {
       insumo: "006R01683 / B8075 TONER",
       stock_minimo: 5,
     }, //45
-    {
-      id: 46,
-      insumo: "013R00675 / B8075 DRUM",
-      stock_minimo: 5,
+    { 
+      id: 46, 
+      insumo: "013R00675 / B8075 DRUM", 
+      stock_minimo: 2, 
     }, //46
     { id: 47, insumo: "TN1060 TONER", stock_minimo: 5 }, //47
-    { id: 48, insumo: "DR1060 DRUMS", stock_minimo: 5 }, //48
+    { id: 48, insumo: "DR1060 DRUM", stock_minimo: 2 }, //48
     { id: 49, insumo: "TN450 TONER", stock_minimo: 5 }, //49
-    { id: 50, insumo: "DR420 DRUMS", stock_minimo: 2 }, //50
+    { id: 50, insumo: "DR420 DRUM", stock_minimo: 2 }, //50
     { id: 51, insumo: "TN650 TONER", stock_minimo: 5 }, //51
-    { id: 52, insumo: "DR620 DRUMS", stock_minimo: 5 }, //52
-    { id: 53, insumo: "E260A11L", stock_minimo: 5 }, //53
-    { id: 54, insumo: "E260X22G DRUMS", stock_minimo: 5 }, //54
-    { id: 55, insumo: "E250A11L TONER", stock_minimo: 5 }, //55
-    { id: 56, insumo: "E250X22G DRUMS", stock_minimo: 2 }, //56
+    { id: 52, insumo: "DR620 DRUM", stock_minimo: 2 }, //52
+    { id: 53, insumo: "E260A11L TONER", stock_minimo: 5 }, //53
+    { id: 54, insumo: "E260X22G DRUM", stock_minimo: 1 }, //54
+    { id: 55, insumo: "E250A11L TONER", stock_minimo: 2, flagHabilitado: false }, //55
+    { id: 56, insumo: "E250X22G DRUM", stock_minimo: 2, flagHabilitado: false }, //56
     { id: 57, insumo: "TK-3182 TONER", stock_minimo: 5 }, //57
     { id: 58, insumo: "DK-3192 DRUM", stock_minimo: 2 }, //58
-    { id: 59, insumo: "TK-5232K BLACK TONER", stock_minimo: 5 }, //59
-    { id: 60, insumo: "TK-5232C CYAN TONER", stock_minimo: 5 }, //60
-    {
-      id: 61,
-      insumo: "TK-5232M MAGENTA TONER",
-      stock_minimo: 5,
-      flagHabilitado: true,
-    }, //61
-    { id: 62, insumo: "TK-5232Y YELLOW TONER", stock_minimo: 5 }, //62
+    { id: 59, insumo: "TK-5232K BLACK TONER", stock_minimo: 3 }, //59
+    { id: 60, insumo: "TK-5232C CYAN TONER", stock_minimo: 3 }, //60
+    { id: 61, insumo: "TK-5232M MAGENTA TONER", stock_minimo: 3, }, //61
+    { id: 62, insumo: "TK-5232Y AMARILLO TONER", stock_minimo: 3 }, //62
     { id: 63, insumo: "TK-1150/52 TONER", stock_minimo: 5 }, //63
     { id: 64, insumo: "MLT203 TONER", stock_minimo: 5 }, //64
-    { id: 65, insumo: "MLT-D105L TONER", stock_minimo: 5 }, //65
+    { id: 65, insumo: "MLT-D105L TONER", stock_minimo: 2 }, //65
     { id: 66, insumo: "SP3710 TONER", stock_minimo: 5 }, //66
     { id: 67, insumo: "M600 TONER", stock_minimo: 5 }, //67
-    { id: 68, insumo: "101R00555N DRUM", stock_minimo: 2 }, //68
-    { id: 69, insumo: "108R01417 CYAN DRUMS", stock_minimo: 5 }, //69
+    { id: 68, insumo: "101R00555 DRUM", stock_minimo: 2 }, //68
+    { 
+      id: 69, 
+      insumo: "108R01417 CYAN DRUM", 
+      stock_minimo: 2 
+    }, //69
     {
       id: 70,
-      insumo: "108R01418 MAGENTA DRUMS",
-      stock_minimo: 5,
+      insumo: "108R01418 MAGENTA DRUM",
+      stock_minimo: 2,
     }, //70
     {
       id: 71,
-      insumo: "108R01419 AMARILLO DRUMS",
-      stock_minimo: 3,
+      insumo: "108R01419 AMARILLO DRUM",
+      stock_minimo: 2,
     }, //71
-    { id: 72, insumo: "108R01420 NEGRO DRUMS", stock_minimo: 5 }, //72
+    { 
+      id: 72, 
+      insumo: "108R01420 NEGRO DRUM", 
+      stock_minimo: 2 
+    }, //72
     {
       id: 73,
       insumo: "106R3488/92 NEGRO TONER",
-      stock_minimo: 5,
+      stock_minimo: 3,
     }, //73
     {
       id: 74,
       insumo: "106R3690/94 MAGENTA TONER",
-      stock_minimo: 5,
+      stock_minimo: 3,
     }, //74
     {
       id: 75,
       insumo: "106R3489/93 CYAN TONER",
-      stock_minimo: 5,
+      stock_minimo: 3,
     }, //75
     {
       id: 76,
-      insumo: "106R3691/95 YELLOW TONER",
-      stock_minimo: 5,
+      insumo: "106R3691/95 AMARILLO TONER",
+      stock_minimo: 3,
     }, //76
     {
       id: 77,
       insumo: "JC91-01034B FUSOR XEROX 3225",
-      stock_minimo: 5,
+      stock_minimo: 1,
     }, //77
     {
       id: 78,
       insumo: "115R00085 FUSOR XEROX 3615",
-      stock_minimo: 2,
+      stock_minimo: 1,
     }, //78
     {
       id: 79,
@@ -292,24 +294,24 @@ export async function seed_inicial() {
     { modeloId: 13, insumoId: 12 }, // HP LASERJET M12W - 79A
     { modeloId: 14, insumoId: 13 }, // HP LASERJET 107W - 105A / 1105A
     { modeloId: 15, insumoId: 14 }, // XEROX PHASER 3225/3260 - 106R02778 TONER
-    { modeloId: 15, insumoId: 15 }, // XEROX PHASER 3225/3260 - 101R474 DRUMS
+    { modeloId: 15, insumoId: 15 }, // XEROX PHASER 3225/3260 - 101R474 DRUM
     { modeloId: 16, insumoId: 16 }, // XEROX PHASER 3020 - 106R02773 TONER
     { modeloId: 17, insumoId: 17 }, // XEROX PHASER 4600DN - 106R1536 TONER
-    { modeloId: 17, insumoId: 18 }, // XEROX PHASER 4600DN - 113R00762 DRUMS
+    { modeloId: 17, insumoId: 18 }, // XEROX PHASER 4600DN - 113R00762 DRUM
     { modeloId: 17, insumoId: 19 }, // XEROX PHASER 4600DN - 115R00070X UNIDAD DE IMAGEN
     { modeloId: 18, insumoId: 20 }, // XEROX WorkCentre 6505DN - 106R01601 CYAN TONER
     { modeloId: 18, insumoId: 21 }, // XEROX WorkCentre 6505DN - 106R01602 RED TONER
-    { modeloId: 18, insumoId: 22 }, // XEROX WorkCentre 6505DN - 106R01603 YELLOW TONER
+    { modeloId: 18, insumoId: 22 }, // XEROX WorkCentre 6505DN - 106R01603 AMARILLO TONER
     { modeloId: 18, insumoId: 23 }, // XEROX WorkCentre 6505DN - 106R01604 BLACK TONER
     { modeloId: 18, insumoId: 24 }, // XEROX WorkCentre 6505DN - 676K05360 UNIDAD DE IMAGEN
     { modeloId: 19, insumoId: 25 }, // XEROX WorkCentre 3615 - 106R02732 TONER
-    { modeloId: 19, insumoId: 26 }, // XEROX WorkCentre 3615 - 113R00773 DRUMS
+    { modeloId: 19, insumoId: 26 }, // XEROX WorkCentre 3615 - 113R00773 DRUM
     { modeloId: 20, insumoId: 27 }, // XEROX WorkCentre 3345 - 106R03623N TONER
-    { modeloId: 20, insumoId: 68 }, // XEROX WorkCentre 3345 - 101R0555N DRUMS
+    { modeloId: 20, insumoId: 68 }, // XEROX WorkCentre 3345 - 101R0555N DRUM
     { modeloId: 21, insumoId: 28 }, // XEROX WorkCentre 3550 - 106R01531 TONER
     { modeloId: 21, insumoId: 29 }, // XEROX WorkCentre 3550 - 999W3550 TONER|
     { modeloId: 22, insumoId: 30 }, // XEROX WorkCentre 5225/5230 - 106R01305 TONER
-    { modeloId: 22, insumoId: 31 }, // XEROX WorkCentre 5225/5230 - 101R0435 DRUMS
+    { modeloId: 22, insumoId: 31 }, // XEROX WorkCentre 5225/5230 - 101R0435 DRUM
     { modeloId: 23, insumoId: 32 }, // XEROX WorkCentre 6515DN - 106R03478 MAGENTA TONER {XL}
     { modeloId: 23, insumoId: 33 }, // XEROX WorkCentre 6515DN - 106R03479 AMARILLO TONER {XL}
     { modeloId: 23, insumoId: 34 }, // XEROX WorkCentre 6515DN - 106R03477 CYAN TONER {XL}
@@ -326,22 +328,22 @@ export async function seed_inicial() {
     { modeloId: 28, insumoId: 45 }, // XEROX VersaLink B8075 - 006R01683 / B8075 TONER
     { modeloId: 28, insumoId: 46 }, // XEROX VersaLink B8075 - 013R00675 / B8075 DRUM
     { modeloId: 29, insumoId: 47 }, // BROTHER HL-1100/DCP1617NW - TN-1060 TONER
-    { modeloId: 29, insumoId: 48 }, // BROTHER HL-1100/DCP1617NW - DR-1060 DRUMS
+    { modeloId: 29, insumoId: 48 }, // BROTHER HL-1100/DCP1617NW - DR-1060 DRUM
     { modeloId: 30, insumoId: 49 }, // BROTHER HL-2200 - TN450 TONER
-    { modeloId: 30, insumoId: 50 }, // BROTHER HL-2200 - DR420 DRUMS
+    { modeloId: 30, insumoId: 50 }, // BROTHER HL-2200 - DR420 DRUM
     { modeloId: 31, insumoId: 51 }, // BROTHER HL-5350DN - TN650 TONER {XL}
-    { modeloId: 31, insumoId: 52 }, // BROTHER HL-5350DN - DR620 DRUMS
-    { modeloId: 32, insumoId: 48 }, //BROTHER HL-1200 - DR-1060 DRUMS
+    { modeloId: 31, insumoId: 52 }, // BROTHER HL-5350DN - DR620 DRUM
+    { modeloId: 32, insumoId: 48 }, //BROTHER HL-1200 - DR-1060 DRUM
     { modeloId: 33, insumoId: 53 }, // LEXMARK E260DN - E260A11L TONER
-    { modeloId: 33, insumoId: 54 }, // LEXMARK E260DN - E260X22G DRUMS
+    { modeloId: 33, insumoId: 54 }, // LEXMARK E260DN - E260X22G DRUM
     { modeloId: 34, insumoId: 55 }, //LEXMARK E250DN/E350DN - E250A11L
-    { modeloId: 34, insumoId: 56 }, //LEXMARK E250DN/E350DN - E250X22G DRUMS
+    { modeloId: 34, insumoId: 56 }, //LEXMARK E250DN/E350DN - E250X22G DRUM
     { modeloId: 35, insumoId: 57 }, // KYOCERA ECOSYS P3055DN -  TK-3182 TONER
     { modeloId: 35, insumoId: 58 }, // KYOCERA ECOSYS P3055DN - DK-3192 DRUM
     { modeloId: 36, insumoId: 59 }, // KYOCERA ECOSYS M5521CDW -  TK-5232K BLACK TONER
     { modeloId: 36, insumoId: 60 }, // KYOCERA ECOSYS M5521CDW -  TK-5232C CYAN TONER
     { modeloId: 36, insumoId: 61 }, // KYOCERA ECOSYS M5521CDW -  TK-5232M MAGENTA TONER
-    { modeloId: 36, insumoId: 62 }, // KYOCERA ECOSYS M5521CDW -  TK-5232Y YELLOW TONER
+    { modeloId: 36, insumoId: 62 }, // KYOCERA ECOSYS M5521CDW -  TK-5232Y AMARILLO TONER
     { modeloId: 37, insumoId: 63 }, // KYOCERA ECOSYS P2235DN - TK-1150/52 TONER
     { modeloId: 38, insumoId: 64 }, // SAMSUNG SL-M4072FD - MLT-D203U
     { modeloId: 39, insumoId: 65 }, //SAMSUNG ML-2525 - MLT-D105L
@@ -349,14 +351,14 @@ export async function seed_inicial() {
     { modeloId: 41, insumoId: 67 }, // RICOH P800 - M600
     { modeloId: 42, insumoId: 66 }, // RICOH M320F - SP3710 TONER
     { modeloId: 43, insumoId: 66 }, // RICOH P311 - SP3710 TONER
-    { modeloId: 23, insumoId: 69 }, // XEROX WorkCentre 6515DN - 108R01417 CYAN DRUMS
-    { modeloId: 23, insumoId: 70 }, // XEROX WorkCentre 6515DN - 108R01418 MAGENTA DRUMS
-    { modeloId: 23, insumoId: 71 }, // XEROX WorkCentre 6515DN - 108R01419 AMARILLO DRUMS
-    { modeloId: 23, insumoId: 72 }, // XEROX WorkCentre 6515DN - 108R01420 NEGRO DRUMS
+    { modeloId: 23, insumoId: 69 }, // XEROX WorkCentre 6515DN - 108R01417 CYAN DRUM
+    { modeloId: 23, insumoId: 70 }, // XEROX WorkCentre 6515DN - 108R01418 MAGENTA DRUM
+    { modeloId: 23, insumoId: 71 }, // XEROX WorkCentre 6515DN - 108R01419 AMARILLO DRUM
+    { modeloId: 23, insumoId: 72 }, // XEROX WorkCentre 6515DN - 108R01420 NEGRO DRUM
     { modeloId: 23, insumoId: 73 }, // XEROX WorkCentre 6515DN - 106R3488/92 NEGRO TONER
     { modeloId: 23, insumoId: 74 }, // XEROX WorkCentre 6515DN - 106R3694AL MAGENTA TONER
     { modeloId: 23, insumoId: 75 }, // XEROX WorkCentre 6515DN - 106R3489/93 CYAN TONER
-    { modeloId: 23, insumoId: 76 }, // XEROX WorkCentre 6515DN - 106R3695AL YELLOW TONER
+    { modeloId: 23, insumoId: 76 }, // XEROX WorkCentre 6515DN - 106R3695AL AMARILLO TONER
     { modeloId: 15, insumoId: 77 }, // XEROX 3225/3260 - JC91-01034B FUSOR XEROX 3225
     { modeloId: 23, insumoId: 78 }, // XEROX WorkCentre 3615 - 115R00085 KIT MANTENIMIENTO FUSOR
     { modeloId: 1, insumoId: 79 }, //hp 1102w - CBT-CB435A/436A/CE285A/CE278A
@@ -690,15 +692,15 @@ export async function seed_inicial() {
     { marcaId: 3, modeloId: 32 }, //BROTHER HL-1200
     { marcaId: 4, modeloId: 33 }, // LEXMARK E260DN
     { marcaId: 4, modeloId: 34 }, //LEXMARK E250DN/E350DN
-    { marcaId: 5, modeloId: 35 }, 
-    { marcaId: 5, modeloId: 36 }, 
+    { marcaId: 5, modeloId: 35 },
+    { marcaId: 5, modeloId: 36 },
     { marcaId: 5, modeloId: 37 },
     { marcaId: 6, modeloId: 38 },
     { marcaId: 6, modeloId: 39 }, //SAMSUNG ML-2525
     { marcaId: 7, modeloId: 40 },
     { marcaId: 7, modeloId: 41 },
     { marcaId: 7, modeloId: 42 },
-    { marcaId: 7, modeloId: 43 }, 
+    { marcaId: 7, modeloId: 43 },
   ];
 
   const impresoraFisica = [
@@ -2328,18 +2330,10 @@ export async function seed_inicial() {
   ];
 
   const Repuestos = [
-    { id: 1,
-      repuesto: "Fuente 500W ATX",
-    },
-    { id: 2,
-      repuesto: "Teclado USB",
-    },
-    { id: 3,
-      repuesto: "Mouse Óptico USB",
-    },
-    { id: 4,
-      repuesto: "Disco SSD 240GB",
-    },
+    { id: 1, repuesto: "Fuente 500W ATX" },
+    { id: 2, repuesto: "Teclado USB" },
+    { id: 3, repuesto: "Mouse Óptico USB" },
+    { id: 4, repuesto: "Disco SSD 240GB" },
   ];
 
   async function runSeeder() {
@@ -2354,7 +2348,7 @@ export async function seed_inicial() {
       console.log("✅ Proveedores cargados");
 
       await Servicio.bulkCreate(servicios, { ignoreDuplicates: true });
-     await sequelize.query(
+      await sequelize.query(
         "SELECT setval('servicios_id_seq', (SELECT MAX(id) FROM servicios))"
       );
       console.log("✅ Servicios cargados");
@@ -2381,7 +2375,7 @@ export async function seed_inicial() {
       console.log("✅ modelos insumos cargados");
 
       await Impresora.bulkCreate(impresoras, { ignoreDuplicates: true });
-       await sequelize.query(
+      await sequelize.query(
         "SELECT setval('impresoras_id_seq', (SELECT MAX(id) FROM impresoras))"
       );
       console.log("✅ Impresoras cargadas");
@@ -2389,20 +2383,19 @@ export async function seed_inicial() {
       await ImpresoraFisica.bulkCreate(impresoraFisica, {
         ignoreDuplicates: true,
       });
-       await sequelize.query(
+      await sequelize.query(
         "SELECT setval(pg_get_serial_sequence('impresora_Fisica','id'), (SELECT MAX(id) FROM impresora_Fisica));"
       );
       console.log("✅ Impresoras físicas cargadas");
 
-     await Repuesto.bulkCreate(Repuestos, {
+      await Repuesto.bulkCreate(Repuestos, {
         ignoreDuplicates: true,
       });
-       await sequelize.query(
+      await sequelize.query(
         "SELECT setval(pg_get_serial_sequence('repuestos','id'), (SELECT MAX(id) FROM repuestos));"
       );
       console.log("✅ Repuestos cargados");
 
-      
       await sequelize.close();
     } catch (err) {
       console.error("❌ Error en el seeder:", err);
