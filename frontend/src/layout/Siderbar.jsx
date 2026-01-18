@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../src/common/hooks/useAuth";
 
 const routeMap = {
@@ -43,11 +43,11 @@ const routeMap = {
 
   // Movimientos
   "Ingreso de insumos": "/IngresoInsumos",
-  "Entrega de insumos": "/EgresoInusmos",
-  "Ajuste de insumos": "AjusteInsumos",
+  "Entrega de insumos": "/EgresoInsumos",
+  "Ajuste de insumos": "/AjusteInsumos",
 
   //reportes
-  Stock: "/ReporteStock",
+  "Stock": "/ReporteStock",
   "Movimiento por Servicios": "/ReporteMovimientosServicio",
   "Movimiento por Insumos": "/ReporteMovInsumos",
   "Ingreso por Insumos": "/ReporteIngresosPorInsumo",
@@ -67,6 +67,7 @@ const routeMap = {
 export default function Sidebar() {
   const [openGroup, setOpenGroup] = useState(null);
   const { auth } = useAuth();
+  const location = useLocation();
 
   const handleToggle = (label) => {
     setOpenGroup(openGroup === label ? null : label);
@@ -92,6 +93,7 @@ export default function Sidebar() {
                 "Resetear contraseña",
                 "Eliminar Usuario",
               ]}
+              location={location}
             />
           )}
 
@@ -101,6 +103,7 @@ export default function Sidebar() {
             open={openGroup === "Proveedores"}
             onToggle={() => handleToggle("Proveedores")}
             items={["Alta Proveedor", "Editar Proveedor", "Baja Proveedor"]}
+            location={location}
           />
 
           <SidebarGroup
@@ -109,6 +112,7 @@ export default function Sidebar() {
             open={openGroup === "Servicios"}
             onToggle={() => handleToggle("Servicios")}
             items={["Alta Servicio", "Editar Servicio", "Baja Servicio"]}
+            location={location}
           />
 
           {/* 🔹 Separador visual */}
@@ -128,6 +132,7 @@ export default function Sidebar() {
               "Baja Impresora",
               "Actualizar Serie"
             ]}
+            location={location}
           />
 
           {auth.idRol === 1 && (
@@ -147,6 +152,7 @@ export default function Sidebar() {
               open={openGroup === "Modelos"}
               onToggle={() => handleToggle("Modelos")}
               items={["Agregar Modelo", "Editar Modelo"]}
+              location={location}
             />
           )}
 
@@ -162,6 +168,7 @@ export default function Sidebar() {
                 "Eliminar Insumo",
                 "Modificar Stock mínimo",
               ]}
+              location={location}
             />
           )}
 
@@ -175,6 +182,7 @@ export default function Sidebar() {
               "Entrega de insumos",
               "Ajuste de insumos",
             ]}
+            location={location}
           />
 
           <SidebarGroup
@@ -189,6 +197,7 @@ export default function Sidebar() {
               "Ingreso por Proveedor",
               "Ingreso por Insumos",
             ]}
+            location={location}
           />
         </nav>
 
@@ -209,6 +218,7 @@ export default function Sidebar() {
               "Entregar Repuesto",
               "Ajuste Repuestos",
             ]}
+            location={location}
           ></SidebarGroup>
 
           <SidebarGroup
@@ -217,6 +227,7 @@ export default function Sidebar() {
             open={openGroup === "Reportes de Repuestos"}
             onToggle={() => handleToggle("Reportes de Repuestos")}
             items={["Stock Repuestos"]}
+            location={location}  
           ></SidebarGroup>
 
           {/* 🔹 Separador visual */}
@@ -230,6 +241,7 @@ export default function Sidebar() {
               open={openGroup === "Logs del Sistema"}
               onToggle={() => handleToggle("Logs del Sistema")}
               items={["Mostrar Logs"]}
+              location={location}
             />
           )}
         </nav>
@@ -237,37 +249,44 @@ export default function Sidebar() {
     </aside>
   );
 
-  function SidebarGroup({ label, icon, open, onToggle, items, children }) {
-    return (
-      <div>
-        <div
-          onClick={onToggle}
-          className="flex items-center justify-between px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer transition"
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-lg">{icon}</span>
-            <span className="font-medium">{label}</span>
-          </div>
-          <span className="text-gray-500">{open ? "▲" : "▼"}</span>
+  function SidebarGroup({ label, icon, open, onToggle, items, children, location }) { 
+  return (
+    <div>
+      <div
+        onClick={onToggle}
+        className="flex items-center justify-between px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer transition"
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-lg">{icon}</span>
+          <span className="font-medium">{label}</span>
         </div>
+        <span className="text-gray-500">{open ? "▲" : "▼"}</span>
+      </div>
 
-        {open && (
-          <div className="ml-10 mt-1 space-y-1">
-            {items.map((item) => (
+      {open && (
+        <div className="ml-10 mt-1 space-y-1">
+          {items.map((item) => {
+            // AHORA SÍ FUNCIONA PORQUE RECIBIMOS LOCATION POR PROPS
+            const isActive = location.pathname === routeMap[item];
+
+            return (
               <Link
                 key={item}
                 to={routeMap[item] || "#"}
-                className="block px-3 py-1 text-gray-600 hover:text-blue-600 cursor-pointer transition"
+                className={`block px-3 py-1 transition cursor-pointer ${
+                  isActive 
+                    ? "text-blue-700 font-bold border-l-4 border-blue-600 bg-blue-100/50" 
+                    : "text-gray-600 hover:text-blue-600"
+                }`}
               >
                 {item}
               </Link>
-            ))}
-
-            {/* ✅ Aquí se renderizan los subgrupos */}
-            {children}
-          </div>
-        )}
-      </div>
-    );
-  }
+            );
+          })}
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
 }

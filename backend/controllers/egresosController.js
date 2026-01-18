@@ -1,52 +1,47 @@
+import sequelize from "../config/db.js"; // Importas tu instancia de conexión
 import { egresarInsumoService } from "../services/egresosService.js";
 import { calcularStock } from "../helpers/calcularStock.js";
 
 export async function egresarInsumo(req, res, next) {
-  try {
-    const { servicioId, items } = req.body;
+    // Iniciamos la transacción
+    const t = await sequelize.transaction();
 
-    // ✅ Validación inicial
-    if (!servicioId || !items?.length) {
-      const error = new Error("Datos incompletos");
-      error.isCustom = true;
-      error.httpStatus = 400;
-      error.code = "MISSING_DATA";
-      throw error;
+    try {
+        const { servicioId, items } = req.body;
+
+        if (!servicioId || !items?.length) {
+            throw createError("Datos incompletos", 400, "MISSING_DATA");
+        }
+
+        for (const item of items) {
+            // Pasamos la transacción al helper para que lea el stock real en este momento
+            const stockActual = await calcularStock(item.insumoId, { transaction: t });
+
+            if (item.cantidad > stockActual) {
+                throw createError(`Stock insuficiente para ${item.insumoId}`, 409, "INSUFFICIENT_STOCK");
+            }
+        }
+
+        // Pasamos la transacción al servicio para que el bulkCreate sea parte de ella
+        await egresarInsumoService({ servicioId, items }, { transaction: t });
+
+        // Si todo salió bien, guardamos los cambios definitivamente
+        await t.commit();
+
+        return res.json({ success: true, message: "Egreso registrado correctamente" });
+
+    } catch (err) {
+        // Si algo falló, deshacemos cualquier cambio en la base de datos
+        await t.rollback();
+        next(err);
     }
+}
 
-    // ✅ Validación defensiva por item
-    for (const item of items) {
-      if (!item.insumoId || !item.cantidad) {
-        const error = new Error(
-          `Item inválido: insumoId=${item.insumoId}, cantidad=${item.cantidad}`
-        );
-        error.isCustom = true;
-        error.httpStatus = 400;
-        error.code = "INVALID_ITEM";
-        throw error;
-      }
-
-      const stockActual = await calcularStock(item.insumoId);
-
-      if (item.cantidad > stockActual) {
-        const error = new Error(
-          `Stock insuficiente para el insumo ${item.insumoId}. Disponible: ${stockActual}`
-        );
-        error.isCustom = true;
-        error.httpStatus = 409; // Conflict
-        error.code = "INSUFFICIENT_STOCK";
-        throw error;
-      }
-    }
-
-    // ✅ Registrar egreso
-    await egresarInsumoService({ servicioId, items });
-
-    return res.json({
-      success: true,
-      message: "Egreso registrado correctamente",
-    });
-  } catch (err) {
-    next(err); // ✅ delegás al middleware
-  }
+// Función auxiliar para limpiar el código
+function createError(msg, status, code) {
+    const error = new Error(msg);
+    error.isCustom = true;
+    error.httpStatus = status;
+    error.code = code;
+    return error;
 }

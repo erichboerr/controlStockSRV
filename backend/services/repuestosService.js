@@ -152,8 +152,10 @@ export async function getInsumosBajoStockRepuestos() {
     SELECT i.id, i.repuesto AS nombre, COALESCE(m.stock_actual, 0) AS stock_actual, i.stock_minimo
     FROM repuestos i
     LEFT JOIN stock_calculado AS m ON m."repuestoId" = i.id
-    WHERE COALESCE(m.stock_actual, 0) < i.stock_minimo
+    WHERE i."flagHabilitado" = true
+      AND COALESCE(m.stock_actual, 0) < i.stock_minimo
     ORDER BY i.repuesto`;
 
   return await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
 }
+
