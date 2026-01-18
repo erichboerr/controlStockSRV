@@ -47,7 +47,7 @@ const routeMap = {
   "Ajuste de insumos": "/AjusteInsumos",
 
   //reportes
-  "Stock": "/ReporteStock",
+  Stock: "/ReporteStock",
   "Movimiento por Servicios": "/ReporteMovimientosServicio",
   "Movimiento por Insumos": "/ReporteMovInsumos",
   "Ingreso por Insumos": "/ReporteIngresosPorInsumo",
@@ -130,7 +130,7 @@ export default function Sidebar() {
               "Entregar Impresora",
               "Retirar Impresora",
               "Baja Impresora",
-              "Actualizar Serie"
+              "Actualizar Serie",
             ]}
             location={location}
           />
@@ -156,19 +156,19 @@ export default function Sidebar() {
             />
           )}
 
-          {auth.idRol === 1 && (
+          {[1, 2].includes(auth.idRol) && (
             <SidebarGroup
               label="Insumos"
               icon={<i className="bi bi-droplet text-lg"></i>}
               open={openGroup === "Insumos"}
               onToggle={() => handleToggle("Insumos")}
-              items={[
-                "Agregar Insumo",
-                "Editar Insumo",
-                "Eliminar Insumo",
-                "Modificar Stock mínimo",
-              ]}
               location={location}
+              items={[
+                auth.idRol === 1 && "Agregar Insumo",
+                auth.idRol === 1 && "Editar Insumo",
+                auth.idRol === 1 && "Eliminar Insumo",
+                "Modificar Stock mínimo", // Sin condición, lo ven ambos
+              ].filter(Boolean)}
             />
           )}
 
@@ -227,7 +227,7 @@ export default function Sidebar() {
             open={openGroup === "Reportes de Repuestos"}
             onToggle={() => handleToggle("Reportes de Repuestos")}
             items={["Stock Repuestos"]}
-            location={location}  
+            location={location}
           ></SidebarGroup>
 
           {/* 🔹 Separador visual */}
@@ -249,44 +249,52 @@ export default function Sidebar() {
     </aside>
   );
 
-  function SidebarGroup({ label, icon, open, onToggle, items, children, location }) { 
-  return (
-    <div>
-      <div
-        onClick={onToggle}
-        className="flex items-center justify-between px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer transition"
-      >
-        <div className="flex items-center gap-3">
-          <span className="text-lg">{icon}</span>
-          <span className="font-medium">{label}</span>
+  function SidebarGroup({
+    label,
+    icon,
+    open,
+    onToggle,
+    items,
+    children,
+    location,
+  }) {
+    return (
+      <div>
+        <div
+          onClick={onToggle}
+          className="flex items-center justify-between px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer transition"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-lg">{icon}</span>
+            <span className="font-medium">{label}</span>
+          </div>
+          <span className="text-gray-500">{open ? "▲" : "▼"}</span>
         </div>
-        <span className="text-gray-500">{open ? "▲" : "▼"}</span>
+
+        {open && (
+          <div className="ml-10 mt-1 space-y-1">
+            {items.map((item) => {
+              // AHORA SÍ FUNCIONA PORQUE RECIBIMOS LOCATION POR PROPS
+              const isActive = location.pathname === routeMap[item];
+
+              return (
+                <Link
+                  key={item}
+                  to={routeMap[item] || "#"}
+                  className={`block px-3 py-1 transition cursor-pointer ${
+                    isActive
+                      ? "text-blue-700 font-bold border-l-4 border-blue-600 bg-blue-100/50"
+                      : "text-gray-600 hover:text-blue-600"
+                  }`}
+                >
+                  {item}
+                </Link>
+              );
+            })}
+            {children}
+          </div>
+        )}
       </div>
-
-      {open && (
-        <div className="ml-10 mt-1 space-y-1">
-          {items.map((item) => {
-            // AHORA SÍ FUNCIONA PORQUE RECIBIMOS LOCATION POR PROPS
-            const isActive = location.pathname === routeMap[item];
-
-            return (
-              <Link
-                key={item}
-                to={routeMap[item] || "#"}
-                className={`block px-3 py-1 transition cursor-pointer ${
-                  isActive 
-                    ? "text-blue-700 font-bold border-l-4 border-blue-600 bg-blue-100/50" 
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                {item}
-              </Link>
-            );
-          })}
-          {children}
-        </div>
-      )}
-    </div>
-  );
-}
+    );
+  }
 }
