@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import PrivateRoute from "./PrivateRoute";
+import RoleGuard from "../common/components/RoleGuard";
 
 //Login
 import Login from "../pages/login/Login.jsx";
@@ -85,46 +86,65 @@ export default function AppRouter() {
         {/* Inicio */}
         <Route index element={<StockMinimoDashboard />} />
         <Route path="/inicio" element={<StockMinimoDashboard />} />
+
         {/* Usuarios */}
-        <Route path="/AltaUsuario" element={<AgregarUsuario />} />
-        <Route path="/EditarUsuario" element={<EditarUsuario />} />
-        <Route path="/BajaUsuario" element={<EliminarUsuario />} />
-        <Route path="/ActualizarPassword" element={<ResetearContraseña />} />
+        <Route element={<RoleGuard allowedRoles={[1]} />}>
+          <Route path="/AltaUsuario" element={<AgregarUsuario />} />
+          <Route path="/EditarUsuario" element={<EditarUsuario />} />
+          <Route path="/BajaUsuario" element={<EliminarUsuario />} />
+          <Route path="/ActualizarPassword" element={<ResetearContraseña />} />
+        </Route>
+
         {/* Servicios */}
         <Route path="/AgregarServicio" element={<AgregarServicio />} />
         <Route path="/EditarServicio" element={<EditarServicio />} />
         <Route path="/EliminarServicio" element={<EliminarServicio />} />
+
         {/* Proveedores */}
         <Route path="/AgregarProveedor" element={<AgregarProveedor />} />
         <Route path="/EditarProveedor" element={<EditarProveedor />} />
         <Route path="/EliminarProveedor" element={<EliminarProveedor />} />
+
         {/* Impresoras */}
         <Route path="/AgregarImpresora" element={<AgregarImpresora />} />
         <Route path="/IngresarImpresora" element={<IngresarImpresora />} />
         <Route path="/EntregarImpresora" element={<EntrgarImpresora />} />
         <Route path="/RetirarImpresora" element={<RetirarImpresora />} />
         <Route path="/BajaImpresora" element={<BajaImpresora />} />
-        <Route path="/CambioSerieImpresora" element= {<CambioSerieImpresora/>} />
-        
+        <Route
+          path="/CambioSerieImpresora"
+          element={<CambioSerieImpresora />}
+        />
+
         {/* marcas */}
         <Route path="/AgregarMarca" element={<AgregarMarca />} />
         <Route path="/EditarMarca" element={<EditarMarca />} />
+
         {/* modelos */}
         <Route path="/AgregarModelo" element={<AgregarModelo />} />
         <Route path="/EditarModelo" element={<EditarModelo />} />
+
         {/* insumos */}
-        <Route path="/AgregarInsumo" element={<AgregarInsumo />} />
-        <Route path="/EditarInsumo" element={<EditarInsumo />} />
-        <Route path="/EliminarInsumo" element={<EliminarInsumo />} />
-        <Route
-          path="/ModificarStockMinimo"
-          element={<ModificarStockMinimo />}
-        />
+        <Route element={<RoleGuard allowedRoles={[1]} />}>
+          <Route path="/AgregarInsumo" element={<AgregarInsumo />} />
+          <Route path="/EditarInsumo" element={<EditarInsumo />} />
+          <Route path="/EliminarInsumo" element={<EliminarInsumo />} />
+        </Route>
+
+        <Route element={<RoleGuard allowedRoles={[1, 2]} />}>
+          <Route
+            path="/ModificarStockMinimo"
+            element={<ModificarStockMinimo />}
+          />
+        </Route>
+
         {/* Ingresos de insumos */}
         <Route path="/IngresoInsumos" element={<IngresoInsumos />} />
+        
         {/* Egresos de insumos */}
         <Route path="/EgresoInusmos" element={<EgresoInusmos />} />
         <Route path="/AjusteInsumos" element={<AjusteInsumos />} />
+
         {/* Reportes */}
         <Route path="/ReporteStock" element={<ReporteStock />} />
         <Route
@@ -140,12 +160,14 @@ export default function AppRouter() {
           path="/ReporteIngresosPorProveedor"
           element={<ReporteIngresosPorProveedor />}
         />
+
         {/* Repuestos */}
         <Route path="/AgregarRepuesto" element={<AgregarRepuesto />} />
         <Route path="/IngresoRepuesto" element={<IngresoRepuesto />} />
         <Route path="/EgresoRepuesto" element={<EgresoRepuesto />} />
         <Route path="/AjusteRepuestos" element={<AjusteRepuestos />} />
         <Route path="/StockRepuestos" element={<StockRepuestos />} />
+        
         {/*Logs*/}
         <Route path="/logs" element={<Logs />} />
       </Route>

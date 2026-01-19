@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import { insumoUrl } from "../../../config/env.js";
-//import { useToast } from "../../../common/hooks/useToast.js";
 import axios from "axios";
 
 export function useBajoStock() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  //const { addToast } = useToast();
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`${insumoUrl}/stock-bajo`);
+      setData(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      console.error(err);
+      setError("Error al cargar stock");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    axios.get(`${insumoUrl}/stock-bajo`).then((res) => {
-      //console.log("Respuesta cruda:", res.data, Array.isArray(res.data));
-      setData(Array.isArray(res.data) ? res.data : []);
-      setLoading(false);
-    });
+    fetchData();
   }, []);
 
-  return { data, loading };
+  return { data, loading, error, refresh: fetchData };
 }
