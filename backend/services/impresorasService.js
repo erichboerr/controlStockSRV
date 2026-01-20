@@ -35,9 +35,15 @@ export async function create({ marcaId, modeloId }) {
   try {
     return await Impresora.create({ marcaId, modeloId });
   } catch (err) {
-    err.isCustom = true;
-    err.httpStatus = 500;
-    err.code = "DB_ERROR";
+    if (err.name === "Esta IMPRESORA ya existe en el sistema") {
+      err.isCustom = true;
+      err.httpStatus = 409;
+      err.code = "IMPRESORA_EXISTS";
+    } else {
+      err.isCustom = true;
+      err.httpStatus = 500;
+      err.code = "DB_ERROR";
+    }
     throw err;
   }
 }

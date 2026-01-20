@@ -142,7 +142,7 @@ export default function AppRouter() {
         <Route path="/IngresoInsumos" element={<IngresoInsumos />} />
         
         {/* Egresos de insumos */}
-        <Route path="/EgresoInusmos" element={<EgresoInusmos />} />
+        <Route path="/EgresoInsumos" element={<EgresoInusmos />} />
         <Route path="/AjusteInsumos" element={<AjusteInsumos />} />
 
         {/* Reportes */}

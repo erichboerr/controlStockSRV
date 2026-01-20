@@ -19,6 +19,7 @@ export async function crearUsuario(req, res, next) {
   }
 }
 
+
 export async function editarUsuario(req, res, next) {
   try {
     const actualizado = await update(req.params.id, req.body);

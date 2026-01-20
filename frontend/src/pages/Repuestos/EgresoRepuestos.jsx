@@ -60,7 +60,7 @@ export default function EgresoRepuestos() {
                 requerido={false}
                 placeholder="Cantidad"
                 tipo="number"
-                icono="bi-pencil"
+                icono="bi-hash"
                 className="w-8" 
               />
             </div>

@@ -4,7 +4,7 @@ import InputGeneric from "../../common/components/InputGeneric.jsx";
 import Button from "../../common/components/Button";
 import useEditarInsumosForm from "./hooks/useEditarInsumoForm.js";
 
-export default function EditarInsumo() {
+export default function EditarInsumo() { 
   const {
     insumo,
     setInsumo,

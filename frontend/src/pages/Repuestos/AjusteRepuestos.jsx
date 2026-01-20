@@ -28,7 +28,7 @@ export default function AjusteRepuestos() {
         <>
           <SelectGeneric
             generic={repuestos}
-            value="Seleccionar repuesto"
+            value="Seleccionar Repuesto"
             seleccionado={repuestoSeleccionado}
             setSeleccionado={setrepuestoSeleccionado}
             icono="bi-gear"
@@ -36,11 +36,11 @@ export default function AjusteRepuestos() {
           />
 
           <InputGeneric
-            type="number"
+            tipo="number"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
             placeholder="Cantidad"
-            icono="bi-pencil"
+            icono="bi-hash"
           />
  
           {/* Selector de acción */}

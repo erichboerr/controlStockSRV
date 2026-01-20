@@ -3,6 +3,7 @@ import {
   getByModelo,
   createOrAssociate,
   remove,
+  update,
   removeAssociation,
   getInsumosBajoStock,
   updateStockMinimo,
@@ -51,6 +52,18 @@ export async function desasociarInsumoDeModelo(req, res, next) {
     next(err);
   }
 }
+
+// Editar insumo
+export async function editarInsumo(req, res, next) {
+  try {
+    const { insumo } = req.body;
+    const actualizado = await update(req.params.id, { insumo });
+    res.json(actualizado);
+  } catch (err) {
+    next(err);
+  }
+}
+
 
 // Actualizar stock mínimo
 export async function actualizarStockMinimo(req, res, next) {

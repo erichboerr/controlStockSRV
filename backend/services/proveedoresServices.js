@@ -20,7 +20,7 @@ export async function create({ proveedor, telefono, email }) {
   try {
     return await Proveedor.create({ proveedor, telefono, email });
   } catch (err) {
-    if (err.name === "SequelizeUniqueConstraintError") {
+    if (err.name === "El proveedor ya existe en el sistema") {
       err.isCustom = true;
       err.httpStatus = 409;
       err.code = "PROVEEDOR_EXISTS";

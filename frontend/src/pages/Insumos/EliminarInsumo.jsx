@@ -19,6 +19,7 @@ export default function EliminarInsumo() {
     handleCancelar,
   } = useEliminarInsumoForm();
 
+
   return (
     <FormularioMarco titulo="Eliminar Insumo del Modelo">
       <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
@@ -58,13 +59,18 @@ export default function EliminarInsumo() {
       </form>
 
       <ConfirmModal
-        show={showConfirm}
-        onHide={cancelarConfirmacion}
-        onConfirm={handleEliminar}
-        entidad={insumoSeleccionado}
-        tipo="insumo"
-        campo="insumo"
-      />
+  show={showConfirm}
+  onHide={cancelarConfirmacion}
+  onConfirm={handleEliminar}
+  titulo="Confirmar eliminación"
+  mensaje={
+    insumoSeleccionado && modeloSeleccionado
+      ? `¿Está seguro que desea eliminar el insumo "${insumoSeleccionado.insumo}" del modelo "${modeloSeleccionado.modelo}"?`
+      : "¿Está seguro que desea eliminar este insumo?"
+  }
+  textoConfirmar="Eliminar"
+  varianteConfirmar="danger"
+/>
     </FormularioMarco>
   );
 }

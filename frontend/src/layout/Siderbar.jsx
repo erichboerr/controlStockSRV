@@ -117,6 +117,9 @@ export default function Sidebar() {
 
           {/* 🔹 Separador visual */}
           <hr className="my-4 border-gray-400" />
+          <h3 className="text-black-500 text-sm font-semibold uppercase tracking-wide mb-2">
+            Impresoras e Insumos
+          </h3>
 
           {/* ✅ Impresoras + Marcas + Modelos + Insumos */}
           <SidebarGroup
@@ -142,6 +145,7 @@ export default function Sidebar() {
               open={openGroup === "Marca"}
               onToggle={() => handleToggle("Marca")}
               items={["Agregar Marca", "Editar Marca"]}
+              location={location}
             />
           )}
 
@@ -274,7 +278,6 @@ export default function Sidebar() {
         {open && (
           <div className="ml-10 mt-1 space-y-1">
             {items.map((item) => {
-              // AHORA SÍ FUNCIONA PORQUE RECIBIMOS LOCATION POR PROPS
               const isActive = location.pathname === routeMap[item];
 
               return (

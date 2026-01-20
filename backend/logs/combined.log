@@ -1,0 +1,1 @@
+{"action":"/","code":"PROVEEDOR_EXISTS","controller":"/proveedores","httpStatus":409,"level":"error","message":"llave duplicada viola restricción de unicidad «proveedores_proveedor_key»","method":"POST","route":"/proveedores","timestamp":"2026-01-20 17:58:43"}

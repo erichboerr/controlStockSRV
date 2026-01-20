@@ -66,7 +66,7 @@ export default function IngresoInsumos() {
             requerido={false}
             placeholder="Cantidad"
             tipo="number"
-            icono="bi-pencil"
+            icono="bi-hash"
             className="w-8" // ancho más corto para el input
           />
 

@@ -36,7 +36,7 @@ export default function AjusteInsumos() {
           />
 
           <InputGeneric
-            type="number"
+            tipo="number"
             value={cantidad}
             onChange={(e) => setCantidad(e.target.value)}
             placeholder="Cantidad"

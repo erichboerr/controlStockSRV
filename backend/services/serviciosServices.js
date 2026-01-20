@@ -20,9 +20,15 @@ export async function create({ servicio, ubicacion }) {
   try {
     return await Servicio.create({ servicio, ubicacion });
   } catch (err) {
-    err.isCustom = true;
-    err.httpStatus = 500;
-    err.code = "DB_ERROR";
+    if (err.name === "Este servicio ya existe en el sistema") {
+      err.isCustom = true;
+      err.httpStatus = 409;
+      err.code = "SERVICIO_EXISTS";
+    } else {
+      err.isCustom = true;
+      err.httpStatus = 500;
+      err.code = "DB_ERROR";
+    }
     throw err;
   }
 }
