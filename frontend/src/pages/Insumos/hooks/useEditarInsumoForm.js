@@ -15,27 +15,39 @@ export default function useEditarInsumoForm() {
 
   // Cargar modelos
   useEffect(() => {
-    axios.get(modeloUrl)
+    axios
+      .get(modeloUrl)
       .then((res) => {
         const habilitados = res.data.filter((r) => r.flagHabilitado);
         setModelos(habilitados);
       })
-      .catch(() => setModelos([]));
-  }, []);
+      .catch(() => {
+        setModelos([]);
+       addToast("❌ Error al cargar modelos", "danger");
+      });
+  }, [addToast]);
 
   // Cargar insumos asociados al modelo
   useEffect(() => {
     if (modeloSeleccionado) {
-      axios.get(`${insumoUrl}/modelo/?modeloId=${modeloSeleccionado.id}`)
+      axios
+        .get(`${insumoUrl}/modelo/?modeloId=${modeloSeleccionado.id}`)
         .then((res) => {
           const habilitados = res.data.filter((r) => r.flagHabilitado);
           setInsumos(habilitados);
+          setInsumoSeleccionado(null);
+          setInsumo("");
         })
-        .catch(() => setInsumos([]));
+        .catch(() => {
+          setInsumos([]);
+          addToast("❌ Error al cargar insumos", "danger");
+        });
     } else {
       setInsumos([]);
+      setInsumoSeleccionado(null);
+      setInsumo("");
     }
-  }, [modeloSeleccionado]);
+  }, [modeloSeleccionado, addToast]);
 
   const validarCampos = () => {
     return insumoSeleccionado?.id && insumo.trim();

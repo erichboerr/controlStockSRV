@@ -115,6 +115,29 @@ export async function remove(id) {
   return { mensaje: "Insumo dado de baja" };
 }
 
+export async function update(id, data) {
+  const insumo = await Insumo.findByPk(id);
+  if (!insumo) {
+    const error = new Error("Insumo no encontrado");
+    error.isCustom = true;
+    error.httpStatus = 404;
+    error.code = "NOT_FOUND";
+    throw error;
+  }
+
+  if (!data.insumo?.trim()) {
+    const error = new Error("Nombre de insumo inválido");
+    error.isCustom = true;
+    error.httpStatus = 400;
+    error.code = "INVALID_INPUT";
+    throw error;
+  }
+
+  insumo.insumo = data.insumo;
+  await insumo.save();
+  return insumo;
+}
+
 export async function getInsumosBajoStock() {
   const query = `
     WITH stock_calculado AS (

@@ -18,16 +18,16 @@ export async function create(data) {
   const existente2 = await Usuario.findOne({ where: { user: normalizedUser } });
 
   if (existente || existente2) {
-  const error = new Error("El usuario ya existe");
-  error.isCustom = true;
-  error.httpStatus = 409;       // 👈 Conflict
-  error.code = "USER_EXISTS";   // 👈 código interno
-  throw error;
-}
+    const error = new Error("El usuario ya existe");
+    error.isCustom = true;
+    error.httpStatus = 409;
+    error.code = "USER_EXISTS";
+    throw error;
+  }
 
   if (!password || password.length < 6) {
     const error = new Error(
-      "Contraseña inválida: debe tener al menos 6 caracteres"
+      "Contraseña inválida: debe tener al menos 6 caracteres",
     );
     error.isCustom = true;
     error.httpStatus = 400;
@@ -75,7 +75,7 @@ export async function update(id, data) {
   if (data.password) {
     if (!password || password.length < 6) {
       const error = new Error(
-        "Contraseña inválida: debe tener al menos 6 caracteres"
+        "Contraseña inválida: debe tener al menos 6 caracteres",
       );
       error.isCustom = true;
       error.httpStatus = 400;
@@ -89,7 +89,7 @@ export async function update(id, data) {
       usuario.set("password", hashed);
     } else {
       const error = new Error(
-        "La nueva contraseña coincide con la actual, no se actualiza"
+        "La nueva contraseña coincide con la actual, no se actualiza",
       );
       error.isCustom = true;
       error.httpStatus = 409; // Conflict

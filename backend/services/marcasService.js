@@ -20,7 +20,7 @@ export async function create(marca) {
   try {
     return await Marca.create({ marca });
   } catch (err) {
-    if (err.name === "SequelizeUniqueConstraintError") {
+    if (err.name === "Esta marca ya existe en el sistema") {
       err.isCustom = true;
       err.httpStatus = 409;
       err.code = "MARCA_EXISTS";

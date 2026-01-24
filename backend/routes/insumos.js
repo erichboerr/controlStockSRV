@@ -4,6 +4,7 @@ import {
   listarInsumosPorModelo,
   asociarInsumosAModelo,
   desasociarInsumoDeModelo,
+  editarInsumo,
   eliminarInsumo,
   obtenerInsumosBajoStock,
   actualizarStockMinimo,
@@ -19,6 +20,7 @@ router.get("/stock-bajo", obtenerInsumosBajoStock);
 router.post("/modelo/:id/insumos", asociarInsumosAModelo);
 
 router.put("/:id/stock-minimo", actualizarStockMinimo);
+router.put("/:id", editarInsumo);
 
 // ✅ Nueva ruta N‑N
 router.delete("/modelo/:modeloId/:insumoId", desasociarInsumoDeModelo);

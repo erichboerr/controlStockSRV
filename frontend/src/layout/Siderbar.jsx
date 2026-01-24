@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../src/common/hooks/useAuth";
 
 const routeMap = {
@@ -43,8 +43,8 @@ const routeMap = {
 
   // Movimientos
   "Ingreso de insumos": "/IngresoInsumos",
-  "Entrega de insumos": "/EgresoInusmos",
-  "Ajuste de insumos": "AjusteInsumos",
+  "Entrega de insumos": "/EgresoInsumos",
+  "Ajuste de insumos": "/AjusteInsumos",
 
   //reportes
   Stock: "/ReporteStock",
@@ -67,6 +67,7 @@ const routeMap = {
 export default function Sidebar() {
   const [openGroup, setOpenGroup] = useState(null);
   const { auth } = useAuth();
+  const location = useLocation();
 
   const handleToggle = (label) => {
     setOpenGroup(openGroup === label ? null : label);
@@ -92,6 +93,7 @@ export default function Sidebar() {
                 "Resetear contraseña",
                 "Eliminar Usuario",
               ]}
+              location={location}
             />
           )}
 
@@ -101,6 +103,7 @@ export default function Sidebar() {
             open={openGroup === "Proveedores"}
             onToggle={() => handleToggle("Proveedores")}
             items={["Alta Proveedor", "Editar Proveedor", "Baja Proveedor"]}
+            location={location}
           />
 
           <SidebarGroup
@@ -109,10 +112,14 @@ export default function Sidebar() {
             open={openGroup === "Servicios"}
             onToggle={() => handleToggle("Servicios")}
             items={["Alta Servicio", "Editar Servicio", "Baja Servicio"]}
+            location={location}
           />
 
           {/* 🔹 Separador visual */}
           <hr className="my-4 border-gray-400" />
+          <h3 className="text-black-500 text-sm font-semibold uppercase tracking-wide mb-2">
+            Impresoras e Insumos
+          </h3>
 
           {/* ✅ Impresoras + Marcas + Modelos + Insumos */}
           <SidebarGroup
@@ -126,8 +133,9 @@ export default function Sidebar() {
               "Entregar Impresora",
               "Retirar Impresora",
               "Baja Impresora",
-              "Actualizar Serie"
+              "Actualizar Serie",
             ]}
+            location={location}
           />
 
           {auth.idRol === 1 && (
@@ -137,6 +145,7 @@ export default function Sidebar() {
               open={openGroup === "Marca"}
               onToggle={() => handleToggle("Marca")}
               items={["Agregar Marca", "Editar Marca"]}
+              location={location}
             />
           )}
 
@@ -147,21 +156,23 @@ export default function Sidebar() {
               open={openGroup === "Modelos"}
               onToggle={() => handleToggle("Modelos")}
               items={["Agregar Modelo", "Editar Modelo"]}
+              location={location}
             />
           )}
 
-          {auth.idRol === 1 && (
+          {[1, 2].includes(auth.idRol) && (
             <SidebarGroup
               label="Insumos"
               icon={<i className="bi bi-droplet text-lg"></i>}
               open={openGroup === "Insumos"}
               onToggle={() => handleToggle("Insumos")}
+              location={location}
               items={[
-                "Agregar Insumo",
-                "Editar Insumo",
-                "Eliminar Insumo",
-                "Modificar Stock mínimo",
-              ]}
+                auth.idRol === 1 && "Agregar Insumo",
+                auth.idRol === 1 && "Editar Insumo",
+                auth.idRol === 1 && "Eliminar Insumo",
+                "Modificar Stock mínimo", // Sin condición, lo ven ambos
+              ].filter(Boolean)}
             />
           )}
 
@@ -175,6 +186,7 @@ export default function Sidebar() {
               "Entrega de insumos",
               "Ajuste de insumos",
             ]}
+            location={location}
           />
 
           <SidebarGroup
@@ -189,6 +201,7 @@ export default function Sidebar() {
               "Ingreso por Proveedor",
               "Ingreso por Insumos",
             ]}
+            location={location}
           />
         </nav>
 
@@ -209,6 +222,7 @@ export default function Sidebar() {
               "Entregar Repuesto",
               "Ajuste Repuestos",
             ]}
+            location={location}
           ></SidebarGroup>
 
           <SidebarGroup
@@ -217,6 +231,7 @@ export default function Sidebar() {
             open={openGroup === "Reportes de Repuestos"}
             onToggle={() => handleToggle("Reportes de Repuestos")}
             items={["Stock Repuestos"]}
+            location={location}
           ></SidebarGroup>
 
           {/* 🔹 Separador visual */}
@@ -230,6 +245,7 @@ export default function Sidebar() {
               open={openGroup === "Logs del Sistema"}
               onToggle={() => handleToggle("Logs del Sistema")}
               items={["Mostrar Logs"]}
+              location={location}
             />
           )}
         </nav>
@@ -237,7 +253,15 @@ export default function Sidebar() {
     </aside>
   );
 
-  function SidebarGroup({ label, icon, open, onToggle, items, children }) {
+  function SidebarGroup({
+    label,
+    icon,
+    open,
+    onToggle,
+    items,
+    children,
+    location,
+  }) {
     return (
       <div>
         <div
@@ -253,17 +277,23 @@ export default function Sidebar() {
 
         {open && (
           <div className="ml-10 mt-1 space-y-1">
-            {items.map((item) => (
-              <Link
-                key={item}
-                to={routeMap[item] || "#"}
-                className="block px-3 py-1 text-gray-600 hover:text-blue-600 cursor-pointer transition"
-              >
-                {item}
-              </Link>
-            ))}
+            {items.map((item) => {
+              const isActive = location.pathname === routeMap[item];
 
-            {/* ✅ Aquí se renderizan los subgrupos */}
+              return (
+                <Link
+                  key={item}
+                  to={routeMap[item] || "#"}
+                  className={`block px-3 py-1 transition cursor-pointer ${
+                    isActive
+                      ? "text-blue-700 font-bold border-l-4 border-blue-600 bg-blue-100/50"
+                      : "text-gray-600 hover:text-blue-600"
+                  }`}
+                >
+                  {item}
+                </Link>
+              );
+            })}
             {children}
           </div>
         )}
