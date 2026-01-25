@@ -1,1 +1,5 @@
 {"action":"/","code":"PROVEEDOR_EXISTS","controller":"/proveedores","httpStatus":409,"level":"error","message":"llave duplicada viola restricción de unicidad «proveedores_proveedor_key»","method":"POST","route":"/proveedores","timestamp":"2026-01-20 17:58:43"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:29:37"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:29:45"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:44:40"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:45:00"}
