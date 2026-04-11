@@ -19,14 +19,15 @@ async function startServer() {
     // Verificar que la base exista
     await ensureDatabaseExists();
 
-    // Solo sincronizar en desarrollo si está habilitado
+    // Autenticar conexión
+    await sequelize.authenticate();
+    console.log("✅ Conexión establecida con la base de datos");
+
+    // Sincronizar si está habilitado
     if (String(process.env.DB_SYNC).toLowerCase() === "true") {
       await sequelize.sync({ force: true });
       console.log("🧬 Base sincronizada");
     }
-
-   //await cargarSeeds(); // Cargar seeds básicas
-    //await seed_inicial(); // Cargar datos iniciales
 
     // Cargar seeds si está habilitado
     if (String(process.env.DB_SEED).toLowerCase() === "true") {
@@ -36,16 +37,24 @@ async function startServer() {
       console.log("🌱 Seeders cargados");
     }
 
+    // Levantar servidor
     app.listen(PORT, () => {
-      console.log(
-        `🚀 Servidor escuchando en puerto ${PORT} [${process.env.NODE_ENV}]`
-      );
+      console.log(`🚀 Servidor escuchando en puerto ${PORT} [${process.env.NODE_ENV}]`);
     });
+
+    // Manejar cierre ordenado
+    process.on("SIGINT", async () => {
+      console.log("🛑 Cerrando conexión a la base...");
+      await sequelize.close();
+      process.exit(0);
+    });
+
   } catch (err) {
     console.error("❌ Error CRÍTICO:", err.message);
     process.exit(1);
   }
 }
+
 
 
 startServer();
