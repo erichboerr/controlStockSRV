@@ -1,4 +1,9 @@
 import Servicio from "../models/Servicio.js";
+import ImpresoraFisica from "../models/ImpresoraFisica.js";
+import Impresora from "../models/Impresora.js";
+import ServicioImpresora from "../models/ImpresoraServicio.js";
+import Marca from "../models/Marca.js";
+import Modelo from "../models/Modelo.js";
 
 export async function getAll() {
   return await Servicio.findAll({
@@ -6,6 +11,68 @@ export async function getAll() {
     order: [["servicio", "ASC"]],
   });
 }
+
+export async function getByModelo(modeloId) {
+  return await Servicio.findAll({
+    include: [
+      {
+        model: ServicioImpresora,
+        as: "impresoras",
+        required: true, // 👈 fuerza INNER JOIN
+        include: [
+          {
+            model: ImpresoraFisica,
+            as: "impresoraFisica",
+            required: true,
+            include: [
+              {
+                model: Impresora,
+                as: "impresora",
+                required: true,
+                include: [
+                  {
+                    model: Modelo,
+                    as: "modelo",
+                    where: { id: modeloId }, // 👈 filtro aplicado
+                    required: true,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    where: { flagHabilitado: true },
+    order: [["servicio", "ASC"]],
+  });
+}
+
+export async function getImpresorasByServicio(servicioId) {
+  return await ServicioImpresora.findAll({
+    where: { servicioId },
+    include: [
+      {
+        model: ImpresoraFisica,
+        as: "impresoraFisica",   // coincide con index.js
+        required: true,
+        include: [
+          {
+            model: Impresora,
+            as: "impresora",     // coincide con index.js
+            required: true,
+            include: [
+              { model: Marca, as: "marca", required: true },
+              { model: Modelo, as: "modelo", required: true },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+}
+
+
 
 // Crear nuevo
 export async function create({ servicio, ubicacion }) {

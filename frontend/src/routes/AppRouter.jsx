@@ -53,6 +53,11 @@ import IngresoInsumos from "../pages/Ingresos/IngresoInsumos.jsx";
 import EgresoInusmos from "../pages/Egresos/EgresoInsumos.jsx";
 import AjusteInsumos from "../pages/Egresos/AjustesInsumos.jsx";
 
+//Listados
+import ListarImpresorasPorServicio from "../pages/Listados/ListarImpresorasPorServivio.jsx";
+import ListarServiciosPorImpresora from "../pages/Listados/ListarServiciosPorImpresora.jsx";
+
+
 //Reportes
 import ReporteStock from "../pages/Reportes/ReporteStock.jsx";
 import ReporteMovimientosServicio from "../pages/Reportes/ReporteMovInsumosServicio.jsx";
@@ -160,6 +165,11 @@ export default function AppRouter() {
           path="/ReporteIngresosPorProveedor"
           element={<ReporteIngresosPorProveedor />}
         />
+
+        //Listados
+        <Route path="/ListarImpresorasPorServicio" element={<ListarImpresorasPorServicio />} />
+        <Route path="/ListarServiciosPorImpresora" element={<ListarServiciosPorImpresora />} />
+
 
         {/* Repuestos */}
         <Route path="/AgregarRepuesto" element={<AgregarRepuesto />} />

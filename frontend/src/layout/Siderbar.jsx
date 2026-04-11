@@ -53,6 +53,11 @@ const routeMap = {
   "Ingreso por Insumos": "/ReporteIngresosPorInsumo",
   "Ingreso por Proveedor": "/ReporteIngresosPorProveedor",
 
+  //Listar
+  "Listar Impresoras en servicios": "/ListarImpresorasPorServicio",
+  "Listar Servicios que tienen impresoras": "/ListarServiciosPorImpresora",
+
+
   //repuestos
   "Crear Repuesto": "/AgregarRepuesto",
   "Ingreso Repuesto": "/IngresoRepuesto",
@@ -200,6 +205,18 @@ export default function Sidebar() {
               "Movimiento por Insumos",
               "Ingreso por Proveedor",
               "Ingreso por Insumos",
+            ]}
+            location={location}            
+          />
+
+          <SidebarGroup
+            label="Listados"
+            icon={<i className="bi bi-journal-text text-lg"></i>}
+            open={openGroup === "Listados"}
+            onToggle={() => handleToggle("Listados")}
+            items={[
+              "Listar Impresoras en servicios",
+              "Listar Servicios que tienen impresoras"
             ]}
             location={location}
           />

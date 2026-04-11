@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/serviciosServices.js";
+import { getAll, getByModelo, getImpresorasByServicio, create, update, remove } from "../services/serviciosServices.js";
 
 // Listar servicios
 export async function listarServicios(req, res, next) {
@@ -9,6 +9,29 @@ export async function listarServicios(req, res, next) {
     next(err);
   }
 }
+
+//listar los servicios por modelo seleccionado (se utiliza en el listado)
+export async function listarServiciosPorModelo(req, res, next) {
+  try {
+    const { modeloId } = req.params;
+    const servicios = await getByModelo(modeloId);
+    res.json(servicios);
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+export async function listarImpresorasPorServicio(req, res, next) {
+  try {
+    const { servicioId } = req.params;
+    const impresoras = await getImpresorasByServicio(servicioId);
+    res.json(impresoras);
+  } catch (err) {
+    next(err);
+  }
+}
+
 
 // Crear servicio
 export async function crearServicio(req, res, next) {
