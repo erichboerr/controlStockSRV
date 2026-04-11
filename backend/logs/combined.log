@@ -3,3 +3,16 @@
 {"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:29:45"}
 {"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:44:40"}
 {"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-25 09:45:00"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-01-26 09:48:04"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-01-26 09:48:33"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-01-26 09:49:20"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-26 10:05:02"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-26 10:05:55"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-26 10:10:16"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-26 10:10:49"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-01-26 10:11:35"}
+{"action":"/login","code":"USER_NOT_FOUND","controller":"/auth","httpStatus":401,"level":"error","message":"Usuario no encontrado","method":"POST","route":"/auth/login","timestamp":"2026-02-03 09:00:45"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-03-15 11:12:52"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-03-15 11:13:02"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-03-15 11:13:11"}
+{"action":"/login","code":"INVALID_CREDENTIALS","controller":"/auth","httpStatus":401,"level":"error","message":"Credenciales inválidas","method":"POST","route":"/auth/login","timestamp":"2026-03-21 11:35:08"}
