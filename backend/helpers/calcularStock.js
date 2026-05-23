@@ -1,6 +1,6 @@
 import MovimientoInsumo from "../models/MovimientoInsumo.js";
 
-export async function calcularStock(insumoId) {
+export async function calcularStock(insumoId, options = {}) {
   if (!insumoId) {
     const error = new Error("ID de insumo requerido");
     error.isCustom = true;
@@ -12,10 +12,12 @@ export async function calcularStock(insumoId) {
   try {
     const ingresos = await MovimientoInsumo.sum("cantidad", {
       where: { insumoId, tipo: "ingreso" },
+      ...options,
     });
 
     const egresos = await MovimientoInsumo.sum("cantidad", {
       where: { insumoId, tipo: "egreso" },
+      ...options,
     });
 
     return (ingresos || 0) - (egresos || 0);
