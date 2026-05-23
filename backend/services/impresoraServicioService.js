@@ -1,16 +1,12 @@
 import ImpresoraFisica from "../models/ImpresoraFisica.js";
 import ImpresoraServicio from "../models/ImpresoraServicio.js";
-import ServicioImpresora from "../models/ImpresoraServicio.js";
 import Impresora from "../models/Impresora.js";
 import Marca from "../models/Marca.js";
 import Modelo from "../models/Modelo.js";
 import { Op } from "sequelize";
 
 
-// Entregar impresora a un servicio
 export async function entregarImpresoraService({ numeroSerie, servicioId }) {
-  //console.log("servicioId: "+ servicioId);
- // console.log("numeroSerie: "+ numeroSerie.trim());
   if (!numeroSerie?.trim() || !servicioId) {
     const error = new Error("Faltan datos obligatorios");
     error.isCustom = true;
@@ -20,11 +16,11 @@ export async function entregarImpresoraService({ numeroSerie, servicioId }) {
   }
 
   const impresoraFisica = await ImpresoraFisica.findOne({
-  where: { numeroSerie: { [Op.iLike]: numeroSerie.trim() } },
-});
+    where: { numeroSerie: { [Op.iLike]: numeroSerie.trim() } },
+  });
 
   if (!impresoraFisica) {
-    const error = new Error("Impresora física no encontrada serie numero: "+numeroSerie.trim());
+    const error = new Error("Impresora física no encontrada serie numero: " + numeroSerie.trim());
     error.isCustom = true;
     error.httpStatus = 404;
     error.code = "NOT_FOUND";
@@ -34,7 +30,7 @@ export async function entregarImpresoraService({ numeroSerie, servicioId }) {
   const entregaActiva = await ImpresoraServicio.findOne({
     where: { impresoraFisicaId: impresoraFisica.id, fechaRetiro: null },
   });
-  //console.log("impresora encontrada: "+ entregaActiva)
+
   if (entregaActiva) {
     const error = new Error("La impresora ya está entregada a un servicio activo");
     error.isCustom = true;
@@ -62,6 +58,7 @@ export async function retirarImpresoraService({ impresoraFisicaId, servicioId })
   const entregaActiva = await ImpresoraServicio.findOne({
     where: { impresoraFisicaId, servicioId, fechaRetiro: null, flagHabilitado: true },
   });
+
   if (!entregaActiva) {
     const error = new Error("No se encontró entrega activa para esa impresora");
     error.isCustom = true;
@@ -78,7 +75,7 @@ export async function retirarImpresoraService({ impresoraFisicaId, servicioId })
 }
 
 export async function listarImpresorasActivasService(servicioId) {
-  return await ServicioImpresora.findAll({
+  return await ImpresoraServicio.findAll({
     where: { servicioId, fechaRetiro: null },
     include: [
       {
@@ -99,12 +96,12 @@ export async function listarImpresorasActivasService(servicioId) {
   });
 }
 
-export async function getImpresorasPorServicioService (servicioId) {
+export async function getImpresorasPorServicioService(servicioId) {
   try {
-    const impresorasEntregadas = await ServicioImpresora.findAll({
+    const impresorasEntregadas = await ImpresoraServicio.findAll({
       where: {
-        servicioId: servicioId,
-        fechaRetiro: null, // Filtramos las que aún no han sido retiradas
+        servicioId,
+        fechaRetiro: null,
         flagHabilitado: true,
       },
       include: [
@@ -129,5 +126,4 @@ export async function getImpresorasPorServicioService (servicioId) {
   } catch (error) {
     throw new Error("Error al obtener las impresoras del servicio: " + error.message);
   }
-};
-
+}
