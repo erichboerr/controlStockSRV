@@ -1,3 +1,4 @@
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
   listarInsumos,
@@ -13,17 +14,17 @@ import {
 const router = express.Router();
 
 //GET
-router.get("/", listarInsumos);
-router.get("/modelo", listarInsumosPorModelo);
-router.get("/stock-bajo", obtenerInsumosBajoStock);
+router.get( "/",authMiddleware,  listarInsumos);
+router.get( "/modelo",authMiddleware,  listarInsumosPorModelo);
+router.get( "/stock-bajo",authMiddleware,  obtenerInsumosBajoStock);
 
-router.post("/modelo/:id/insumos", asociarInsumosAModelo);
+router.post( "/modelo/:id/insumos",authMiddleware,  asociarInsumosAModelo);
 
-router.put("/:id/stock-minimo", actualizarStockMinimo);
-router.put("/:id", editarInsumo);
+router.put( "/:id/stock-minimo",authMiddleware,  actualizarStockMinimo);
+router.put( "/:id",authMiddleware,  editarInsumo);
 
 // ✅ Nueva ruta N‑N
-router.delete("/modelo/:modeloId/:insumoId", desasociarInsumoDeModelo);
-router.delete("/:id", eliminarInsumo);
+router.delete( "/modelo/:modeloId/:insumoId",authMiddleware,  desasociarInsumoDeModelo);
+router.delete( "/:id", authMiddleware, eliminarInsumo);
 
 export default router;

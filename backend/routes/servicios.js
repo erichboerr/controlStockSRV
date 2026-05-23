@@ -1,3 +1,4 @@
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
   listarServicios,
@@ -10,11 +11,11 @@ import {
 
 const router = express.Router();
 
-router.get("/", listarServicios);
-router.get("/por-modelo/:modeloId", listarServiciosPorModelo);
-router.get("/:servicioId/impresoras", listarImpresorasPorServicio);
-router.post("/", crearServicio);
-router.put("/:id", editarServicio);
-router.delete("/:id", eliminarServicio);
+router.get( "/",authMiddleware, listarServicios);
+router.get( "/por-modelo/:modeloId",authMiddleware, listarServiciosPorModelo);
+router.get( "/:servicioId/impresoras",authMiddleware, listarImpresorasPorServicio);
+router.post( "/",authMiddleware, crearServicio);
+router.put( "/:id",authMiddleware, editarServicio);
+router.delete( "/:id",authMiddleware, eliminarServicio);
 
 export default router;

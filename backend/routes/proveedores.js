@@ -1,3 +1,4 @@
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
   listarProveedores,
@@ -8,9 +9,9 @@ import {
 
 const router = express.Router();
 
-router.get("/", listarProveedores);
-router.post("/", crearProveedor);
-router.put("/:id", editarProveedor);
-router.delete("/:id", eliminarProveedor);
+router.get( "/",authMiddleware, listarProveedores);
+router.post( "/",authMiddleware, crearProveedor);
+router.put( "/:id",authMiddleware, editarProveedor);
+router.delete( "/:id",authMiddleware, eliminarProveedor);
 
 export default router;

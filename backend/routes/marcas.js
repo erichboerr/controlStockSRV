@@ -1,3 +1,4 @@
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
   listarMarcas,
@@ -8,9 +9,9 @@ import {
 
 const router = express.Router();
 
-router.get("/", listarMarcas);
-router.post("/", crearMarca);
-router.put("/:id", editarMarca);
-router.delete("/:id", eliminarMarca);
+router.get( "/", authMiddleware,listarMarcas);
+router.post( "/", authMiddleware,crearMarca);
+router.put( "/:id",authMiddleware, editarMarca);
+router.delete( "/:id",authMiddleware, eliminarMarca);
 
 export default router;

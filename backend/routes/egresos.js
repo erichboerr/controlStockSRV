@@ -1,3 +1,4 @@
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
     egresarInsumo ,
@@ -5,7 +6,7 @@ import {
 
 const router = express.Router();
 
-router.post("/", egresarInsumo);
+router.post("/",authMiddleware, egresarInsumo);
 
 
 export default router;

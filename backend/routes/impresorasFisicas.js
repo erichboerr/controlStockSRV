@@ -1,3 +1,4 @@
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
   ListarImpresorasFisicas,
@@ -10,13 +11,13 @@ import {
 
 const router = express.Router();
 
-router.get("/", ListarImpresorasFisicas);
-router.get("/series", ListarSeriesDisponibles);
+router.get( "/",authMiddleware, ListarImpresorasFisicas);
+router.get( "/series",authMiddleware, ListarSeriesDisponibles);
 
 
-router.post("/", IngresarImpresoraFisica);
+router.post( "/", authMiddleware,IngresarImpresoraFisica);
 
-router.put("/baja", darDeBajaImpresora);
-router.put("/:id", actualizarSerieImpresora);
+router.put( "/baja",authMiddleware, darDeBajaImpresora);
+router.put( "/:id", authMiddleware,actualizarSerieImpresora);
 
 export default router;
