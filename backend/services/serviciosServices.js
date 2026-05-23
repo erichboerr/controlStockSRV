@@ -138,7 +138,5 @@ export async function remove(id) {
   }
 
   await servicio.update({ flagHabilitado: false });
-  await servicio.destroy(); // soft delete
-
   return { mensaje: "Servicio dado de baja" };
 }

@@ -65,15 +65,14 @@ export async function removeAssociation(modeloId, insumoId) {
 
   const sigueAsociado = await ModeloInsumo.findOne({ where: { insumoId } });
   if (!sigueAsociado) {
-    const insumo = await Insumo.findByPk(insumoId);
-    if (insumo) {
-      await insumo.update({ flagHabilitado: false });
-      await insumo.destroy();
-      return {
-        mensaje: "Insumo desasociado y eliminado porque no tenía más modelos asociados",
-      };
-    }
+  const insumo = await Insumo.findByPk(insumoId);
+  if (insumo) {
+    await insumo.update({ flagHabilitado: false });
+    return {
+      mensaje: "Insumo desasociado y eliminado porque no tenía más modelos asociados",
+    };
   }
+}
   return { mensaje: "Insumo desasociado del modelo" };
 }
 
@@ -111,7 +110,6 @@ export async function remove(id) {
   }
 
   await insumo.update({ flagHabilitado: false });
-  await insumo.destroy();
   return { mensaje: "Insumo dado de baja" };
 }
 
