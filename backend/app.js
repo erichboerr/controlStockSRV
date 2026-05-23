@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 import usuariosRoutes from "./routes/usuarios.js";
@@ -20,10 +22,18 @@ import reportesRouter from "./routes/reportes.js";
 import repuestosRouter from "./routes/repuestos.js";
 import logRouter from "./routes/logs.js";
 
-
 const app = express();
-app.use(cors());
+
+// Seguridad y logging
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+}));
+
 app.use(express.json());
+
 app.use("/usuarios", usuariosRoutes);
 app.use("/roles", rolesRoutes);
 app.use("/proveedores", ProveedoresRoute);
@@ -44,6 +54,5 @@ app.use("/logs", logRouter);
 
 // Middleware de errores al final
 app.use(errorHandler);
-
 
 export default app;
