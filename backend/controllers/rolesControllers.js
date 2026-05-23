@@ -1,4 +1,4 @@
-import { getAllRolesForUser } from "../services/rolesServices.js";
+import { getAllRolesForUser } from "../services/rolesService.js";
 
 // Listar roles del usuario
 export async function listarRoles(req, res, next) {

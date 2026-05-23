@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/proveedoresServices.js";
+import { getAll, create, update, remove } from "../services/proveedoresService.js";
 
 // Listar proveedores
 export async function listarProveedores(req, res, next) {
