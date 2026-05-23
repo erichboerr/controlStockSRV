@@ -22,45 +22,27 @@ export async function obtenerStockActual(repuestoId) {
 
 export async function create(repuesto, stock_minimo = 3) {
   if (!repuesto || typeof repuesto !== "string") {
-    const error = new Error("Repuesto inválido");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_REPUESTO";
-    throw error;
+    throw createError("Repuesto inválido", 400, "INVALID_REPUESTO");
   }
 
   try {
     return await Repuesto.create({ repuesto, stock_minimo });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
-      err.isCustom = true;
-      err.httpStatus = 409;
-      err.code = "REPUESTO_EXISTS";
-    } else {
-      err.isCustom = true;
-      err.httpStatus = 500;
-      err.code = "DB_ERROR";
+      throw createError("El repuesto ya existe", 409, "REPUESTO_EXISTS");
     }
-    throw err;
+    throw createError("Error al crear repuesto", 500, "DB_ERROR");
   }
 }
 
 export async function registrarIngresoRepuestos(proveedorId, remito, items) {
   if (!Array.isArray(items) || items.length === 0) {
-    const error = new Error("Items inválidos");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_ITEMS";
-    throw error;
+    throw createError("Items inválidos", 400, "INVALID_ITEMS");
   }
 
   const movimientosData = items.map((it) => {
     if (!it.repuestoId || !it.cantidad) {
-      const error = new Error("Item incompleto");
-      error.isCustom = true;
-      error.httpStatus = 400;
-      error.code = "INVALID_ITEM";
-      throw error;
+      throw createError("Item incompleto", 400, "INVALID_ITEM");
     }
     return {
       tipo: "ingreso",
@@ -77,20 +59,12 @@ export async function registrarIngresoRepuestos(proveedorId, remito, items) {
 
 export async function registrarEgresoRepuestos(servicioId, items) {
   if (!Array.isArray(items) || items.length === 0) {
-    const error = new Error("Items inválidos");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_ITEMS";
-    throw error;
+    throw createError("Items inválidos", 400, "INVALID_ITEMS");
   }
 
   const movimientosData = items.map((it) => {
     if (!it.repuestoId || !it.cantidad) {
-      const error = new Error("Item incompleto");
-      error.isCustom = true;
-      error.httpStatus = 400;
-      error.code = "INVALID_ITEM";
-      throw error;
+      throw createError("Item incompleto", 400, "INVALID_ITEM");
     }
     return {
       tipo: "egreso",
@@ -159,4 +133,3 @@ export async function getInsumosBajoStockRepuestos() {
 
   return await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
 }
-

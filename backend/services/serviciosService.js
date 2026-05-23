@@ -19,7 +19,7 @@ export async function getByModelo(modeloId) {
       {
         model: ServicioImpresora,
         as: "impresoras",
-        required: true, // 👈 fuerza INNER JOIN
+        required: true,
         include: [
           {
             model: ImpresoraFisica,
@@ -34,7 +34,7 @@ export async function getByModelo(modeloId) {
                   {
                     model: Modelo,
                     as: "modelo",
-                    where: { id: modeloId }, // 👈 filtro aplicado
+                    where: { id: modeloId },
                     required: true,
                   },
                 ],
@@ -55,12 +55,12 @@ export async function getImpresorasByServicio(servicioId) {
     include: [
       {
         model: ImpresoraFisica,
-        as: "impresoraFisica",   // coincide con index.js
+        as: "impresoraFisica",
         required: true,
         include: [
           {
             model: Impresora,
-            as: "impresora",     // coincide con index.js
+            as: "impresora",
             required: true,
             include: [
               { model: Marca, as: "marca", required: true },
@@ -73,43 +73,25 @@ export async function getImpresorasByServicio(servicioId) {
   });
 }
 
-
-
-// Crear nuevo
 export async function create({ servicio, ubicacion }) {
   if (!servicio) {
-    const error = new Error("El servicio es obligatorio");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_SERVICIO";
-    throw error;
+    throw createError("El servicio es obligatorio", 400, "MISSING_SERVICIO");
   }
 
   try {
     return await Servicio.create({ servicio, ubicacion });
   } catch (err) {
     if (err.name === "Este servicio ya existe en el sistema") {
-      err.isCustom = true;
-      err.httpStatus = 409;
-      err.code = "SERVICIO_EXISTS";
-    } else {
-      err.isCustom = true;
-      err.httpStatus = 500;
-      err.code = "DB_ERROR";
+      throw createError("Este servicio ya existe en el sistema", 409, "SERVICIO_EXISTS");
     }
-    throw err;
+    throw createError("Error al crear servicio", 500, "DB_ERROR");
   }
 }
 
-// Actualizar
 export async function update(id, data) {
   const servicio = await Servicio.findByPk(id);
   if (!servicio) {
-    const error = new Error("Servicio no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Servicio no encontrado", 404, "NOT_FOUND");
   }
 
   servicio.servicio = data.servicio || servicio.servicio;
@@ -119,23 +101,14 @@ export async function update(id, data) {
   return servicio;
 }
 
-// Eliminar
 export async function remove(id) {
   const servicio = await Servicio.findByPk(id);
   if (!servicio) {
-    const error = new Error("Servicio no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Servicio no encontrado", 404, "NOT_FOUND");
   }
 
   if (!servicio.flagHabilitado) {
-    const error = new Error("El servicio ya está dado de baja");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "ALREADY_DISABLED";
-    throw error;
+    throw createError("El servicio ya está dado de baja", 409, "ALREADY_DISABLED");
   }
 
   await servicio.update({ flagHabilitado: false });

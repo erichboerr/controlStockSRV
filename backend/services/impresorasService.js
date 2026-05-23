@@ -19,44 +19,26 @@ export async function obtenerImpresoraPorMarcaYModelo(marcaId, modeloId) {
 
 export async function create({ marcaId, modeloId }) {
   if (!marcaId || typeof marcaId !== "number") {
-    const error = new Error("marcaId inválido");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_MARCA";
-    throw error;
+    throw createError("marcaId inválido", 400, "INVALID_MARCA");
   }
   if (!modeloId || typeof modeloId !== "number") {
-    const error = new Error("modeloId inválido");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_MODELO";
-    throw error;
+    throw createError("modeloId inválido", 400, "INVALID_MODELO");
   }
 
   try {
     return await Impresora.create({ marcaId, modeloId });
   } catch (err) {
     if (err.name === "Esta IMPRESORA ya existe en el sistema") {
-      err.isCustom = true;
-      err.httpStatus = 409;
-      err.code = "IMPRESORA_EXISTS";
-    } else {
-      err.isCustom = true;
-      err.httpStatus = 500;
-      err.code = "DB_ERROR";
+      throw createError("Esta impresora ya existe en el sistema", 409, "IMPRESORA_EXISTS");
     }
-    throw err;
+    throw createError("Error al crear impresora", 500, "DB_ERROR");
   }
 }
 
 export async function update(id, data) {
   const impresora = await Impresora.findByPk(id);
   if (!impresora) {
-    const error = new Error("Impresora no encontrada");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Impresora no encontrada", 404, "NOT_FOUND");
   }
 
   impresora.impresora = data.impresora || impresora.impresora;
@@ -67,23 +49,13 @@ export async function update(id, data) {
 export async function remove(id) {
   const impresora = await Impresora.findByPk(id);
   if (!impresora) {
-    const error = new Error("Impresora no encontrada");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Impresora no encontrada", 404, "NOT_FOUND");
   }
 
   if (!impresora.flagHabilitado) {
-    const error = new Error("La impresora ya está dada de baja");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "ALREADY_DISABLED";
-    throw error;
+    throw createError("La impresora ya está dada de baja", 409, "ALREADY_DISABLED");
   }
 
   await impresora.update({ flagHabilitado: false });
-  await impresora.destroy(); // soft delete
-
   return { mensaje: "Impresora dada de baja" };
 }

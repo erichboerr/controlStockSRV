@@ -14,52 +14,31 @@ export async function getAllMarca({ idMarca }) {
   return await Modelo.findAll({ where: filtros });
 }
 
-// Crear nuevo
 export async function create(modelo, marcaId) {
   if (!modelo || typeof modelo !== "string") {
-    const error = new Error("modelo inválido");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_MODELO";
-    throw error;
+    throw createError("modelo inválido", 400, "INVALID_MODELO");
   }
   if (!marcaId || typeof marcaId !== "number") {
-    const error = new Error("marcaId inválido");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_MARCAID";
-    throw error;
+    throw createError("marcaId inválido", 400, "INVALID_MARCAID");
   }
 
   const normalizedModelo = modelo.trim().toUpperCase();
   const existente = await Modelo.findOne({ where: { modelo: normalizedModelo, marcaId } });
   if (existente) {
-    const error = new Error("El modelo ya existe para esta marca");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "MODELO_EXISTS";
-    throw error;
+    throw createError("El modelo ya existe para esta marca", 409, "MODELO_EXISTS");
   }
 
   try {
     return await Modelo.create({ modelo: normalizedModelo, marcaId });
   } catch (err) {
-    err.isCustom = true;
-    err.httpStatus = 500;
-    err.code = "DB_ERROR";
-    throw err;
+    throw createError("Error al crear modelo", 500, "DB_ERROR");
   }
 }
 
-// Actualizar
 export async function update(id, data) {
   const modelo = await Modelo.findByPk(id);
   if (!modelo) {
-    const error = new Error("modelo no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("modelo no encontrado", 404, "NOT_FOUND");
   }
 
   modelo.modelo = data.modelo || modelo.modelo;
@@ -67,26 +46,16 @@ export async function update(id, data) {
   return modelo;
 }
 
-// Eliminar
 export async function remove(id) {
   const modelo = await Modelo.findByPk(id);
   if (!modelo) {
-    const error = new Error("Modelo no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Modelo no encontrado", 404, "NOT_FOUND");
   }
 
   if (!modelo.flagHabilitado) {
-    const error = new Error("El modelo ya está dado de baja");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "ALREADY_DISABLED";
-    throw error;
+    throw createError("El modelo ya está dado de baja", 409, "ALREADY_DISABLED");
   }
 
   await modelo.update({ flagHabilitado: false });
-  await modelo.destroy();
   return { mensaje: "Modelo dado de baja" };
 }

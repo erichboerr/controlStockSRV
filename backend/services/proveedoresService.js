@@ -8,41 +8,25 @@ export async function getAll() {
   });
 }
 
-// Crear nuevo
 export async function create({ proveedor, telefono, email }) {
   if (!proveedor) {
-    const error = new Error("El nombre del proveedor es obligatorio");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_NAME";
-    throw error;
+    throw createError("El nombre del proveedor es obligatorio", 400, "MISSING_NAME");
   }
 
   try {
     return await Proveedor.create({ proveedor, telefono, email });
   } catch (err) {
     if (err.name === "El proveedor ya existe en el sistema") {
-      err.isCustom = true;
-      err.httpStatus = 409;
-      err.code = "PROVEEDOR_EXISTS";
-    } else {
-      err.isCustom = true;
-      err.httpStatus = 500;
-      err.code = "DB_ERROR";
+      throw createError("El proveedor ya existe en el sistema", 409, "PROVEEDOR_EXISTS");
     }
-    throw err;
+    throw createError("Error al crear proveedor", 500, "DB_ERROR");
   }
 }
 
-// Actualizar
 export async function update(id, data) {
   const proveedor = await Proveedor.findByPk(id);
   if (!proveedor) {
-    const error = new Error("Proveedor no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Proveedor no encontrado", 404, "NOT_FOUND");
   }
 
   proveedor.proveedor = data.proveedor || proveedor.proveedor;
@@ -53,27 +37,16 @@ export async function update(id, data) {
   return proveedor;
 }
 
-// Eliminar
 export async function remove(id) {
   const proveedor = await Proveedor.findByPk(id);
   if (!proveedor) {
-    const error = new Error("Proveedor no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Proveedor no encontrado", 404, "NOT_FOUND");
   }
 
   if (!proveedor.flagHabilitado) {
-    const error = new Error("El proveedor ya está dado de baja");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "ALREADY_DISABLED";
-    throw error;
+    throw createError("El proveedor ya está dado de baja", 409, "ALREADY_DISABLED");
   }
 
   await proveedor.update({ flagHabilitado: false });
-  await proveedor.destroy(); // soft delete
-
   return { mensaje: "Proveedor dado de baja" };
 }

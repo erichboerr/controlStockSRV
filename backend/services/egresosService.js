@@ -14,9 +14,6 @@ export async function egresarInsumoService({ servicioId, items }) {
   try {
     await MovimientoInsumo.bulkCreate(movimientos);
   } catch (error) {
-    error.isCustom = true;
-    error.httpStatus = 500;
-    error.code = "DB_ERROR";
-    throw error;
+    throw createError("Error al registrar egreso", 500, "DB_ERROR");
   }
 }

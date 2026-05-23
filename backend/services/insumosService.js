@@ -14,18 +14,13 @@ export async function getAll() {
 export async function getByModelo(modeloId) {
   const modelo = await Modelo.findByPk(modeloId, {
     include: { model: Insumo, as: "insumos" },
-    
   });
   return modelo ? modelo.insumos : [];
 }
 
 export async function createOrAssociate(modeloId, insumos, stock_minimo) {
   if (!modeloId || !Array.isArray(insumos)) {
-    const error = new Error("Datos incompletos para asociar insumos");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_DATA";
-    throw error;
+    throw createError("Datos incompletos para asociar insumos", 400, "MISSING_DATA");
   }
 
   const resultados = [];
@@ -34,7 +29,7 @@ export async function createOrAssociate(modeloId, insumos, stock_minimo) {
 
     let insumo = await Insumo.findOne({ where: { insumo: normalizado } });
     if (!insumo) {
-        insumo = await Insumo.create({
+      insumo = await Insumo.create({
         insumo: normalizado,
         stock_minimo: stock_minimo ?? 5,
       });
@@ -55,36 +50,26 @@ export async function createOrAssociate(modeloId, insumos, stock_minimo) {
 export async function removeAssociation(modeloId, insumoId) {
   const relacion = await ModeloInsumo.findOne({ where: { modeloId, insumoId } });
   if (!relacion) {
-    const error = new Error("La relación modelo-insumo no existe");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "RELATION_NOT_FOUND";
-    throw error;
+    throw createError("La relación modelo-insumo no existe", 404, "RELATION_NOT_FOUND");
   }
 
   await relacion.destroy();
 
   const sigueAsociado = await ModeloInsumo.findOne({ where: { insumoId } });
   if (!sigueAsociado) {
-  const insumo = await Insumo.findByPk(insumoId);
-  if (insumo) {
-    await insumo.update({ flagHabilitado: false });
-    return {
-      mensaje: "Insumo desasociado y eliminado porque no tenía más modelos asociados",
-    };
+    const insumo = await Insumo.findByPk(insumoId);
+    if (insumo) {
+      await insumo.update({ flagHabilitado: false });
+      return { mensaje: "Insumo desasociado y eliminado porque no tenía más modelos asociados" };
+    }
   }
-}
   return { mensaje: "Insumo desasociado del modelo" };
 }
 
 export async function updateStockMinimo(id, stock_minimo) {
   const insumo = await Insumo.findByPk(id);
   if (!insumo) {
-    const error = new Error("Insumo no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Insumo no encontrado", 404, "NOT_FOUND");
   }
 
   insumo.stock_minimo = stock_minimo;
@@ -95,19 +80,11 @@ export async function updateStockMinimo(id, stock_minimo) {
 export async function remove(id) {
   const insumo = await Insumo.findByPk(id);
   if (!insumo) {
-    const error = new Error("Insumo no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Insumo no encontrado", 404, "NOT_FOUND");
   }
 
   if (!insumo.flagHabilitado) {
-    const error = new Error("El insumo ya está dado de baja");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "ALREADY_DISABLED";
-    throw error;
+    throw createError("El insumo ya está dado de baja", 409, "ALREADY_DISABLED");
   }
 
   await insumo.update({ flagHabilitado: false });
@@ -117,19 +94,11 @@ export async function remove(id) {
 export async function update(id, data) {
   const insumo = await Insumo.findByPk(id);
   if (!insumo) {
-    const error = new Error("Insumo no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Insumo no encontrado", 404, "NOT_FOUND");
   }
 
   if (!data.insumo?.trim()) {
-    const error = new Error("Nombre de insumo inválido");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_INPUT";
-    throw error;
+    throw createError("Nombre de insumo inválido", 400, "INVALID_INPUT");
   }
 
   insumo.insumo = data.insumo;
@@ -156,7 +125,6 @@ export async function getInsumosBajoStock() {
     WHERE i."flagHabilitado" = true
       AND COALESCE(m.stock_actual, 0) < i.stock_minimo
   ORDER BY i.insumo;`
-
 
   return await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
 }

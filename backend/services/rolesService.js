@@ -3,20 +3,12 @@ import Rol from "../models/Rol.js";
 
 export async function getAllRolesForUser(usuario) {
   if (!usuario) {
-    const error = new Error("Usuario no proporcionado");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_USER";
-    throw error;
+    throw createError("Usuario no proporcionado", 400, "MISSING_USER");
   }
 
   const rolUsuario = await Rol.findByPk(usuario.rolId);
   if (!rolUsuario) {
-    const error = new Error("Rol del usuario no encontrado");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "ROLE_NOT_FOUND";
-    throw error;
+    throw createError("Rol del usuario no encontrado", 404, "ROLE_NOT_FOUND");
   }
 
   if (rolUsuario.rol === "ROOT" || rolUsuario.systemRole) {

@@ -8,41 +8,25 @@ export async function getAll() {
   });
 }
 
-// Crear nuevo
 export async function create(marca) {
   if (!marca || typeof marca !== "string") {
-    const error = new Error("Marca inválida");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "INVALID_MARCA";
-    throw error;
+    throw createError("Marca inválida", 400, "INVALID_MARCA");
   }
 
   try {
     return await Marca.create({ marca });
   } catch (err) {
     if (err.name === "Esta marca ya existe en el sistema") {
-      err.isCustom = true;
-      err.httpStatus = 409;
-      err.code = "MARCA_EXISTS";
-    } else {
-      err.isCustom = true;
-      err.httpStatus = 500;
-      err.code = "DB_ERROR";
+      throw createError("Esta marca ya existe en el sistema", 409, "MARCA_EXISTS");
     }
-    throw err;
+    throw createError("Error al crear marca", 500, "DB_ERROR");
   }
 }
 
-// Actualizar
 export async function update(id, data) {
   const marca = await Marca.findByPk(id);
   if (!marca) {
-    const error = new Error("Marca no encontrada");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Marca no encontrada", 404, "NOT_FOUND");
   }
 
   marca.marca = data.marca || marca.marca;
@@ -50,27 +34,16 @@ export async function update(id, data) {
   return marca;
 }
 
-// Eliminar
 export async function remove(id) {
   const marca = await Marca.findByPk(id);
   if (!marca) {
-    const error = new Error("Marca no encontrada");
-    error.isCustom = true;
-    error.httpStatus = 404;
-    error.code = "NOT_FOUND";
-    throw error;
+    throw createError("Marca no encontrada", 404, "NOT_FOUND");
   }
 
   if (!marca.flagHabilitado) {
-    const error = new Error("La marca ya está dada de baja");
-    error.isCustom = true;
-    error.httpStatus = 409;
-    error.code = "ALREADY_DISABLED";
-    throw error;
+    throw createError("La marca ya está dada de baja", 409, "ALREADY_DISABLED");
   }
 
   await marca.update({ flagHabilitado: false });
-  await marca.destroy();
-
   return { mensaje: "Marca dada de baja" };
 }

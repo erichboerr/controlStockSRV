@@ -3,11 +3,7 @@ import MovimientoInsumo from "../models/MovimientoInsumo.js";
 
 export async function registrarIngresoService({ proveedorId, remito, items }) {
   if (!proveedorId || !remito || !items?.length) {
-    const error = new Error("Datos incompletos");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_DATA";
-    throw error;
+    throw createError("Datos incompletos", 400, "MISSING_DATA");
   }
 
   const movimientos = items.map(it => ({
@@ -23,20 +19,13 @@ export async function registrarIngresoService({ proveedorId, remito, items }) {
   try {
     return await MovimientoInsumo.bulkCreate(movimientos);
   } catch (err) {
-    err.isCustom = true;
-    err.httpStatus = 500;
-    err.code = "DB_ERROR";
-    throw err;
+    throw createError("Error al registrar ingreso", 500, "DB_ERROR");
   }
 }
 
 export async function registrarEgresoService({ servicioId, items }) {
   if (!servicioId || !items?.length) {
-    const error = new Error("Datos incompletos");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_DATA";
-    throw error;
+    throw createError("Datos incompletos", 400, "MISSING_DATA");
   }
 
   const movimientos = items.map(it => ({
@@ -50,9 +39,6 @@ export async function registrarEgresoService({ servicioId, items }) {
   try {
     return await MovimientoInsumo.bulkCreate(movimientos);
   } catch (err) {
-    err.isCustom = true;
-    err.httpStatus = 500;
-    err.code = "DB_ERROR";
-    throw err;
+    throw createError("Error al registrar egreso", 500, "DB_ERROR");
   }
 }

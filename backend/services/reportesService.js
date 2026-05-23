@@ -43,24 +43,13 @@ export async function obtenerStock() {
       order: [["insumo", "ASC"]],
     });
   } catch (err) {
-    err.isCustom = true;
-    err.httpStatus = 500;
-    err.code = "DB_ERROR";
-    throw err;
+    throw createError("Error al obtener stock", 500, "DB_ERROR");
   }
 }
 
-export async function RepoMovInsumosServicioService({
-  desde,
-  hasta,
-  servicio,
-}) {
+export async function RepoMovInsumosServicioService({ desde, hasta, servicio }) {
   if (!desde || !hasta || !servicio) {
-    const error = new Error("Parámetros obligatorios faltantes");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_PARAMS";
-    throw error;
+    throw createError("Parámetros obligatorios faltantes", 400, "MISSING_PARAMS");
   }
 
   return await MovimientoInsumo.findAll({
@@ -82,44 +71,34 @@ export async function RepoMovInsumosServicioService({
   });
 }
 
-/******************************************************/
 export async function RepoMovimientosInsumosService({ desde, hasta, insumo }) {
   if (!desde || !hasta || !insumo) {
-    const error = new Error("Parámetros obligatorios faltantes");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_PARAMS";
-    throw error;
+    throw createError("Parámetros obligatorios faltantes", 400, "MISSING_PARAMS");
   }
 
   return await MovimientoInsumo.findAll({
-  where: {
-    insumoId: insumo,
-    fecha: {
-      [Sequelize.Op.between]: [
-        new Date(`${desde}T00:00:00-03:00`),
-        new Date(`${hasta}T23:59:59-03:00`),
-      ],
+    where: {
+      insumoId: insumo,
+      fecha: {
+        [Sequelize.Op.between]: [
+          new Date(`${desde}T00:00:00-03:00`),
+          new Date(`${hasta}T23:59:59-03:00`),
+        ],
+      },
+      flagHabilitado: true,
     },
-    flagHabilitado: true,
-  },
-  include: [
-    { model: Insumo, as: "insumo", attributes: ["insumo"] },
-    { model: Servicio, as: "servicio", attributes: ["servicio"] },
-    { model: Proveedor, as: "proveedorInsumos", attributes: ["proveedor"] }, // 👈 alias correcto
-  ],
-  order: [["fecha", "ASC"]],
-});
+    include: [
+      { model: Insumo, as: "insumo", attributes: ["insumo"] },
+      { model: Servicio, as: "servicio", attributes: ["servicio"] },
+      { model: Proveedor, as: "proveedorInsumos", attributes: ["proveedor"] },
+    ],
+    order: [["fecha", "ASC"]],
+  });
 }
 
-/************************************************************/
 export async function RepoIngresosPorInsumoService({ desde, hasta, insumo }) {
   if (!desde || !hasta || !insumo) {
-    const error = new Error("Parámetros obligatorios faltantes");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_PARAMS";
-    throw error;
+    throw createError("Parámetros obligatorios faltantes", 400, "MISSING_PARAMS");
   }
 
   return await MovimientoInsumo.findAll({
@@ -136,25 +115,17 @@ export async function RepoIngresosPorInsumoService({ desde, hasta, insumo }) {
     },
     include: [
       { model: Insumo, as: "insumo", attributes: ["insumo"] },
-      { model: Proveedor, as: "proveedorInsumos", attributes: ["proveedor"] }, // 👈 alias corregido
+      { model: Proveedor, as: "proveedorInsumos", attributes: ["proveedor"] },
     ],
     order: [["fecha", "ASC"]],
   });
 }
 
-/************************************************************/
-export async function RepoIngresosPorProveedorService({
-  desde,
-  hasta,
-  proveedor,
-}) {
+export async function RepoIngresosPorProveedorService({ desde, hasta, proveedor }) {
   if (!desde || !hasta || !proveedor) {
-    const error = new Error("Parámetros obligatorios faltantes");
-    error.isCustom = true;
-    error.httpStatus = 400;
-    error.code = "MISSING_PARAMS";
-    throw error;
+    throw createError("Parámetros obligatorios faltantes", 400, "MISSING_PARAMS");
   }
+
   return await MovimientoInsumo.findAll({
     where: {
       proveedorId: proveedor,
@@ -169,10 +140,8 @@ export async function RepoIngresosPorProveedorService({
     },
     include: [
       { model: Insumo, as: "insumo", attributes: ["insumo"] },
-      { model: Proveedor, as: "proveedorInsumos", attributes: ["proveedor"] }, // 👈 alias correcto
+      { model: Proveedor, as: "proveedorInsumos", attributes: ["proveedor"] },
     ],
     order: [["fecha", "ASC"]],
   });
 }
-
-/************************************************************/
