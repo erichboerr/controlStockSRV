@@ -1,3 +1,4 @@
+import { createError } from "../utils/createError.js";
 import Proveedor from "../models/Proveedor.js";
 
 export async function getAll() {

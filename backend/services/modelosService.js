@@ -1,3 +1,4 @@
+import { createError } from "../utils/createError.js";
 import Modelo from "../models/Modelo.js";
 
 export async function getAll() {

@@ -1,3 +1,4 @@
+import { createError } from "../utils/createError.js";
 import MovimientoInsumo from "../models/MovimientoInsumo.js";
 
 export async function registrarIngresoService({ proveedorId, remito, items }) {

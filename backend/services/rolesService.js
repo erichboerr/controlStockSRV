@@ -1,3 +1,4 @@
+import { createError } from "../utils/createError.js";
 import Rol from "../models/Rol.js";
 
 export async function getAllRolesForUser(usuario) {

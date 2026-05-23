@@ -1,3 +1,4 @@
+import { createError } from "../utils/createError.js";
 import Impresora from "../models/Impresora.js";
 
 export async function getAll() {
