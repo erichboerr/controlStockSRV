@@ -132,7 +132,7 @@ Proveedor.hasMany(MovimientoRepuesto, {
   foreignKey: "proveedorId",
   as: "ingresosRepuestos",
 });
-MovimientoInsumo.belongsTo(Proveedor, {
+MovimientoRepuesto.belongsTo(Proveedor, {
   foreignKey: "proveedorId",
   as: "proveedorRepuestos",
 });
@@ -141,7 +141,7 @@ Servicio.hasMany(MovimientoRepuesto, {
   foreignKey: "servicioId",
   as: "egresosRepuestos",
 });
-MovimientoInsumo.belongsTo(Servicio, {
+MovimientoRepuesto.belongsTo(Servicio, {
   foreignKey: "servicioId",
   as: "servicioRepuesto",
 });
