@@ -1,7 +1,7 @@
 import FormularioMarco from "../../common/components/FormularioMarco.jsx";
 import Button from "../../common/components/Button.jsx";
 import useStockRepuestosForm from "./hooks/useStockRepuestosForm.js";
-import generarPdfStock from "./helpers/generarPdfStock.js.js";
+import generarPdfStock from "./helpers/generarPdfStock.js";
 
 export default function StockRepuestos() {
   const { data } = useStockRepuestosForm();
@@ -38,6 +38,7 @@ export default function StockRepuestos() {
           ))}
         </tbody>
       </table>
+
     </FormularioMarco>
   );
 }

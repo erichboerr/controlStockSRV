@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import { usuariosUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
 
 export default function useEliminarUsuario() {
   const [usuarios, setUsuarios] = useState([]);
   const [seleccionado, setSeleccionado] = useState(null);
-  const [tipo, setTipo] = useState("usuario");
+  const [tipo, _] = useState("usuario");
   const campo = "user";
   const [showConfirm, setShowConfirm] = useState(false);
   const { addToast } = useToast();

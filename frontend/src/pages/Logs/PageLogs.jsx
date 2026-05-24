@@ -1,6 +1,6 @@
 // frontend/src/pages/logs/LogsPage.jsx
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../common/config/axiosInstance.js";
 import { logsUrl } from "../../config/env.js";
 import { getToken } from "../../common/utils/auth.js";
 

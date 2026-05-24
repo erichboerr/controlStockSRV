@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import { proveedoresUrl } from "../../../config/env.js";
 import { validarEmail } from "../../../common/helpers/validarEmail.js";
 import { useToast } from "../../../common/hooks/useToast.js";

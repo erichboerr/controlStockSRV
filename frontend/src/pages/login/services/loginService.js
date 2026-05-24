@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import { guardarToken } from "../../../common/utils/auth";
 import { authUrl } from "../../../config/env.js"
 

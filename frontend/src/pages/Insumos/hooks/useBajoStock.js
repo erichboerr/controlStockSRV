@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { insumoUrl } from "../../../config/env.js";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 
 export function useBajoStock() {
   const [data, setData] = useState([]);
@@ -26,3 +26,4 @@ export function useBajoStock() {
 
   return { data, loading, error, refresh: fetchData };
 }
+

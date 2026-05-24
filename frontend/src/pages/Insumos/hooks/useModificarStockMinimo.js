@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import { insumoUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
 
@@ -35,6 +35,7 @@ export default function useModificarStockMinimo() {
       handleCancelar();
     } catch (error) {
       addToast("❌ Error al actualizar stock mínimo", "danger");
+      console.error(error);
     }
   };
 

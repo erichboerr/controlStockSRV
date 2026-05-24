@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import {
   marcaUrl,
   modeloUrl,
@@ -145,6 +145,7 @@ export default function useAgregarImpresoraForm() {
       await cargarModelosPorMarca(marca.id);
     } catch (error) {
       addToast("❌ Error al crear modelo", "danger");
+      console.error("Error al crear modelo:", error);
       return false;
     }
 

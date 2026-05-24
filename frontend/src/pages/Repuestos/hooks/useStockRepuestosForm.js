@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import { repuestosUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
 
@@ -15,3 +15,4 @@ useEffect(() => {
 
   return { data };
 }
+

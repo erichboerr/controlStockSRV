@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../../common/config/axiosInstance.js";
 import { marcaUrl, modeloUrl, serviciosUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
 import { useNavigate } from "react-router-dom";
