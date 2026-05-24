@@ -1,7 +1,7 @@
 import FormularioMarco from "../../common/components/FormularioMarco.jsx";
 import Button from "../../common/components/Button.jsx";
 import useStockRepuestosForm from "./hooks/useStockRepuestosForm.js";
-import generarPdfStock from "./helpers/generarPdfStock.js";
+import generarPdfStockRepuestos  from "./helpers/generarPdfStockRepuestos.js";
 
 export default function StockRepuestos() {
   const { data } = useStockRepuestosForm();
@@ -11,7 +11,7 @@ export default function StockRepuestos() {
       <div className="flex justify-end mb-4">
         <Button
           variant="primary"
-          onClick={() => generarPdfStock(data)}
+          onClick={() => generarPdfStockRepuestos (data)}
           className="bg-blue-600 text-white"
         >
           Imprimir PDF

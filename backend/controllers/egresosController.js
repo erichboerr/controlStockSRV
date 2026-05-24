@@ -1,6 +1,7 @@
 import sequelize from "../config/db.js"; // Importas tu instancia de conexión
 import { egresarInsumoService } from "../services/egresosService.js";
 import { calcularStock } from "../helpers/calcularStock.js";
+import { createError } from "../utils/createError.js";
 
 export async function egresarInsumo(req, res, next) {
     // Iniciamos la transacción
@@ -37,11 +38,3 @@ export async function egresarInsumo(req, res, next) {
     }
 }
 
-// Función auxiliar para limpiar el código
-function createError(msg, status, code) {
-    const error = new Error(msg);
-    error.isCustom = true;
-    error.httpStatus = status;
-    error.code = code;
-    return error;
-}
