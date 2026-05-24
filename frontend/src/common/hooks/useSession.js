@@ -1,37 +1,37 @@
+// useSession.js
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import useAuth from "./useAuth";
-import { getToken, eliminarToken } from "../utils/auth"; // Importamos eliminarToken
+import { getToken, eliminarToken } from "../utils/auth";
 
 export default function useSession() {
-  const { setAuth } = useAuth();
+  const { setAuth, setLoading } = useAuth();
 
   useEffect(() => {
     const token = getToken();
-    if (!token) return;
-
+    if (!token) {
+      setLoading(false);
+      return;
+    }
     try {
       const payload = jwtDecode(token);
-      
-      // Validar si el token expiró
-      const ahora = Date.now() / 1000; // JWT usa segundos, no milisegundos
+      const ahora = Date.now() / 1000;
       if (payload.exp < ahora) {
-        console.warn("La sesión ha expirado");
         eliminarToken();
         setAuth({ isLoggedIn: false, idRol: null, user: null });
-        return;
+      } else {
+        setAuth({
+          isLoggedIn: true,
+          idRol: payload.rolId,
+          user: { usuario: payload.usuario },
+        });
       }
-
-      // Si no ha expirado, cargamos la sesión normalmente
-      setAuth({
-        isLoggedIn: true,
-        idRol: payload.rolId,              
-        user: { usuario: payload.usuario }, // Mantenemos consistencia con useLoginForm
-      });
     } catch (err) {
-      console.error("Token inválido o corrupto:", err);
       eliminarToken();
       setAuth({ isLoggedIn: false, idRol: null, user: null });
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
-  }, [setAuth]);
+  }, [setAuth, setLoading]);
 }
