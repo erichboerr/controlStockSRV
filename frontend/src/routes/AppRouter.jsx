@@ -54,7 +54,7 @@ import EgresoInusmos from "../pages/Egresos/EgresoInsumos.jsx";
 import AjusteInsumos from "../pages/Egresos/AjustesInsumos.jsx";
 
 //Listados
-import ListarImpresorasPorServicio from "../pages/Listados/ListarImpresorasPorServivio.jsx";
+import ListarImpresorasPorServicio from "../pages/Listados/ListarImpresorasPorServicio.jsx";
 import ListarServiciosPorImpresora from "../pages/Listados/ListarServiciosPorImpresora.jsx";
 
 

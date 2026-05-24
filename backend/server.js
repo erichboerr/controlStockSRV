@@ -10,9 +10,9 @@ import { seed_inicial } from "./seeders/seed_inicial.js";
 
 const PORT = process.env.PORT || 5050;
 
-console.log("NODE_ENV =", process.env.NODE_ENV);
+/*console.log("NODE_ENV =", process.env.NODE_ENV);
 console.log("DB_SEED =", process.env.DB_SEED);
-console.log("DB_SYNC =", process.env.DB_SYNC);
+console.log("DB_SYNC =", process.env.DB_SYNC);*/
 
 async function startServer() {
   try {
