@@ -4,7 +4,7 @@ import axios from "../../../common/config/axiosInstance.js";
 import { usuariosUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
 
-export default function useResetearContraseñaForm() {
+export default function useResetearContrasenaForm() {
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [nuevaPassword, setNuevaPassword] = useState("");

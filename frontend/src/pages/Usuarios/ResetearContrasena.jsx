@@ -1,10 +1,10 @@
 import FormularioMarco from "../../common/components/FormularioMarco.jsx";
 import SelectGeneric from "../../common/components/SelectGeneric.jsx";
 import InputGeneric from "../../common/components/InputGeneric.jsx";
-import Button from "../../common/components/Button";
-import useResetearContraseñaForm from "./hooks/useResetearContraseñaForm.js";
+import Button from "../../common/components/Button.jsx";
+import useResetearContrasenaForm from "./hooks/useResetearContrasenaForm.js";
 
-export default function ResetearContraseña() {
+export default function ResetearContrasena() {
   const {
     usuarios,
     usuarioSeleccionado,
@@ -13,7 +13,7 @@ export default function ResetearContraseña() {
     handleUsuarioSelect,
     handleCancelar,
     handleSubmit,
-  } = useResetearContraseñaForm();
+  } = useResetearContrasenaForm();
 
   return (
     <FormularioMarco titulo="Resetear Contraseña de Usuario">

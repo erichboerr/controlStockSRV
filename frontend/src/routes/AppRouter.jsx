@@ -9,7 +9,7 @@ import Login from "../pages/login/Login.jsx";
 import AgregarUsuario from "../pages/Usuarios/AgregarUsuario.jsx";
 import EditarUsuario from "../pages/Usuarios/EditarUsuario.jsx";
 import EliminarUsuario from "../pages/Usuarios/EliminarUsuario.jsx";
-import ResetearContraseña from "../pages/Usuarios/ResetearContraseña.jsx";
+import ResetearContrasena from "../pages/Usuarios/ResetearContrasena.jsx";
 
 //DashBoard
 import StockMinimoDashboard from "../common/components/StockMinimoDashBoard.jsx";
@@ -97,7 +97,7 @@ export default function AppRouter() {
           <Route path="/AltaUsuario" element={<AgregarUsuario />} />
           <Route path="/EditarUsuario" element={<EditarUsuario />} />
           <Route path="/BajaUsuario" element={<EliminarUsuario />} />
-          <Route path="/ActualizarPassword" element={<ResetearContraseña />} />
+          <Route path="/ActualizarPassword" element={<ResetearContrasena />} />
         </Route>
 
         {/* Servicios */}
