@@ -26,7 +26,7 @@ const app = express();
 
 // Seguridad y logging
 app.use(helmet());
-app.use(morgan("dev"));
+app.use(morgan("combined"));
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true,
