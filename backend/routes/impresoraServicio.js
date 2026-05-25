@@ -1,6 +1,9 @@
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
-import { entregarImpresoraServicio, retirarImpresoraServicio, listarImpresorasActivasPorServicio, getImpresorasPorServicio  } from "../controllers/impresoraServicioController.js";
+import { entregarImpresoraServicio, 
+    retirarImpresoraServicio, 
+    listarImpresorasActivasPorServicio, 
+    getImpresorasPorServicio  } from "../controllers/impresoraServicioController.js";
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/usuariosService.js";
+import { getAll, create, update, remove } from "../services/usuarioService.js";
 
 export async function listarUsuarios(req, res, next) {
   try {

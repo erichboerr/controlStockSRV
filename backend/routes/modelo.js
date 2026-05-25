@@ -6,7 +6,7 @@ import {
   crearModelo,
   editarModelo,
   eliminarModelo,
-} from "../controllers/modelosController.js";
+} from "../controllers/modeloController.js";
 
 const router = express.Router();
 

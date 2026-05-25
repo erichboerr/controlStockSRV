@@ -9,7 +9,7 @@ import {
   StockActual,
   ReporteStockRepuestos,
   obtenerInsumosBajoStockRepuestos
-} from "../controllers/repuestosController.js";
+} from "../controllers/repuestoController.js";
 
 const router = express.Router();
 

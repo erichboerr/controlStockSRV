@@ -6,7 +6,7 @@ import {
   crearImpresora,
   editarImpresora,
   eliminarImpresora,
-} from "../controllers/impresorasController.js";
+} from "../controllers/impresoraController.js";
 
 const router = express.Router();
 

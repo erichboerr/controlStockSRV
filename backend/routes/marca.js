@@ -5,7 +5,7 @@ import {
   crearMarca,
   editarMarca,
   eliminarMarca,
-} from "../controllers/marcasController.js";
+} from "../controllers/marcaController.js";
 
 const router = express.Router();
 

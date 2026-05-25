@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/marcasService.js";
+import { getAll, create, update, remove } from "../services/marcaService.js";
 
 // Listar marcas
 export async function listarMarcas(req, res, next) {

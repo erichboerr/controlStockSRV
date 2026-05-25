@@ -1,5 +1,5 @@
 import sequelize from "../config/db.js"; // Importas tu instancia de conexión
-import { egresarInsumoService } from "../services/egresosService.js";
+import { egresarInsumoService } from "../services/egresoService.js";
 import { calcularStock } from "../helpers/calcularStock.js";
 import { createError } from "../utils/createError.js";
 

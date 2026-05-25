@@ -6,7 +6,7 @@ import {
   getMovimientosInsumos,
   getIngresosPorInsumo,
   getIngresosPorProveedor,
-} from "../controllers/reportesController.js";
+} from "../controllers/reporteController.js";
 
 const router = express.Router();
 

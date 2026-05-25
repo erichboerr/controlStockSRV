@@ -6,7 +6,7 @@ import {
   obtenerStockActual,
   obtenerStockRepuestos,
   getInsumosBajoStockRepuestos,
-} from "../services/repuestosService.js";
+} from "../services/repuestoService.js";
 
 // Listar repuestos
 export async function ListarRepuestos(req, res, next) {

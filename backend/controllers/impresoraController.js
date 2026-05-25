@@ -4,7 +4,7 @@ import {
   create,
   update,
   remove,
-} from "../services/impresorasService.js";
+} from "../services/impresoraService.js";
 
 export async function listarImpresoras(req, res, next) {
   try {

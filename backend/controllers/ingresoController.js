@@ -1,4 +1,4 @@
-import { registrarIngresoService, registrarEgresoService } from "../services/ingresosService.js";
+import { registrarIngresoService, registrarEgresoService } from "../services/ingresoService.js";
 
 // POST /stock/ingreso
 export async function registrarIngreso(req, res, next) {

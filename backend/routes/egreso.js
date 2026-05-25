@@ -1,11 +1,12 @@
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import express from "express";
 import {
-    registrarIngreso ,
-} from "../controllers/ingresosController.js";
+    egresarInsumo ,
+} from "../controllers/egresoController.js";
 
 const router = express.Router();
 
-router.post( "/",authMiddleware, registrarIngreso);
+router.post("/",authMiddleware, egresarInsumo);
+
 
 export default router;

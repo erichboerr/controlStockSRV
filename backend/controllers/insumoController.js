@@ -7,7 +7,7 @@ import {
   removeAssociation,
   getInsumosBajoStock,
   updateStockMinimo,
-} from "../services/insumosService.js";
+} from "../services/insumoService.js";
 
 // Listar insumos
 export async function listarInsumos(req, res, next) {

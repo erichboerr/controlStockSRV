@@ -1,4 +1,4 @@
-import { getAll, getByModelo, getImpresorasByServicio, create, update, remove } from "../services/serviciosService.js";
+import { getAll, getByModelo, getImpresorasByServicio, create, update, remove } from "../services/servicioService.js";
 
 // Listar servicios
 export async function listarServicios(req, res, next) {

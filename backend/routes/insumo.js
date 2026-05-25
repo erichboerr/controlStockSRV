@@ -9,7 +9,7 @@ import {
   eliminarInsumo,
   obtenerInsumosBajoStock,
   actualizarStockMinimo,
-} from "../controllers/insumosController.js";
+} from "../controllers/insumoController.js";
 
 const router = express.Router();
 

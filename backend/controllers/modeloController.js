@@ -1,4 +1,4 @@
-import { getAll, getAllMarca, create, update, remove } from "../services/modelosService.js";
+import { getAll, getAllMarca, create, update, remove } from "../services/modeloService.js";
 
 // Listar todos los modelos
 export async function listarModelos(req, res, next) {

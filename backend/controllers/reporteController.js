@@ -4,7 +4,7 @@ import {
   RepoMovimientosInsumosService,
   RepoIngresosPorInsumoService,
   RepoIngresosPorProveedorService,
-} from "../services/reportesService.js";
+} from "../services/reporteService.js";
 
 // Reporte de stock
 export async function reporteStock(req, res, next) {

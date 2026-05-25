@@ -5,7 +5,7 @@ import {
   crearProveedor,
   editarProveedor,
   eliminarProveedor,
-} from "../controllers/proveedoresControllers.js";
+} from "../controllers/proveedorController.js";
 
 const router = express.Router();
 
