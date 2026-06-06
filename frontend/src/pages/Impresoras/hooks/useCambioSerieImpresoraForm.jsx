@@ -110,7 +110,6 @@ export default function useCambioSerieImpresoraForm() {
       // Corregimos la sintaxis de la URL
       const url = `${impresorasServicioUrl}/servicio/${idServicio}`;
       const res = await axios.get(url);
-      console.log(res.data);
 
       const data = res.data || [];
       setRawImpresoras(data);
