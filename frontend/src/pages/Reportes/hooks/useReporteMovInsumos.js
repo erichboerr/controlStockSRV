@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import dayjs from "dayjs";
 import { reportesUrl, insumoUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
+import axios from '../../../common/config/axiosInstance.js';
 
 export function useReporteMovInsumos() {
   const { addToast } = useToast();
@@ -17,53 +18,38 @@ export function useReporteMovInsumos() {
   const [loading, setLoading] = useState(false);
 
   // ✅ Cargar proveedores al inicio
-  useEffect(() => {
+  
+  const cargarInsumos = useCallback(async () => {
+  try {
+    const res = await axios.get(`${insumoUrl}/`);
+    setInsumos(res.data);
+  } catch {
+    addToast("Error al cargar insumos", "error");
+  }
+}, [addToast]);
+  
+useEffect(() => {
     cargarInsumos();
-  }, []);
+  }, [cargarInsumos]);
 
-  const cargarInsumos = async () => {
-    fetch(`${insumoUrl}/`)
-      .then((r) => {
-        if (!r.ok) throw new Error();
-        return r.json();
-      })
-      .then(setInsumos)
-      .catch(() => {
-        addToast("Error al cargar insumos", "error");
-      });
-  };
+const buscar = async () => {
+  if (!seleccionado) {
+    addToast("Debe seleccionar un insumo", "warning");
+    return;
+  }
 
-  // ✅ Buscar movimientos
-  const buscar = async () => {
-    if (!seleccionado) {
-      addToast("Debe seleccionar un insumo", "warning");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const r = await fetch(
-        `${reportesUrl}/movimientosInsumos?desde=${desde}&hasta=${hasta}&insumo=${seleccionado?.id}`
-      );
-
-      if (!r.ok) {
-        addToast("Error al obtener movimientos", "error");
-        setLoading(false);
-        return;
-      }
-
-      const data = await r.json();
-      setMovimientos(data);
-
-      addToast("Movimientos cargados correctamente", "success");
-    } catch (err) {
-      console.log(err);
-      addToast("Error de conexión con el servidor", "error");
-    }
-
-    setLoading(false);
-  };
+  setLoading(true);
+  try {
+    const res = await axios.get(
+      `${reportesUrl}/movimientosInsumos?desde=${desde}&hasta=${hasta}&insumo=${seleccionado?.id}`
+    );
+    setMovimientos(res.data);
+    addToast("Movimientos cargados correctamente", "success");
+  } catch {
+    addToast("Error de conexión con el servidor", "error");
+  }
+  setLoading(false);
+};
 
   
 
