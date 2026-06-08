@@ -101,7 +101,6 @@ export default function useRetirarImpresoraCrud() {
         id: i.impresoraFisica.id,
         numeroSerie: i.impresoraFisica.numeroSerie,       
       }));
-       console.log("nuevas series:", JSON.stringify(nuevasSeries, null, 2));
 
     setSeries(nuevasSeries);
 

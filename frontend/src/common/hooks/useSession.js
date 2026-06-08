@@ -29,7 +29,6 @@ export default function useSession() {
     } catch (err) {
       eliminarToken();
       setAuth({ isLoggedIn: false, idRol: null, user: null });
-      console.log(err);
     } finally {
       setLoading(false);
     }

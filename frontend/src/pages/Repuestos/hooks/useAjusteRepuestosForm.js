@@ -1,34 +1,31 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "../../../common/config/axiosInstance.js";
-import { repuestosUrl } from "../../../config/env.js";
-import { useToast } from "../../../common/hooks/useToast.js";
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import axios from '../../../common/config/axiosInstance.js';
+import { repuestosUrl } from '../../../config/env.js';
+import { useToast } from '../../../common/hooks/useToast.js';
 
 export default function useAjusteRepuestosForm() {
   const [repuestos, setRepuestos] = useState([]);
   const [repuestoSeleccionado, setrepuestoSeleccionado] = useState(null);
-  const [cantidad, setCantidad] = useState("");
+  const [cantidad, setCantidad] = useState('');
   const [listaEgreso, setListaEgreso] = useState([]);
-  const [accion, setAccion] = useState("sumar");
+  const [accion, setAccion] = useState('sumar');
   const [enviando, setEnviando] = useState(false);
   const { addToast } = useToast();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    cargarRepuestos();
-  }, []);
+ const cargarRepuestos = useCallback(async () => {
+  try {
+    const res = await axios.get(`${repuestosUrl}/`);
+    setRepuestos(res.data);
+  } catch {
+    addToast("Error al cargar repuestos", "error");
+  }
+}, [addToast]);
 
-  const cargarRepuestos = async () => {
-    fetch(`${repuestosUrl}/`)
-      .then((r) => {
-        if (!r.ok) throw new Error();
-        return r.json();
-      })
-      .then(setRepuestos)
-      .catch(() => {
-        addToast("Error al cargar repuestos", "error");
-      });
-  };
+useEffect(() => {
+  cargarRepuestos();
+}, [cargarRepuestos]);
 
   // ✅ Agregar ítem con stock actual
   const handleAgregar = async () => {
@@ -38,10 +35,10 @@ export default function useAjusteRepuestosForm() {
       const res = await axios.get(`${repuestosUrl}/${repuestoSeleccionado.id}`);
       const stockActual = res.data.stock;
 
-      if (accion === "restar" && parseInt(cantidad, 10) > stockActual) {
-        addToast(`❌ Stock insuficiente. Disponible: ${stockActual}`, "danger");
+      if (accion === 'restar' && parseInt(cantidad, 10) > stockActual) {
+        addToast(`❌ Stock insuficiente. Disponible: ${stockActual}`, 'danger');
         // 👇 limpiar input y select
-        setCantidad("");
+        setCantidad('');
         setrepuestoSeleccionado(null);
 
         return;
@@ -55,15 +52,17 @@ export default function useAjusteRepuestosForm() {
       };
 
       setListaEgreso((prev) => [...prev, nuevoItem]);
-      setCantidad("");
+      setCantidad('');
       setrepuestoSeleccionado(null);
     } catch {
-      addToast("❌ Error al validar stock", "danger");
+      addToast('❌ Error al validar stock', 'danger');
     }
   };
 
   const handleEliminar = (repuestoId) => {
-    setListaEgreso((prev) => prev.filter((item) => item.repuestoId !== repuestoId));
+    setListaEgreso((prev) =>
+      prev.filter((item) => item.repuestoId !== repuestoId)
+    );
   };
 
   // ✅ Restar con validación de stock por cada ítem
@@ -88,13 +87,13 @@ export default function useAjusteRepuestosForm() {
         if (it.cantidad > stockActual) {
           addToast(
             `❌ Stock insuficiente para ${it.repuesto}. Disponible: ${stockActual}`,
-            "danger"
+            'danger'
           );
           setEnviando(false);
           return;
         }
       } catch {
-        addToast(`❌ Error al validar stock de ${it.repuesto}`, "danger");
+        addToast(`❌ Error al validar stock de ${it.repuesto}`, 'danger');
         setEnviando(false);
         return;
       }
@@ -109,12 +108,12 @@ export default function useAjusteRepuestosForm() {
         })),
       });
 
-      addToast("✅ Egreso registrado correctamente", "success");
+      addToast('✅ Egreso registrado correctamente', 'success');
       handleCancelar();
     } catch (error) {
       const msg =
-        error?.response?.data?.error || "❌ Error al registrar egreso";
-      addToast(msg, "danger");
+        error?.response?.data?.error || '❌ Error al registrar egreso';
+      addToast(msg, 'danger');
       setEnviando(false);
     }
   };
@@ -137,29 +136,29 @@ export default function useAjusteRepuestosForm() {
     try {
       await axios.post(`${repuestosUrl}/ingreso`, {
         proveedorId: 1,
-        remito: "AJUSTE",
+        remito: 'AJUSTE',
         items: itemsFinal.map((it) => ({
           repuestoId: it.repuestoId,
           cantidad: it.cantidad,
         })),
       });
 
-      addToast("✅ Ingreso registrado correctamente", "success");
+      addToast('✅ Ingreso registrado correctamente', 'success');
       handleCancelar();
     } catch (error) {
       const msg =
-        error?.response?.data?.error || "❌ Error al registrar ingreso";
-      addToast(msg, "danger");
+        error?.response?.data?.error || '❌ Error al registrar ingreso';
+      addToast(msg, 'danger');
       setEnviando(false);
     }
   };
 
   const handleCancelar = () => {
     setrepuestoSeleccionado(null);
-    setCantidad("");
+    setCantidad('');
     setListaEgreso([]);
-    setAccion("sumar"); // 👈 vuelve a habilitar y setea default
-    navigate("/");
+    setAccion('sumar'); // 👈 vuelve a habilitar y setea default
+    navigate('/');
   };
 
   return {

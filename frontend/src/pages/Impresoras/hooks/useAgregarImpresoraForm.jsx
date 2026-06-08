@@ -101,7 +101,6 @@ export default function useAgregarImpresoraForm() {
       .filter((i) => i.length > 0);
 
     if (insumosValidos.length === 0) {
-      console.log("No hay insumos para asociar");
       return;
     }
 

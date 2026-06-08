@@ -11,7 +11,6 @@ useEffect(() => {
   axios.get(`${reportesUrl}/stock`)
     .then(res => setData(res.data))
     .catch(() => addToast("❌ Error al cargar stock", "danger"));
-    console.log("url backend: ->" + reportesUrl);
 }, [addToast]); // ✅ solo se ejecuta una vez
 
   return { data };

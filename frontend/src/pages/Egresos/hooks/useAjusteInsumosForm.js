@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "../../../common/config/axiosInstance.js";
 import {
   insumoUrl,
@@ -19,21 +19,18 @@ export default function useAjusteInsumosForm() {
   const { addToast } = useToast();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    cargarInsumos();
-  }, []);
+  const cargarInsumos = useCallback(async () => {
+  try {
+    const res = await axios.get(`${insumoUrl}/`);
+    setInsumos(res.data);
+  } catch {
+    addToast("Error al cargar insumos", "error");
+  }
+}, [addToast]);
 
-  const cargarInsumos = async () => {
-    fetch(`${insumoUrl}/`)
-      .then((r) => {
-        if (!r.ok) throw new Error();
-        return r.json();
-      })
-      .then(setInsumos)
-      .catch(() => {
-        addToast("Error al cargar insumos", "error");
-      });
-  };
+useEffect(() => {
+  cargarInsumos();
+}, [cargarInsumos]);
 
   // ✅ Agregar ítem con stock actual
   const handleAgregar = async () => {

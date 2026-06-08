@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import PrivateRoute from "./PrivateRoute";
 import RoleGuard from "../common/components/RoleGuard";
+import { ROLES } from "../common/config/roles.js";
 
 //Login
 import Login from "../pages/login/Login.jsx";
@@ -9,7 +10,7 @@ import Login from "../pages/login/Login.jsx";
 import AgregarUsuario from "../pages/Usuarios/AgregarUsuario.jsx";
 import EditarUsuario from "../pages/Usuarios/EditarUsuario.jsx";
 import EliminarUsuario from "../pages/Usuarios/EliminarUsuario.jsx";
-import ResetearContraseña from "../pages/Usuarios/ResetearContraseña.jsx";
+import ResetearContrasena from "../pages/Usuarios/ResetearContrasena.jsx";
 
 //DashBoard
 import StockMinimoDashboard from "../common/components/StockMinimoDashBoard.jsx";
@@ -93,11 +94,11 @@ export default function AppRouter() {
         <Route path="/inicio" element={<StockMinimoDashboard />} />
 
         {/* Usuarios */}
-        <Route element={<RoleGuard allowedRoles={[1]} />}>
+        <Route element={<RoleGuard allowedRoles={[ROLES.ROOT]} />}>
           <Route path="/AltaUsuario" element={<AgregarUsuario />} />
           <Route path="/EditarUsuario" element={<EditarUsuario />} />
           <Route path="/BajaUsuario" element={<EliminarUsuario />} />
-          <Route path="/ActualizarPassword" element={<ResetearContraseña />} />
+          <Route path="/ActualizarPassword" element={<ResetearContrasena />} />
         </Route>
 
         {/* Servicios */}
@@ -130,13 +131,13 @@ export default function AppRouter() {
         <Route path="/EditarModelo" element={<EditarModelo />} />
 
         {/* insumos */}
-        <Route element={<RoleGuard allowedRoles={[1]} />}>
+        <Route element={<RoleGuard allowedRoles={[ROLES.ROOT]} />}>
           <Route path="/AgregarInsumo" element={<AgregarInsumo />} />
           <Route path="/EditarInsumo" element={<EditarInsumo />} />
           <Route path="/EliminarInsumo" element={<EliminarInsumo />} />
         </Route>
 
-        <Route element={<RoleGuard allowedRoles={[1, 2]} />}>
+        <Route element={<RoleGuard allowedRoles={[ROLES.ROOT, ROLES.ADMIN]} />}>
           <Route
             path="/ModificarStockMinimo"
             element={<ModificarStockMinimo />}
@@ -166,7 +167,7 @@ export default function AppRouter() {
           element={<ReporteIngresosPorProveedor />}
         />
 
-        //Listados
+        {/* Listados */}
         <Route path="/ListarImpresorasPorServicio" element={<ListarImpresorasPorServicio />} />
         <Route path="/ListarServiciosPorImpresora" element={<ListarServiciosPorImpresora />} />
 
