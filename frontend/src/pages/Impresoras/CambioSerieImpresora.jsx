@@ -31,8 +31,8 @@ export default function CambioSerieImpresora() {
 
   return (
     <FormularioMarco
-      titulo="Entregar Impresora al servicio"
-      descripcion="Complete los datos de la impresora entregada al servicio."
+      titulo="Cambiar Serie Impresora al servicio"
+      descripcion="Complete los datos de la impresora que va a cambiar de serie."
     >
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Select Servicio */}
