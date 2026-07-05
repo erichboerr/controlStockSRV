@@ -23,7 +23,6 @@ export default function useIngresoRepuestosForm() {
 
   const agregarItem = () => {
     if (!repuestoSeleccionado || !cantidad) return;
-    console.log("Agregando item:", repuestoSeleccionado, cantidad);
     setItems([
   ...items,
   {

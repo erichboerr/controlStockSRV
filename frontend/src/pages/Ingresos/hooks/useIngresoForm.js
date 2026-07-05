@@ -22,7 +22,6 @@ export default function useIngresoForm() {
 
   const agregarItem = () => {
     if (!insumoSeleccionado || !cantidad) return;
-    console.log("Agregando item:", insumoSeleccionado, cantidad);
     setItems([
   ...items,
   {
