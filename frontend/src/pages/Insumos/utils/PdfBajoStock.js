@@ -1,7 +1,7 @@
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable"; 
+import autoTable from "jspdf-autotable";
 
-export function generarPdfBajoStock(data) {
+export function generarPdfBajoStock(data, filtroDescripcion) {
     const doc = new jsPDF({
         orientation: "portrait",
         unit: "pt",
@@ -17,16 +17,33 @@ export function generarPdfBajoStock(data) {
     const fecha = new Date().toLocaleDateString("es-AR");
     doc.text(`Fecha: ${fecha}`, 40, 60);
 
+    let startY = 90;
+    if (filtroDescripcion) {
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        doc.text(`Filtro aplicado: ${filtroDescripcion}`, 40, 76);
+        doc.setTextColor(0);
+        startY = 100;
+    }
+
     // Columnas
     const columnas = [
-        { header: "Insumo", dataKey: "nombre" },
+        { header: "Marca", dataKey: "marca" },
+        { header: "Modelo", dataKey: "modelo" },
+        { header: "Insumo", dataKey: "insumo" },
         { header: "Stock actual", dataKey: "stock_actual" },
         { header: "Stock mínimo", dataKey: "stock_minimo" }
     ];
 
-    // Tabla: USANDO autoTable(doc, settings) en lugar de doc.autoTable(settings)
-    autoTable(doc, { // <-- CAMBIO CLAVE AQUÍ
-        startY: 90,
+    // Normalizamos: si un insumo no tiene modelo asociado, mostramos "-"
+    const filas = data.map((item) => ({
+        ...item,
+        marca: item.marca ?? "-",
+        modelo: item.modelo ?? "-",
+    }));
+
+    autoTable(doc, {
+        startY,
         headStyles: {
             fillColor: [66, 66, 66],
             textColor: 255,
@@ -40,7 +57,7 @@ export function generarPdfBajoStock(data) {
         },
         margin: { left: 40, right: 40 },
         columns: columnas,
-        body: data,
+        body: filas,
         didDrawPage: () => {
             const pageNumber = doc.internal.getNumberOfPages();
             doc.setFontSize(10);

@@ -72,6 +72,7 @@ import IngresoRepuesto from "../pages/Repuestos/IngresoRepuestos.jsx";
 import EgresoRepuesto from "../pages/Repuestos/EgresoRepuestos.jsx";
 import AjusteRepuestos from "../pages/Repuestos/AjusteRepuestos.jsx";
 import StockRepuestos from "../pages/Repuestos/StockRepuestos.jsx";
+import StockBajoRepuestos from "../pages/Repuestos/StockBajoRepuestos.jsx";
 
 //Logs
 import Logs from "../pages/Logs/PageLogs.jsx";
@@ -182,6 +183,7 @@ export default function AppRouter() {
         <Route path="/EgresoRepuesto" element={<EgresoRepuesto />} />
         <Route path="/AjusteRepuestos" element={<AjusteRepuestos />} />
         <Route path="/StockRepuestos" element={<StockRepuestos />} />
+        <Route path="/StockBajoRepuestos" element={<StockBajoRepuestos />} />
         
         {/*Logs*/}
         <Route path="/logs" element={<Logs />} />

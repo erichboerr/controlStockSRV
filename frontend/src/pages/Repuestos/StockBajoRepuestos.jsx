@@ -17,9 +17,10 @@ export default function StockBajoRepuestos() {
 
         <button
           onClick={() => generarPdfBajoStockRepuestos(data)}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+          title="Descargar PDF"
+          className="p-2 rounded-full text-red-600 hover:bg-red-50 transition"
         >
-          Descargar PDF
+          <i className="bi bi-file-earmark-pdf-fill text-xl" />
         </button>
       </div>
 

@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import StockMinimoInsumos from "../../pages/Insumos/StockBajo";
 import StockMinimoRepuestos from "../../pages/Repuestos/StockBajoRepuestos";
+import Modal from "./Modal.jsx";
 
 const StockMinimoDashboard = () => {
+  const [showRepuestos, setShowRepuestos] = useState(false);
+
   useEffect(() => {
     // refrescar cada 5 minutos (300000 ms)
     const interval = setInterval(() => {
-      // Forzar un reload de la página completa
-      // o bien disparar un método de fetch en cada componente
       window.location.reload();
     }, 300000);
 
@@ -15,15 +16,24 @@ const StockMinimoDashboard = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-6 p-4">
-      <div>
-        <h2 className="text-xl font-bold mb-2">Stock mínimo de Insumos</h2>
-        <StockMinimoInsumos />
+    <div className="p-4">
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="text-xl font-bold">Stock mínimo de Insumos</h2>
+
+        <button
+          onClick={() => setShowRepuestos(true)}
+          className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 hover:underline"
+        >
+          <i className="bi bi-box-seam" />
+          Ver stock mínimo de Repuestos
+        </button>
       </div>
-      <div>
-        <h2 className="text-xl font-bold mb-2">Stock mínimo de Repuestos</h2>
+
+      <StockMinimoInsumos />
+
+      <Modal show={showRepuestos} onHide={() => setShowRepuestos(false)}>
         <StockMinimoRepuestos />
-      </div>
+      </Modal>
     </div>
   );
 };
