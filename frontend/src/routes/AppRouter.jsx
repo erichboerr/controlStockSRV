@@ -76,6 +76,10 @@ import StockRepuestos from "../pages/Repuestos/StockRepuestos.jsx";
 //Logs
 import Logs from "../pages/Logs/PageLogs.jsx";
 
+//Sistema
+import RestaurarBackup from "../pages/Sistema/RestaurarBackup.jsx";
+import HacerBackup from "../pages/Sistema/HacerBackup.jsx";
+
 export default function AppRouter() {
   return (
     <Routes>
@@ -181,6 +185,12 @@ export default function AppRouter() {
         
         {/*Logs*/}
         <Route path="/logs" element={<Logs />} />
+
+        {/* Sistema */}
+        <Route element={<RoleGuard allowedRoles={[ROLES.ROOT, ROLES.ADMIN]} />}>
+          <Route path="/HacerBackup" element={<HacerBackup />} />
+          <Route path="/RestaurarBackup" element={<RestaurarBackup />} />
+        </Route>
       </Route>
     </Routes>
   );

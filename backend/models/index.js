@@ -15,7 +15,7 @@ import Impresora from "./Impresora.js";
 
 // Unidades físicas y servicios
 import ImpresoraFisica from "./ImpresoraFisica.js";
-import ServicioImpresora from "./ImpresoraServicio.js";
+import ImpresoraServicio from "./ImpresoraServicio.js";
 
 // Movimiento de insumos
 import MovimientoInsumo from "./MovimientoInsumo.js";
@@ -65,22 +65,22 @@ Impresora.belongsTo(Modelo, { foreignKey: "modeloId", as: "modelo" });
 ImpresoraFisica.belongsTo(Proveedor, { foreignKey: "proveedorId", as: "proveedor" });
 ImpresoraFisica.belongsTo(Impresora, { foreignKey: "impresoraId", as: "impresora" });
 
-ImpresoraFisica.hasMany(ServicioImpresora, {
+ImpresoraFisica.hasMany(ImpresoraServicio, {
   foreignKey: "impresoraFisicaId",
   as: "servicios",
 });
 
-Servicio.hasMany(ServicioImpresora, {
+Servicio.hasMany(ImpresoraServicio, {
   foreignKey: "servicioId",
   as: "impresoras",
 });
 
-ServicioImpresora.belongsTo(Servicio, {
+ImpresoraServicio.belongsTo(Servicio, {
   foreignKey: "servicioId",
   as: "servicio",
 });
 
-ServicioImpresora.belongsTo(ImpresoraFisica, {
+ImpresoraServicio.belongsTo(ImpresoraFisica, {
   foreignKey: "impresoraFisicaId",
   as: "impresoraFisica",
 });
@@ -159,7 +159,7 @@ export default {
   ModeloInsumo,
   Impresora,
   ImpresoraFisica,
-  ServicioImpresora,
+  ImpresoraServicio,
   MovimientoInsumo,
   Repuesto,
   MovimientoRepuesto,

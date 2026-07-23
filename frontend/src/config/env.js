@@ -20,6 +20,7 @@ export const backendUrlStock = import.meta.env.VITE_STOCK_URL;
 export const backendUrlReportes = import.meta.env.VITE_REPORTES_URL;
 export const backendUrlRepuestos = import.meta.env.VITE_REPUESTOS_URL;
 export const backendUrlLogs = import.meta.env.VITE_LOGS_URL;
+export const backendUrlBackup = import.meta.env.VITE_BACKUP_URL;
 
 
 // Endpoints REST
@@ -40,4 +41,5 @@ export const stockUrl = `${backendUrlStock}/stock`;
 export const reportesUrl = `${backendUrlReportes}/reportes`;
 export const repuestosUrl = `${backendUrlRepuestos}/repuestos`;
 export const logsUrl = `${backendUrlLogs}/logs`;
+export const backupUrl = `${backendUrlBackup}/backup`;
 

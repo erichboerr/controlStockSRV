@@ -21,6 +21,7 @@ import stockRoutes from './routes/stock.js';
 import reporteRouter from './routes/reporte.js';
 import repuestosRouter from './routes/repuesto.js';
 import logsRouter from './routes/log.js';
+import backupRouter from './routes/backup.js';
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/stock', stockRoutes);
 app.use('/reportes', reporteRouter);
 app.use('/repuestos', repuestosRouter);
 app.use('/logs', logsRouter);
+app.use('/backup', backupRouter);
 
 // Middleware de errores al final
 app.use(errorHandler);

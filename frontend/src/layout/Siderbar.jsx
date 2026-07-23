@@ -67,6 +67,10 @@ const routeMap = {
 
   //logs
   "Mostrar Logs": "/logs",
+
+  //sistema
+  "Hacer Backup": "/HacerBackup",
+  "Restaurar Backup": "/RestaurarBackup",
 };
 
 export default function Sidebar() {
@@ -253,6 +257,18 @@ export default function Sidebar() {
 
           {/* 🔹 Separador visual */}
           <hr className="my-4 border-gray-400" />
+
+          {/*restaurar backup*/}
+          {[1, 2].includes(auth.idRol) && (
+            <SidebarGroup
+              label="Sistema"
+              icon={<i className="bi bi-database-down text-lg"></i>}
+              open={openGroup === "Sistema"}
+              onToggle={() => handleToggle("Sistema")}
+              items={["Hacer Backup", "Restaurar Backup"]}
+              location={location}
+            />
+          )}
 
           {/*logs del sistema */}
           {auth.idRol === 1 && (

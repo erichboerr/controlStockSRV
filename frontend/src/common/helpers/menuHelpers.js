@@ -12,6 +12,7 @@ export function getMenuByRol(rolId) {
       "Ingresos",
       "Egresos",
       "Reportes",
+      "Sistema",
     ], // Root
     2: [
       "Proveedores",
@@ -20,6 +21,7 @@ export function getMenuByRol(rolId) {
       "Ingresos",
       "Egresos",
       "Reportes",
+      "Sistema",
     ], // Admin
     3: [
       "Proveedores",
@@ -97,6 +99,12 @@ const permisos = {
     3: [],
     4: [],
   },
+  Sistema: {
+    1: ["Restaurar"],
+    2: ["Restaurar"],
+    3: [],
+    4: [],
+  },
 };
 
 // Íconos por subacción
@@ -117,6 +125,7 @@ const iconos = {
   Generar: "bi-bar-chart",
   Exportar: "bi-box-arrow-up-right",
   Resetear: "bi-key",
+  Restaurar: "bi-database-down",
   AgregarImpresora: "bi-printer",
   IngresarImpresora: "bi-printer",
   EntregarImpresora: "bi-printer",
@@ -180,6 +189,10 @@ export function getRutaPorAccion(categoria, accion) {
     },
     Egresos: {
       Entregar: "EgresoInusmos",
+    },
+
+    Sistema: {
+      Restaurar: "RestaurarBackup",
     },
 
     // Podés seguir agregando categorías

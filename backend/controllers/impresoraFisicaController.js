@@ -1,6 +1,7 @@
 import {
   getAll,
   create,
+  createBulk,
   obtenerSeriesDisponibles,
   darDeBajaImpresoraService,
   updateSerie,
@@ -27,6 +28,24 @@ export async function IngresarImpresoraFisica(req, res, next) {
       impresoraId,
     });
     res.status(201).json({ id: nueva.id });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function IngresarImpresorasFisicasBulk(req, res, next) {
+  try {
+    const { proveedorId, remito, impresoraId, numerosSerie } = req.body;
+    const creadas = await createBulk({
+      proveedorId,
+      remito,
+      impresoraId,
+      numerosSerie,
+    });
+    res.status(201).json({
+      cantidad: creadas.length,
+      ids: creadas.map((c) => c.id),
+    });
   } catch (err) {
     next(err);
   }

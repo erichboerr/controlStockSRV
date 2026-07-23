@@ -3,6 +3,7 @@ import express from "express";
 import {
   ListarImpresorasFisicas,
   IngresarImpresoraFisica,
+  IngresarImpresorasFisicasBulk,
   ListarSeriesDisponibles,
   darDeBajaImpresora,
   actualizarSerieImpresora,
@@ -16,6 +17,7 @@ router.get( "/series",authMiddleware, ListarSeriesDisponibles);
 
 
 router.post( "/", authMiddleware,IngresarImpresoraFisica);
+router.post( "/bulk", authMiddleware, IngresarImpresorasFisicasBulk);
 
 router.put( "/baja",authMiddleware, darDeBajaImpresora);
 router.put( "/:id", authMiddleware,actualizarSerieImpresora);
