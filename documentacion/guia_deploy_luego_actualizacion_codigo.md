@@ -63,3 +63,21 @@ pm2 startup systemd → configurar arranque automático.
 systemctl status pm2-erichboerr → verificar servicio.
 Reiniciar servidor y confirmar con pm2 list.
 Con esto tu backend queda desplegado y protegido contra reinicios del servidor.
+
+🚀 Actualizar código del frontend
+1. Traer la última versión del repositorio para compilar el build.
+
+En el directorio del frontend
+
+git pull origin main
+
+npm install
+
+2. Generar build de producción
+
+En el directorio del frontend
+
+npm run build
+
+3. Reiniciar Nginx
+sudo systemctl restart nginx
