@@ -34,7 +34,8 @@ export const impresoraFisica = [
   { id: 33, numeroSerie: "5160Z931377", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - GINECOLOGIA
   { id: 34, numeroSerie: "5160ZC30052", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - GINECOLOGIA (RESIDENTES)
   { id: 35, numeroSerie: "702053230FG8P", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - GUARDIA (ISLA)
-  { id: 36, numeroSerie: "702053630FWC0", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - GUARDIA (JEFATURA)
+  { id: 36, numeroSerie: "702053630FWC0-Dup", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - GUARDIA (JEFATURA) // ⚠️ REVISAR: numeroSerie duplicado, verificar serie real
+  { id: 59, numeroSerie: "3380499214", remito: null, proveedorId: 1, impresoraId: 8, flagHabilitado: true }, // XEROX PHASER 3225/3260 - ORL
   { id: 37, numeroSerie: "702053230FFCL", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - GUARDIA (SECRETARÍA)
   { id: 38, numeroSerie: "5160ZC30034", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - GUARDIA (VENTANILLA)
   { id: 39, numeroSerie: "5852ZC30223", remito: null, proveedorId: 1, impresoraId: 27, flagHabilitado: true }, // RICOH M320F - HEMOTERAPIA
@@ -56,8 +57,7 @@ export const impresoraFisica = [
   { id: 55, numeroSerie: "ODONTOPEDIAT-02", remito: null, proveedorId: 1, impresoraId: 26, flagHabilitado: true }, // RICOH P800 - ODONTOLOGIA (PEDIATRIA 2)
   { id: 56, numeroSerie: "5160Z931556", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - OFTALMOLOGIA
   { id: 57, numeroSerie: "702053630FWC3", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - ONCOLOGIA 1
-  { id: 58, numeroSerie: "702053630FWC0-Dup", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - ONCOLOGIA 2  // ⚠️ REVISAR: numeroSerie duplicado en la planilla original, verificar serie real
-  { id: 59, numeroSerie: "3380499214", remito: null, proveedorId: 1, impresoraId: 8, flagHabilitado: true }, // XEROX PHASER 3225/3260 - ORL
+  { id: 58, numeroSerie: "702053630FWC0", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - ONCOLOGIA 2 
   { id: 60, numeroSerie: "5161Z930412", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - PATRIMONIO
   { id: 61, numeroSerie: "702053230FFTO", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - PEDIATRIA (INTERNACION)
   { id: 62, numeroSerie: "702053430FVXZ", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - PEDIATRIA (MESON)
@@ -78,11 +78,18 @@ export const impresoraFisica = [
   { id: 77, numeroSerie: "5160Z930651", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - U.C.I.M.
   { id: 78, numeroSerie: "3021575959", remito: null, proveedorId: 1, impresoraId: 13, flagHabilitado: true }, // XEROX VESALINK B230DN - U.T.I.
   { id: 79, numeroSerie: "702053230FGBL", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 1
-  { id: 80, numeroSerie: "702053230FFBL", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 2
-  { id: 81, numeroSerie: "702053630FWF2", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 3
-  { id: 82, numeroSerie: "702053230FFBL-Dup", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 4  // ⚠️ REVISAR: numeroSerie duplicado en la planilla original, verificar serie real
+  { id: 80, numeroSerie: "702053230FFBL", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 2  
+  { id: 81, numeroSerie: "702053230FFBL-Dup", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 3 // ⚠️ REVISAR: numeroSerie duplicado, verificar serie real
+  { id: 82, numeroSerie: "702053630FWF2", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 4 
   { id: 83, numeroSerie: "702053230FGBN", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 7
   { id: 84, numeroSerie: "702053230FGB8", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - UNIDAD 8
   { id: 85, numeroSerie: "5302X451460", remito: null, proveedorId: 1, impresoraId: 26, flagHabilitado: true }, // RICOH P800 - VACUNATORIO
-  { id: 86, numeroSerie: "3021575690", remito: null, proveedorId: 1, impresoraId: 13, flagHabilitado: true }, // XEROX VESALINK B230DN - (sin servicio en planilla)
+  { id: 86, numeroSerie: "3021575690", remito: null, proveedorId: 1, impresoraId: 13, flagHabilitado: true }, // XEROX VESALINK B230DN - (sin servicio)
+  { id: 87, numeroSerie: "702052730F2WK", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - (sin servicio)
+  { id: 88, numeroSerie: "702053230FGBG", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - (sin servicio)
+  { id: 89, numeroSerie: "5873Z530807", remito: null, proveedorId: 1, impresoraId: 28, flagHabilitado: true }, // RICOH P311 - (sin servicio)
+  { id: 90, numeroSerie: "5873Z730434", remito: null, proveedorId: 1, impresoraId: 28, flagHabilitado: true }, // RICOH P311 - (sin servicio)
+  { id: 91, numeroSerie: "Y937Q830987", remito: null, proveedorId: 1, impresoraId: 31, flagHabilitado: true }, // RICOH SP377SFNwX - (sin servicio)
+  { id: 92, numeroSerie: "3381716502", remito: null, proveedorId: 1, impresoraId: 8, flagHabilitado: true }, // XEROX PHASER 3225/3260 - (sin servicio)
+  { id: 93, numeroSerie: "3381716448", remito: null, proveedorId: 1, impresoraId: 8, flagHabilitado: true }, // XEROX PHASER 3225/3260 - (sin servicio)
 ];
