@@ -1,4 +1,4 @@
-import { getAll, getAllMarca, create, update, remove } from "../services/modeloService.js";
+import { getAll, getAllMarca, create, update } from "../services/modeloService.js";
 
 // Listar todos los modelos
 export async function listarModelos(req, res, next) {
@@ -45,16 +45,6 @@ export async function editarModelo(req, res, next) {
   try {
     const actualizado = await update(req.params.id, req.body);
     res.json(actualizado);
-  } catch (err) {
-    next(err);
-  }
-}
-
-// Eliminar modelo
-export async function eliminarModelo(req, res, next) {
-  try {
-    const resultado = await remove(req.params.id);
-    res.json(resultado);
   } catch (err) {
     next(err);
   }

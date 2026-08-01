@@ -3,6 +3,20 @@ import Repuesto from "../models/Repuesto.js";
 import MovimientoRepuesto from "../models/MovimientoRepuesto.js";
 import sequelize from "../config/db.js";
 
+// Namespace distinto al de insumos (LOCK_CLASS_INSUMO=1 en calcularStock.js)
+// para que un pg_advisory_xact_lock de un repuesto nunca choque con el de
+// un insumo que casualmente tenga el mismo id numérico.
+const LOCK_CLASS_REPUESTO = 2;
+
+// Ver bloquearInsumo en helpers/calcularStock.js: mismo mecanismo, para
+// serializar egresos concurrentes del mismo repuesto.
+export async function bloquearRepuesto(repuestoId, transaction) {
+  await sequelize.query("SELECT pg_advisory_xact_lock(:clase, :id)", {
+    replacements: { clase: LOCK_CLASS_REPUESTO, id: Number(repuestoId) },
+    transaction,
+  });
+}
+
 export async function getAll() {
   return await Repuesto.findAll({
     where: { flagHabilitado: true },
@@ -10,12 +24,14 @@ export async function getAll() {
   });
 }
 
-export async function obtenerStockActual(repuestoId) {
+export async function obtenerStockActual(repuestoId, options = {}) {
   const ingresos = await MovimientoRepuesto.sum("cantidad", {
     where: { repuestoId, tipo: "ingreso" },
+    ...options,
   });
   const egresos = await MovimientoRepuesto.sum("cantidad", {
     where: { repuestoId, tipo: "egreso" },
+    ...options,
   });
   return (ingresos || 0) - (egresos || 0);
 }
@@ -41,8 +57,8 @@ export async function registrarIngresoRepuestos(proveedorId, remito, items) {
   }
 
   const movimientosData = items.map((it) => {
-    if (!it.repuestoId || !it.cantidad) {
-      throw createError("Item incompleto", 400, "INVALID_ITEM");
+    if (!it.repuestoId || !Number.isInteger(it.cantidad) || it.cantidad <= 0) {
+      throw createError("Item inválido: repuestoId y cantidad (entero mayor a 0) son obligatorios", 400, "INVALID_ITEM");
     }
     return {
       tipo: "ingreso",
@@ -54,17 +70,24 @@ export async function registrarIngresoRepuestos(proveedorId, remito, items) {
     };
   });
 
-  return await MovimientoRepuesto.bulkCreate(movimientosData);
+  try {
+    return await MovimientoRepuesto.bulkCreate(movimientosData, { validate: true });
+  } catch (err) {
+    if (err?.name === "SequelizeValidationError") {
+      throw createError("Datos de ingreso inválidos", 400, "INVALID_ITEM");
+    }
+    throw createError("Error al registrar ingreso de repuestos", 500, "DB_ERROR");
+  }
 }
 
-export async function registrarEgresoRepuestos(servicioId, items) {
+export async function registrarEgresoRepuestos(servicioId, items, options = {}) {
   if (!Array.isArray(items) || items.length === 0) {
     throw createError("Items inválidos", 400, "INVALID_ITEMS");
   }
 
   const movimientosData = items.map((it) => {
-    if (!it.repuestoId || !it.cantidad) {
-      throw createError("Item incompleto", 400, "INVALID_ITEM");
+    if (!it.repuestoId || !Number.isInteger(it.cantidad) || it.cantidad <= 0) {
+      throw createError("Item inválido: repuestoId y cantidad (entero mayor a 0) son obligatorios", 400, "INVALID_ITEM");
     }
     return {
       tipo: "egreso",
@@ -75,7 +98,14 @@ export async function registrarEgresoRepuestos(servicioId, items) {
     };
   });
 
-  return await MovimientoRepuesto.bulkCreate(movimientosData);
+  try {
+    return await MovimientoRepuesto.bulkCreate(movimientosData, { ...options, validate: true });
+  } catch (err) {
+    if (err?.name === "SequelizeValidationError") {
+      throw createError("Datos de egreso inválidos", 400, "INVALID_ITEM");
+    }
+    throw createError("Error al registrar egreso de repuestos", 500, "DB_ERROR");
+  }
 }
 
 export async function obtenerStockRepuestos() {

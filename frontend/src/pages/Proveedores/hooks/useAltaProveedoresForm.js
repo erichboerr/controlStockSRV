@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "../../../common/config/axiosInstance.js";
 import { proveedoresUrl } from "../../../config/env.js";
 import { validarEmail } from "../../../common/helpers/validarEmail.js";
 import { useToast } from "../../../common/hooks/useToast.js";
+import { useReactivarConfirm } from "../../../common/hooks/useReactivarConfirm.js";
 
 export default function useAltaProveedoresForm() {
   const proveedores = [];
@@ -12,6 +12,8 @@ export default function useAltaProveedoresForm() {
   const [telefono, setTelefono] = useState("");
   const { addToast } = useToast();
   const navigate = useNavigate();
+  const { pendiente, intentarCrear, confirmarReactivar, cancelarReactivar } =
+    useReactivarConfirm(proveedoresUrl);
 
   const handleCancelar = () => {
     setProveedor("");
@@ -42,21 +44,18 @@ export default function useAltaProveedoresForm() {
       return;
     }
 
-    try {
-      await axios.post(proveedoresUrl, {
+    await intentarCrear(
+      {
         proveedor: proveedorNormalizado,
         email: emailNormalizado,
         telefono: telefonoNormalizado,
-      });
-      addToast("✅ Proveedor agregado correctamente", "success");
-      handleCancelar();
-    } catch (error) {
-      const msg =
-        error?.response?.data?.error ||
-        error?.response?.data?.message ||
-        "❌ Error al agregar proveedor";
-      addToast(msg, "danger");
-    }
+      },
+      () => {
+        addToast("✅ Proveedor agregado correctamente", "success");
+        handleCancelar();
+      },
+      (msg) => addToast(msg, "danger")
+    );
   };
 
   return {
@@ -68,5 +67,8 @@ export default function useAltaProveedoresForm() {
     setTelefono,
     handleCancelar,
     agregarProveedor,
+    pendienteReactivar: pendiente,
+    confirmarReactivar: () => confirmarReactivar(handleCancelar),
+    cancelarReactivar,
   };
 }

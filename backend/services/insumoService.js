@@ -33,6 +33,11 @@ export async function createOrAssociate(modeloId, insumos, stock_minimo) {
         insumo: normalizado,
         stock_minimo: stock_minimo ?? 5,
       });
+    } else if (!insumo.flagHabilitado) {
+      // El insumo existe pero estaba dado de baja: al volver a cargarlo
+      // (típicamente en una lista junto con otros) lo reactivamos directo,
+      // sin pedir confirmación por cada uno como en Marca/Proveedor/Servicio.
+      await insumo.update({ flagHabilitado: true });
     }
 
     const existe = await ModeloInsumo.findOne({

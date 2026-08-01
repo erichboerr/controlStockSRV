@@ -28,7 +28,7 @@ export async function create({ marcaId, modeloId }) {
   try {
     return await Impresora.create({ marcaId, modeloId });
   } catch (err) {
-    if (err.name === "Esta IMPRESORA ya existe en el sistema") {
+    if (err.name === "SequelizeUniqueConstraintError") {
       throw createError("Esta impresora ya existe en el sistema", 409, "IMPRESORA_EXISTS");
     }
     throw createError("Error al crear impresora", 500, "DB_ERROR");

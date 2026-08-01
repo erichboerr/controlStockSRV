@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/marcaService.js";
+import { getAll, create, update} from "../services/marcaService.js";
 
 // Listar marcas
 export async function listarMarcas(req, res, next) {
@@ -26,16 +26,6 @@ export async function editarMarca(req, res, next) {
   try {
     const actualizado = await update(req.params.id, req.body);
     res.json(actualizado);
-  } catch (err) {
-    next(err);
-  }
-}
-
-// Eliminar marca
-export async function eliminarMarca(req, res, next) {
-  try {
-    const resultado = await remove(req.params.id);
-    res.json(resultado);
   } catch (err) {
     next(err);
   }

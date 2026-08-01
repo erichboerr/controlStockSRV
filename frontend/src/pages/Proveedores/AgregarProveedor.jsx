@@ -1,6 +1,7 @@
 import FormularioMarco from "../../common/components/FormularioMarco.jsx";
 import InputGeneric from "../../common/components/InputGeneric.jsx";
 import Button from "../../common/components/Button";
+import ConfirmModal from "../../common/components/ConfirmModal.jsx";
 import useAltaProveedoresForm from "./hooks/useAltaProveedoresForm.js";
 
 export default function AgregarProveedor() {
@@ -13,6 +14,9 @@ export default function AgregarProveedor() {
     setTelefono,
     handleCancelar,
     agregarProveedor,
+    pendienteReactivar,
+    confirmarReactivar,
+    cancelarReactivar,
   } = useAltaProveedoresForm();
 
   const handleSubmit = (e) => {
@@ -74,6 +78,24 @@ export default function AgregarProveedor() {
           </div>
         </div>
       </form>
+
+      <ConfirmModal
+        show={!!pendienteReactivar}
+        onHide={cancelarReactivar}
+        onConfirm={confirmarReactivar}
+        titulo="Proveedor dado de baja"
+        mensaje={
+          pendienteReactivar && (
+            <>
+              Ya existe el proveedor{" "}
+              <strong>{pendienteReactivar.nombre}</strong>, pero está dado de
+              baja. ¿Querés reactivarlo en vez de crear uno nuevo?
+            </>
+          )
+        }
+        textoConfirmar="Reactivar"
+        varianteConfirmar="success"
+      />
     </FormularioMarco>
   );
 }

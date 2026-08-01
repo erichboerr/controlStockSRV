@@ -1,6 +1,8 @@
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 // routes/repuestosRoutes.js
 import express from "express";
+import { validate } from "../middlewares/validate.js";
+import { egresoRepuestoSchema, ingresoRepuestoSchema } from "../validators/schemas.js";
 import {
   ListarRepuestos,
   AgregarRepuesto,
@@ -30,9 +32,9 @@ router.get( "/:id",authMiddleware, StockActual);
 router.post( "/nuevo",authMiddleware, AgregarRepuesto);
 
 // 📌 Registrar ingreso de repuestos desde proveedor
-router.post( "/ingreso",authMiddleware, IngresoRepuesto);
+router.post( "/ingreso",authMiddleware, validate(ingresoRepuestoSchema), IngresoRepuesto);
 
 // 📌 Registrar egreso de repuestos hacia servicio
-router.post( "/egreso",authMiddleware, EgresoRepuesto);
+router.post( "/egreso",authMiddleware, validate(egresoRepuestoSchema), EgresoRepuesto);
 
 export default router;

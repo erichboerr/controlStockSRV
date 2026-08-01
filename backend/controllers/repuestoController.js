@@ -1,3 +1,5 @@
+import sequelize from "../config/db.js";
+import { createError } from "../utils/createError.js";
 import {
   getAll,
   create,
@@ -6,6 +8,7 @@ import {
   obtenerStockActual,
   obtenerStockRepuestos,
   getInsumosBajoStockRepuestos,
+  bloquearRepuesto,
 } from "../services/repuestoService.js";
 
 // Listar repuestos
@@ -61,11 +64,61 @@ export async function IngresoRepuesto(req, res, next) {
 
 // Registrar egreso
 export async function EgresoRepuesto(req, res, next) {
+  const t = await sequelize.transaction();
+
   try {
     const { servicioId, items } = req.body;
-    const movimientos = await registrarEgresoRepuestos(servicioId, items);
+
+    if (!servicioId || !items?.length) {
+      throw createError("Datos incompletos", 400, "MISSING_DATA");
+    }
+
+    for (const item of items) {
+      if (!item.repuestoId || !Number.isInteger(item.cantidad) || item.cantidad <= 0) {
+        throw createError(
+          "Item inválido: repuestoId y cantidad (entero mayor a 0) son obligatorios",
+          400,
+          "INVALID_ITEM"
+        );
+      }
+    }
+
+    // Agrupamos por repuestoId antes de validar el stock: si el mismo
+    // repuesto aparece en más de un renglón del mismo request, hay que
+    // chequear la suma total pedida y no cada renglón por separado (si
+    // no, dos renglones podían "pasar" cada uno contra el mismo stock
+    // todavía no descontado y terminar dejando stock negativo).
+    const cantidadPorRepuesto = new Map();
+    for (const item of items) {
+      cantidadPorRepuesto.set(
+        item.repuestoId,
+        (cantidadPorRepuesto.get(item.repuestoId) || 0) + item.cantidad
+      );
+    }
+
+    for (const [repuestoId, cantidadTotal] of cantidadPorRepuesto) {
+      // Bloqueamos este repuesto hasta el commit/rollback para que un
+      // egreso concurrente del mismo repuesto no lea un stock desactualizado.
+      await bloquearRepuesto(repuestoId, t);
+
+      const stockActual = await obtenerStockActual(repuestoId, { transaction: t });
+
+      if (cantidadTotal > stockActual) {
+        throw createError(
+          `Stock insuficiente para el repuesto ${repuestoId}`,
+          409,
+          "INSUFFICIENT_STOCK"
+        );
+      }
+    }
+
+    const movimientos = await registrarEgresoRepuestos(servicioId, items, { transaction: t });
+
+    await t.commit();
+
     res.status(201).json({ message: "Egreso registrado correctamente", movimientos });
   } catch (err) {
+    await t.rollback();
     next(err);
   }
 }

@@ -25,6 +25,13 @@ import backupRouter from './routes/backup.js';
 
 const app = express();
 
+// Detrás de Nginx en producción: sin esto, express-rate-limit (y cualquier
+// lógica que use req.ip) ve la IP del proxy en vez de la del cliente real.
+// El "1" indica que confiamos en un único proxy delante (Nginx).
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
 // Seguridad y logging
 app.use(helmet());
 app.use(morgan('combined'));

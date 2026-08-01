@@ -1,11 +1,19 @@
 import FormularioMarco from "../../common/components/FormularioMarco.jsx";
 import InputGeneric from "../../common/components/InputGeneric.jsx";
 import Button from "../../common/components/Button";
+import ConfirmModal from "../../common/components/ConfirmModal.jsx";
 import useAltaServiciosForm from "./hooks/useAltaServiciosForm.js";
 
 export default function AgregarServicio() {
-  const { servicio, setServicio, agregarServicio, handleCancelar } =
-    useAltaServiciosForm();
+  const {
+    servicio,
+    setServicio,
+    agregarServicio,
+    handleCancelar,
+    pendienteReactivar,
+    confirmarReactivar,
+    cancelarReactivar,
+  } = useAltaServiciosForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +46,24 @@ export default function AgregarServicio() {
           </Button>
         </div>
       </form>
+
+      <ConfirmModal
+        show={!!pendienteReactivar}
+        onHide={cancelarReactivar}
+        onConfirm={confirmarReactivar}
+        titulo="Servicio dado de baja"
+        mensaje={
+          pendienteReactivar && (
+            <>
+              Ya existe el servicio{" "}
+              <strong>{pendienteReactivar.nombre}</strong>, pero está dado de
+              baja. ¿Querés reactivarlo en vez de crear uno nuevo?
+            </>
+          )
+        }
+        textoConfirmar="Reactivar"
+        varianteConfirmar="success"
+      />
     </FormularioMarco>
   );
 }

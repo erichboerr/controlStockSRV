@@ -120,16 +120,39 @@ export async function darDeBajaImpresoraService(impresoraFisicaId) {
     throw createError("Falta impresoraFisicaId", 400, "MISSING_ID");
   }
 
-  const impresora = await ImpresoraFisica.findByPk(impresoraFisicaId);
-  if (!impresora) {
-    throw createError("Impresora física no encontrada", 404, "NOT_FOUND");
+  const t = await sequelize.transaction();
+
+  try {
+    const impresora = await ImpresoraFisica.findByPk(impresoraFisicaId, { transaction: t });
+    if (!impresora) {
+      throw createError("Impresora física no encontrada", 404, "NOT_FOUND");
+    }
+
+    const fechaBaja = new Date();
+
+    impresora.flagHabilitado = false;
+    impresora.fechaBaja = fechaBaja;
+    await impresora.save({ transaction: t });
+
+    // Si la impresora estaba entregada a un servicio, cerramos esa entrega
+    // (fechaRetiro) para que no quede una asignación "activa" fantasma:
+    // si el día de mañana se reactiva la impresora física, no debería
+    // aparecer como entregada a un servicio del que nunca la retiraron.
+    await ImpresoraServicio.update(
+      { fechaRetiro: fechaBaja, flagHabilitado: false },
+      {
+        where: { impresoraFisicaId, fechaRetiro: null },
+        transaction: t,
+      }
+    );
+
+    await t.commit();
+    return impresora;
+  } catch (err) {
+    await t.rollback();
+    if (err.isCustom) throw err;
+    throw createError("Error al dar de baja la impresora física", 500, "DB_ERROR");
   }
-
-  impresora.flagHabilitado = false;
-  impresora.fechaBaja = new Date();
-  await impresora.save();
-
-  return impresora;
 }
 
 export async function updateSerie(id, numeroSerie) {
