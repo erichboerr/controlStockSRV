@@ -84,5 +84,26 @@ export const impresoraServicio = [
   { id: 80, impresoraFisicaId: 83, servicioId: 132, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // UNIDAD 7
   { id: 81, impresoraFisicaId: 84, servicioId: 133, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // UNIDAD 8
   { id: 82, impresoraFisicaId: 85, servicioId: 135, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // VACUNATORIO
-  // impresoraFisicaId 86 sin servicio en la planilla -> queda disponible sin asignar
+  { id: 83, impresoraFisicaId: 7, servicioId: 138, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // ÁREA PROGRAMATICA 3º PISO
+  { id: 84, impresoraFisicaId: 92, servicioId: 139, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // PEDIATRIA (GUARDIA CONSULTORIO 3)
+  { id: 86, impresoraFisicaId: 94, servicioId: 136, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // AREA JURÍDICA
+  { id: 87, impresoraFisicaId: 95, servicioId: 137, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // DPTO. SALUD Y SEG. TRAB.
+  { id: 88, impresoraFisicaId: 96, servicioId: 17, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // CARDIOLOGIA (ECODOPLER)
+  { id: 89, impresoraFisicaId: 97, servicioId: 47, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // ESTERILIZACIÓN
+  { id: 90, impresoraFisicaId: 98, servicioId: 48, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // FACTURACIÓN
+  { id: 91, impresoraFisicaId: 99, servicioId: 147, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // GABO
+  { id: 92, impresoraFisicaId: 100, servicioId: 145, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // UNIDAD 7 (JEFATURA MEDICA)
+  { id: 93, impresoraFisicaId: 101, servicioId: 146, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // UNIDAD 4 (JEFE DE DIVISION)
+  { id: 94, impresoraFisicaId: 102, servicioId: 68, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // LABORATORIO (GUARDIA)
+  { id: 95, impresoraFisicaId: 103, servicioId: 68, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // LABORATORIO (GUARDIA)
+  { id: 96, impresoraFisicaId: 104, servicioId: 140, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // MEDICINA LEGAL
+  { id: 97, impresoraFisicaId: 105, servicioId: 141, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // OBSTETRICIA (ECOGRAFIA)
+  { id: 98, impresoraFisicaId: 89, servicioId: 142, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // DESPACHO (OFICIOS JUDICIALES)
+  { id: 99, impresoraFisicaId: 106, servicioId: 98, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // ONCOLOGIA
+  { id: 100, impresoraFisicaId: 107, servicioId: 111, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // RAYOS (Secretaria)
+  { id: 101, impresoraFisicaId: 108, servicioId: 143, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // SGRRHH
+  { id: 102, impresoraFisicaId: 109, servicioId: 117, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // SUBGERENCIA DE ENFERMERIA
+  { id: 103, impresoraFisicaId: 110, servicioId: 144, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // TRAUMATOLOGIA U10 (SECRETARIA)
+  { id: 104, impresoraFisicaId: 111, servicioId: 126, fechaEntrega: null, fechaRetiro: null, flagHabilitado: true }, // U.F.U.
+
 ];

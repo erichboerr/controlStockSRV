@@ -30,4 +30,7 @@ export const modelos = [
   { id: 29, modelo: 'M320F', marcaId: 7 },
   { id: 30, modelo: 'P311', marcaId: 7 },
   { id: 31, modelo: 'SP377SFNWX', marcaId: 7 },
+  { id: 32, modelo: " LASERJET 1320", marcaId: 1 },
+
+
 ];

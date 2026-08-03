@@ -51,4 +51,6 @@ export const insumos = [
   { id: 50, insumo: '75M0ZV0 DRUM COLOR', stock_minimo: 2 },
   { id: 51, insumo: '101R0555N DRUM', stock_minimo: 2 },
   { id: 52, insumo: '408161 TONER', stock_minimo: 1 },
+  { id: 53, insumo: ' 49A TONER', stock_minimo: 1 },
+
 ];

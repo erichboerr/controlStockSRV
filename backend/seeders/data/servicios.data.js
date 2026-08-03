@@ -137,4 +137,18 @@ export const servicios = [
   { id: 133, servicio: 'UNIDAD 8' },
   { id: 134, servicio: 'U.T.I.' },
   { id: 135, servicio: 'VACUNATORIO' },
+  { id: 136, servicio: 'AREA JURÍDICA' },
+  { id: 137, servicio: 'DPTO. SALUD Y SEG. TRAB.' },
+  { id: 138, servicio: 'ÁREA PROGRAMATICA 3º PISO' },
+  { id: 139, servicio: 'PEDIATRIA (GUARDIA CONSULTORIO 3)' },
+  { id: 140, servicio: 'MEDICINA LEGAL' },
+  { id: 141, servicio: 'OBSTETRICIA (ECOGRAFIA)' },
+  { id: 142, servicio: 'DESPACHO (OFICIOS JUDICIALES)' },
+  { id: 143, servicio: 'SGRRHH' },
+  { id: 144, servicio: 'TRAUMATOLOGIA U10 (SECRETARIA)' },
+  { id: 145, servicio: 'UNIDAD 7 (JEFATURA MEDICA)' },
+  { id: 146, servicio: 'UNIDAD 4 (JEFE DE DIVISION)' },
+  { id: 147, servicio: 'GABO' },
+  { id: 148, servicio: 'LIBRERÍA' },
+
 ];

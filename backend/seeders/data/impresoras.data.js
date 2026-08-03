@@ -30,6 +30,7 @@ export const impresoras = [
     {id:29, marcaId: 4, modeloId: 20 }, // LEXMARK MX532ADWE
     {id:30, marcaId: 4, modeloId: 21 }, // LEXMARK CX635ADWE
     {id:31, marcaId: 7, modeloId: 31 }, // RICOH SP377SFNwX
+    {id:32, marcaId: 1, modeloId: 32 }, // HP LASERJET 1320
 
   ];
 

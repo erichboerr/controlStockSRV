@@ -55,5 +55,7 @@ export const modelosInsumos = [
   { modeloId: 21, insumoId: 48 }, // LEXMARK CX635ADWE - 75M4XM0 MAGENTA TONER
   { modeloId: 21, insumoId: 49 }, // LEXMARK CX635ADWE - 75M0ZK0 DRUM NEGRO
   { modeloId: 21, insumoId: 50 }, // LEXMARK CX635ADWE - 75M0ZV0 DRUM COLOR
-  { modeloId: 31, insumoId: 52 }, // RICOH SP377SFNwX - 408161 TONER
+  { modeloId: 31, insumoId: 52 }, // RICOH SP377SFNWX - 408161 TONER
+  { modeloId: 32, insumoId: 53 }, // HP LASERJET 1320 TONER
+
 ];
