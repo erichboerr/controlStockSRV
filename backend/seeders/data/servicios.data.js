@@ -9,7 +9,6 @@ export const servicios = [
   { id: 8, servicio: 'AMM' },
   { id: 9, servicio: 'A.R.D.' },
   { id: 10, servicio: 'ÁREA PROGRAMATICA 1º PISO' },
-  { id: 138, servicio: 'ÁREA PROGRAMATICA 3º PISO' },
   { id: 11, servicio: 'ARQUITECTA' },
   { id: 12, servicio: 'BIBLIOTECA' },
   { id: 13, servicio: 'BIOETICA' },
@@ -55,7 +54,6 @@ export const servicios = [
   { id: 53, servicio: 'GINECOLOGIA' },
   { id: 54, servicio: 'GINECOLOGIA (RESIDENTES)' },
   { id: 55, servicio: 'GINECOLOGIA (TOCOGINECO)' },
-  { id: 137, servicio: 'GUARDIA (ISLA)' },
   { id: 56, servicio: 'GUARDIA (JEFATURA)' },
   { id: 57, servicio: 'GUARDIA (SECRETARÍA)' },
   { id: 58, servicio: 'GUARDIA (VENTANILLA)' },
@@ -72,7 +70,6 @@ export const servicios = [
   { id: 69, servicio: 'LABORATORIO (QUIMICA)' },
   { id: 70, servicio: 'LABORATORIO (VENTANILLA)' },
   { id: 71, servicio: 'LABORATORIO (MICRIBIOLOGIA)' },
-  { id: 136, servicio: 'LIBRERIA' },
   { id: 72, servicio: 'LIBRETA SANITARIA' },
   { id: 73, servicio: 'LICENCIAS' },
   { id: 74, servicio: 'LIQUIDACION DE GUARDIA' },
@@ -150,5 +147,5 @@ export const servicios = [
   { id: 146, servicio: 'UNIDAD 4 (JEFE DE DIVISION)' },
   { id: 147, servicio: 'GABO' },
   { id: 148, servicio: 'LIBRERÍA' },
-
+  { id: 149, servicio: 'GUARDIA (MESON)' },
 ];

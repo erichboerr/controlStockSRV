@@ -25,7 +25,7 @@ export const impresoraFisica = [
   { id: 24, numeroSerie: "3380490357", remito: null, proveedorId: 1, impresoraId: 8, flagHabilitado: true }, // XEROX PHASER 3225/3260 - DOCENCIA DE ENFERMERIA
   { id: 25, numeroSerie: "ECI-001", remito: null, proveedorId: 1, impresoraId: 16, flagHabilitado: true }, // BROTHER HL-1100/DCP1617NW - E.C.I.
   { id: 26, numeroSerie: "5160Z931341", remito: null, proveedorId: 1, impresoraId: 25, flagHabilitado: true }, // RICOH SP3710DN - ECOGRAFIA
-  { id: 27, numeroSerie: "BRBFCCQQ55", remito: null, proveedorId: 1, impresoraId: 2, flagHabilitado: true }, // HP LASERJET 1606DN - ESTADISTICA
+  { id: 27, numeroSerie: "BRBFCCQQ57", remito: null, proveedorId: 1, impresoraId: 2, flagHabilitado: true }, // HP LASERJET 1606DN - ESTADISTICA
   { id: 28, numeroSerie: "3021577323", remito: null, proveedorId: 1, impresoraId: 13, flagHabilitado: true }, // XEROX VESALINK B230DN - ESTADISTICA (JEFATURA)
   { id: 29, numeroSerie: "70205323OFFT1", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - FACTURACIÓN
   { id: 30, numeroSerie: "702053630FWGM", remito: null, proveedorId: 1, impresoraId: 29, flagHabilitado: true }, // LEXMARK MX532ADWE - FARMACIA CENTRAL
