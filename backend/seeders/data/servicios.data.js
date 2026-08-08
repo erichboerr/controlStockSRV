@@ -147,4 +147,5 @@ export const servicios = [
   { id: 146, servicio: 'UNIDAD 4 (JEFE DE DIVISION)' },
   { id: 147, servicio: 'GABO' },
   { id: 148, servicio: 'LIBRERÍA' },
+  { id: 149, servicio: 'GUARDIA (MESON)' },
 ];

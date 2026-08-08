@@ -22,7 +22,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // ALIMENTACION
+  }, // ALIMENTACIÓN
   {
     id: 4,
     impresoraFisicaId: 4,
@@ -78,7 +78,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // CC.EE (1°PISO)
+  }, // CCEE (1°PISO)
   {
     id: 11,
     impresoraFisicaId: 12,
@@ -86,7 +86,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // CC.EE (DEPTO)
+  }, // CCEE (DEPTO)
   {
     id: 12,
     impresoraFisicaId: 13,
@@ -94,7 +94,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // CC.EE (PSICOPATOLOGIA)
+  }, // CCEE (PSICOPATOLOGIA)
   {
     id: 13,
     impresoraFisicaId: 14,
@@ -158,7 +158,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // DESPACHO (MESA ENTRADA)
+  }, // DESPACHO (Mesa Entrada)
   {
     id: 21,
     impresoraFisicaId: 22,
@@ -174,7 +174,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // DIRECCION
+  }, // DIRECCIÓN
   {
     id: 23,
     impresoraFisicaId: 24,
@@ -190,7 +190,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // CONTROL DE INFECCIONES
+  }, // E.C.I.
   {
     id: 25,
     impresoraFisicaId: 26,
@@ -286,7 +286,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // GUARDIA (MESON)
+  }, // GUARDIA (VENTANILLA)
   {
     id: 37,
     impresoraFisicaId: 39,
@@ -302,7 +302,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // HOSPITAL DE DIA (CONSULTORIO 4)
+  }, // HOSPITAL DE DIA
   {
     id: 39,
     impresoraFisicaId: 41,
@@ -350,7 +350,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // NEONATOLOGIA  (PESQUIZA)
+  }, // NEONATOLOGIA
   {
     id: 45,
     impresoraFisicaId: 48,
@@ -406,7 +406,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // ODONTOLOGIA (PEDIATRIA)
+  }, // ODONTOLOGIA (PEDIATRIA 1)
   {
     id: 52,
     impresoraFisicaId: 55,
@@ -414,7 +414,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // ODONTOLOGIA (PEDIATRIA)
+  }, // ODONTOLOGIA (PEDIATRIA 2)
   {
     id: 53,
     impresoraFisicaId: 56,
@@ -430,7 +430,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // ONCOLOGIA
+  }, // ONCOLOGIA 1
   {
     id: 55,
     impresoraFisicaId: 58,
@@ -438,7 +438,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // ONCOLOGIA
+  }, // ONCOLOGIA 2
   {
     id: 56,
     impresoraFisicaId: 59,
@@ -574,7 +574,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // TRAUMATOLOGIA U09(SALA MEDICOS)
+  }, // TRAUMATOLOGIA U09
   {
     id: 73,
     impresoraFisicaId: 76,
@@ -582,7 +582,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // TRAUMATOLOGIA U10 (SALA MEDICOS)
+  }, // TRAUMATOLOGIA U10
   {
     id: 74,
     impresoraFisicaId: 77,
@@ -618,11 +618,11 @@ export const impresoraServicio = [
   {
     id: 78,
     impresoraFisicaId: 81,
-    servicioId: 144,
+    servicioId: 129,
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // TRAUMATOLOGIA U10 (SECRETARIA)
+  }, // UNIDAD 3
   {
     id: 79,
     impresoraFisicaId: 82,
@@ -665,20 +665,12 @@ export const impresoraServicio = [
   }, // ÁREA PROGRAMATICA 3º PISO
   {
     id: 84,
-    impresoraFisicaId: 35,
-    servicioId: 58,
+    impresoraFisicaId: 92,
+    servicioId: 139,
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // GUARDIA (MESON)
-  {
-    id: 85,
-    impresoraFisicaId: 43,
-    servicioId: 148,
-    fechaEntrega: null,
-    fechaRetiro: null,
-    flagHabilitado: true,
-  }, // LIBRERÍA
+  }, // PEDIATRIA (GUARDIA CONSULTORIO 3)
   {
     id: 86,
     impresoraFisicaId: 94,
@@ -686,7 +678,7 @@ export const impresoraServicio = [
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // DTO. JURIDICO
+  }, // AREA JURÍDICA
   {
     id: 87,
     impresoraFisicaId: 95,
@@ -809,7 +801,7 @@ export const impresoraServicio = [
   }, // SGRRHH
   {
     id: 102,
-    impresoraFisicaId: 87,
+    impresoraFisicaId: 109,
     servicioId: 117,
     fechaEntrega: null,
     fechaRetiro: null,
@@ -817,18 +809,34 @@ export const impresoraServicio = [
   }, // SUBGERENCIA DE ENFERMERIA
   {
     id: 103,
-    impresoraFisicaId: 88,
+    impresoraFisicaId: 110,
+    servicioId: 144,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // TRAUMATOLOGIA U10 (SECRETARIA)
+  {
+    id: 104,
+    impresoraFisicaId: 111,
     servicioId: 126,
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
   }, // U.F.U.
   {
-    id: 104,
-    impresoraFisicaId: 92,
-    servicioId: 139,
+    id: 85,
+    impresoraFisicaId: 43,
+    servicioId: 148,
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // PEDIATRIA (GUARDIA CONSULTORIO 3)
+  }, // LIBRERÍA
+  {
+    id: 105,
+    impresoraFisicaId: 35,
+    servicioId: 149,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // GUARDIA (MESON)
 ];

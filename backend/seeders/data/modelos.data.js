@@ -29,6 +29,8 @@ export const modelos = [
   { id: 28, modelo: 'P800', marcaId: 7 },
   { id: 29, modelo: 'M320F', marcaId: 7 },
   { id: 30, modelo: 'P311', marcaId: 7 },
+  { id: 31, modelo: 'SP377SFNWX', marcaId: 7 },
+  { id: 32, modelo: " LASERJET 1320", marcaId: 1 },
   { id: 31, modelo: 'SP377SFNwX', marcaId: 7 },
   { id: 32, modelo: 'LASERJET 1320', marcaId: 1 },
 ];
