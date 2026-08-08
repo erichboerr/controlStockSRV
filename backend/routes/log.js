@@ -1,10 +1,14 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import { verificarRoot } from "../middlewares/verificarRoot.js";
 
 const router = express.Router();
-const logsDir = path.join(process.cwd(), "logs");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// Mismo criterio que en utils/logger.js: anclado a backend/logs, no a
+// process.cwd() (que bajo pm2 puede no ser backend/).
+const logsDir = path.resolve(__dirname, "..", "logs");
 
 // Los archivos de log crecen sin límite con el tiempo. Antes esta ruta
 // leía y devolvía el archivo completo entero en un solo JSON, lo que con

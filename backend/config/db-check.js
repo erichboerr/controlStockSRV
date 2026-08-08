@@ -1,6 +1,5 @@
 import { Client, escapeIdentifier } from "pg";
-import dotenv from "dotenv";
-dotenv.config();
+import "./loadEnv.js";
 
 export async function ensureDatabaseExists() {
   const { DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env;

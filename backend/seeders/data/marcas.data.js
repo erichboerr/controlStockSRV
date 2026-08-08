@@ -7,4 +7,3 @@ export const marcas = [
     { id: 6, marca: "SAMSUNG" },
     { id: 7, marca: "RICOH" },
   ];
-

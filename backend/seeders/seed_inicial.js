@@ -25,82 +25,92 @@ const {
   Repuesto,
 } = models;
 
-export async function seed_inicial() {
-  async function runSeeder() {
-    try {
-      await sequelize.authenticate();
-      console.log("✅ Conectado a la base");
+// closeConnection=false cuando se llama desde server.js al arrancar: la
+// conexión de sequelize es compartida con el resto de la app, así que acá
+// NO hay que cerrarla (antes se cerraba siempre, sin importar quién
+// llamaba, y el servidor se quedaba sin conexión a la base segundos
+// después de arrancar).
+export async function seed_inicial({ closeConnection = true } = {}) {
+  try {
+    await sequelize.authenticate();
+    console.log("✅ Conectado a la base");
 
-      await Proveedor.bulkCreate(proveedores, { ignoreDuplicates: true });
-      await sequelize.query(
-        "SELECT setval('proveedores_id_seq', (SELECT MAX(id) FROM proveedores))"
-      );
-      console.log("✅ Proveedores cargados");
+    await Proveedor.bulkCreate(proveedores, { ignoreDuplicates: true });
+    await sequelize.query(
+      "SELECT setval('proveedores_id_seq', (SELECT MAX(id) FROM proveedores))"
+    );
+    console.log("✅ Proveedores cargados");
 
-      await Servicio.bulkCreate(servicios, { ignoreDuplicates: true });
-      await sequelize.query(
-        "SELECT setval('servicios_id_seq', (SELECT MAX(id) FROM servicios))"
-      );
-      console.log("✅ Servicios cargados");
+    await Servicio.bulkCreate(servicios, { ignoreDuplicates: true });
+    await sequelize.query(
+      "SELECT setval('servicios_id_seq', (SELECT MAX(id) FROM servicios))"
+    );
+    console.log("✅ Servicios cargados");
 
-      await Marca.bulkCreate(marcas, { ignoreDuplicates: true });
-      await sequelize.query(
-        "SELECT setval('marcas_id_seq', (SELECT MAX(id) FROM marcas))"
-      );
-      console.log("✅ Marcas cargadas");
+    await Marca.bulkCreate(marcas, { ignoreDuplicates: true });
+    await sequelize.query(
+      "SELECT setval('marcas_id_seq', (SELECT MAX(id) FROM marcas))"
+    );
+    console.log("✅ Marcas cargadas");
 
-      await Modelo.bulkCreate(modelos, { ignoreDuplicates: true });
-      await sequelize.query(
-        "SELECT setval('modelos_id_seq', (SELECT MAX(id) FROM modelos))"
-      );
-      console.log("✅ Modelos cargados");
+    await Modelo.bulkCreate(modelos, { ignoreDuplicates: true });
+    await sequelize.query(
+      "SELECT setval('modelos_id_seq', (SELECT MAX(id) FROM modelos))"
+    );
+    console.log("✅ Modelos cargados");
 
-      await Insumo.bulkCreate(insumos, { ignoreDuplicates: true });
-      await sequelize.query(
-        "SELECT setval('insumos_id_seq', (SELECT MAX(id) FROM insumos))"
-      );
-      console.log("✅ insumos cargados");
+    await Insumo.bulkCreate(insumos, { ignoreDuplicates: true });
+    await sequelize.query(
+      "SELECT setval('insumos_id_seq', (SELECT MAX(id) FROM insumos))"
+    );
+    console.log("✅ insumos cargados");
 
-      await ModeloInsumo.bulkCreate(modelosInsumos, { ignoreDuplicates: true });
-      console.log("✅ modelos insumos cargados");
+    await ModeloInsumo.bulkCreate(modelosInsumos, { ignoreDuplicates: true });
+    console.log("✅ modelos insumos cargados");
 
-      await Impresora.bulkCreate(impresoras, { ignoreDuplicates: true });
-      await sequelize.query(
-        "SELECT setval('impresoras_id_seq', (SELECT MAX(id) FROM impresoras))"
-      );
-      console.log("✅ Impresoras cargadas");
+    await Impresora.bulkCreate(impresoras, { ignoreDuplicates: true });
+    await sequelize.query(
+      "SELECT setval('impresoras_id_seq', (SELECT MAX(id) FROM impresoras))"
+    );
+    console.log("✅ Impresoras cargadas");
 
-      await ImpresoraFisica.bulkCreate(impresoraFisica, {
-        ignoreDuplicates: true,
-      });
-      await sequelize.query(
-        "SELECT setval(pg_get_serial_sequence('impresora_Fisica','id'), (SELECT MAX(id) FROM impresora_Fisica));"
-      );
-      console.log("✅ Impresoras físicas cargadas");
+    await ImpresoraFisica.bulkCreate(impresoraFisica, {
+      ignoreDuplicates: true,
+    });
+    await sequelize.query(
+      "SELECT setval(pg_get_serial_sequence('impresora_Fisica','id'), (SELECT MAX(id) FROM impresora_Fisica));"
+    );
+    console.log("✅ Impresoras físicas cargadas");
 
-      await ImpresoraServicio.bulkCreate(impresoraServicio, {
-        ignoreDuplicates: true,
-      });
-      await sequelize.query(
-        "SELECT setval(pg_get_serial_sequence('impresora_servicio','id'), (SELECT MAX(id) FROM impresora_servicio));"
-      );
-      console.log("✅ Impresoras asignadas a servicios (excel)");
+    await ImpresoraServicio.bulkCreate(impresoraServicio, {
+      ignoreDuplicates: true,
+    });
+    await sequelize.query(
+      "SELECT setval(pg_get_serial_sequence('impresora_servicio','id'), (SELECT MAX(id) FROM impresora_servicio));"
+    );
+    console.log("✅ Impresoras asignadas a servicios (excel)");
 
-      await Repuesto.bulkCreate(Repuestos, {
-        ignoreDuplicates: true,
-      });
-      await sequelize.query(
-        "SELECT setval(pg_get_serial_sequence('repuestos','id'), (SELECT MAX(id) FROM repuestos));"
-      );
-      console.log("✅ Repuestos cargados");
-
+    await Repuesto.bulkCreate(Repuestos, {
+      ignoreDuplicates: true,
+    });
+    await sequelize.query(
+      "SELECT setval(pg_get_serial_sequence('repuestos','id'), (SELECT MAX(id) FROM repuestos));"
+    );
+    console.log("✅ Repuestos cargados");
+  } catch (err) {
+    console.error("❌ Error en el seeder:", err);
+    throw err;
+  } finally {
+    if (closeConnection) {
       await sequelize.close();
-    } catch (err) {
-      console.error("❌ Error en el seeder:", err);
     }
   }
-
-  runSeeder();
 }
 
-/*Lo corremos con: node seed_inicial.js*/
+const esEjecucionDirecta =
+  process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
+if (esEjecucionDirecta) {
+  seed_inicial();
+}
+
+/* Lo corremos con: node seed_inicial.js */
