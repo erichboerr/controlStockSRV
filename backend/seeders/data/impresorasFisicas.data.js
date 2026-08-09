@@ -425,7 +425,7 @@ export const impresoraFisica = [
   }, // RICOH P800
   {
     id: 54,
-    numeroSerie: 'ODONTOPEDIAT-01',
+    numeroSerie: '5302X451635',
     remito: null,
     proveedorId: 1,
     impresoraId: 26,
@@ -863,4 +863,53 @@ export const impresoraFisica = [
     impresoraId: 1,
     flagHabilitado: true,
   }, // HP LASERJET 1102W
+  {
+    id: 109,
+    numeroSerie: 'BRBS6D8GJB',
+    remito: null,
+    proveedorId: 1,
+    impresoraId: 3,
+    flagHabilitado: true,
+  }, // HP LASERJET 1022
+  {
+    id: 110,
+    numeroSerie: 'GAST-QX-1',
+    remito: null,
+    proveedorId: 1,
+    impresoraId: 21,
+    flagHabilitado: true,
+  }, // KYOCERA ECOSYS M5521CDW
+  {
+    id: 111,
+    numeroSerie: '6160Z931343',
+    remito: null,
+    proveedorId: 1,
+    impresoraId: 25,
+    flagHabilitado: true,
+  }, // RICOH SP3710DN
+  {
+    id: 112,
+    numeroSerie: 'U63883F5X658774',
+    remito: null,
+    proveedorId: 1,
+    impresoraId: 33,
+    flagHabilitado: true,
+  }, // BROTHER HL-L2360DW
+  {
+    id: 113,
+    numeroSerie: 'OFTALMO-01',
+    remito: null,
+    proveedorId: 1,
+    impresoraId: 1,
+    flagHabilitado: true,
+  }, // HP LASERJET 1102W
+  {
+    id: 114,
+    numeroSerie: '5B74ZA30241',
+    remito: null,
+    proveedorId: 1,
+    impresoraId: 28,
+    flagHabilitado: true,
+  }, // RICOH P311
+
 ];

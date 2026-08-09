@@ -303,6 +303,7 @@ export const impresoraServicio = [
     fechaRetiro: null,
     flagHabilitado: true,
   }, // HOSPITAL DE DIA
+
   {
     id: 39,
     impresoraFisicaId: 41,
@@ -514,11 +515,11 @@ export const impresoraServicio = [
   {
     id: 65,
     impresoraFisicaId: 68,
-    servicioId: 113,
+    servicioId: 37,
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
-  }, // SALUD MENTAL (VENTANILLA)
+  }, //DERMATOLOGIA
   {
     id: 66,
     impresoraFisicaId: 69,
@@ -672,6 +673,14 @@ export const impresoraServicio = [
     flagHabilitado: true,
   }, // PEDIATRIA (GUARDIA CONSULTORIO 3)
   {
+    id: 85,
+    impresoraFisicaId: 43,
+    servicioId: 148,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // LIBRERÍA
+  {
     id: 86,
     impresoraFisicaId: 94,
     servicioId: 136,
@@ -824,19 +833,76 @@ export const impresoraServicio = [
     flagHabilitado: true,
   }, // U.F.U.
   {
-    id: 85,
-    impresoraFisicaId: 43,
-    servicioId: 148,
-    fechaEntrega: null,
-    fechaRetiro: null,
-    flagHabilitado: true,
-  }, // LIBRERÍA
-  {
     id: 105,
     impresoraFisicaId: 35,
-    servicioId: 149,
+    servicioId: 58,
     fechaEntrega: null,
     fechaRetiro: null,
     flagHabilitado: true,
   }, // GUARDIA (MESON)
+  {
+    id: 106,
+    impresoraFisicaId: 93,
+    servicioId: 66,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // KINESIOLOGIA
+  {
+    id: 107,
+    impresoraFisicaId: 109,
+    servicioId: 66,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // KINESIOLOGIA
+  {
+    id: 108,
+    impresoraFisicaId: 32,
+    servicioId: 52,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // GASTROENTEROLOGIA
+  {
+    id: 109,
+    impresoraFisicaId: 110,
+    servicioId: 149,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // GASTROENTEROLOGIA QX
+  {
+    id: 110,
+    impresoraFisicaId: 111,
+    servicioId: 150,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // NEUMONOLOGIA
+  {
+    id: 111,
+    impresoraFisicaId: 112,
+    servicioId: 151,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // NEUMONOLOGIA QX
+  {
+    id: 112,
+    impresoraFisicaId: 113 ,
+    servicioId: 97 ,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // OFTALMOLOGIA
+  {
+    id: 113,
+    impresoraFisicaId: 114 ,
+    servicioId: 89 ,
+    fechaEntrega: null,
+    fechaRetiro: null,
+    flagHabilitado: true,
+  }, // OBSTETRICIA (GUARDIA)
+
 ];

@@ -57,4 +57,7 @@ export const modelosInsumos = [
   { modeloId: 21, insumoId: 50 }, // LEXMARK CX635ADWE - 75M0ZV0 DRUM COLOR
   { modeloId: 31, insumoId: 52 }, // RICOH SP377SFNwX - 408161 TONER.
   { modeloId: 32, insumoId: 53 }, // HP LASERJET 1320 - 49A TONER
+  { modeloId: 33, insumoId: 54 }, // BROTHER HL-L2360DW - TN2370 TONER
+  { modeloId: 33, insumoId: 55 }, // BROTHER HL-L2360DW - DR2340 DRUM
+
 ];
