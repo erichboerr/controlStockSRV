@@ -62,7 +62,7 @@ export const servicios = [
   { id: 61, servicio: 'HEMOTERAPIA' },
   { id: 62, servicio: 'HOSPITAL DE DIA (CONSULTORIO 4)' },
   { id: 63, servicio: 'INFECTOLOGIA' },
-  { id: 64, servicio: 'INSTRUMENTACION QUIRURGICA' },
+  { id: 64, servicio: 'DIVISION ESPECIALIDADES TECNICAS' },
   { id: 65, servicio: 'JURIDICO' },
   { id: 66, servicio: 'KINESIOLOGIA' },
   { id: 67, servicio: 'LABORATORIO (JEFATURA)' },
@@ -145,7 +145,7 @@ export const servicios = [
   { id: 144, servicio: 'UNIDAD 10 (SECRETARIA)' },
   { id: 145, servicio: 'UNIDAD 7 (JEFATURA MEDICA)' },
   { id: 146, servicio: 'UNIDAD 4 (JEFE DE DIVISION)' },
-  { id: 147, servicio: 'D.G.A.' },
+  
   { id: 148, servicio: 'LIBRERÍA' },  
   { id: 149, servicio: 'GASTROENTEROLOGIA (QUIROFANO)' },
   { id: 150, servicio: 'NEUMONOLOGIA' },

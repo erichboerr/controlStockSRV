@@ -720,14 +720,9 @@ export const impresoraServicio = [
     fechaRetiro: null,
     flagHabilitado: true,
   }, // FACTURACIÓN
-  {
-    id: 91,
-    impresoraFisicaId: 99,
-    servicioId: 147,
-    fechaEntrega: null,
-    fechaRetiro: null,
-    flagHabilitado: true,
-  }, // GABO
+
+
+  
   {
     id: 92,
     impresoraFisicaId: 100,

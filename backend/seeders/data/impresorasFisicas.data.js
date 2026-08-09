@@ -783,14 +783,9 @@ export const impresoraFisica = [
     impresoraId: 10,
     flagHabilitado: true,
   }, // XEROX PHASER 4600DN
-  {
-    id: 99,
-    numeroSerie: '30215796610',
-    remito: null,
-    proveedorId: 1,
-    impresoraId: 13,
-    flagHabilitado: true,
-  }, // XEROX VersaLink B230DN
+
+
+  
   {
     id: 100,
     numeroSerie: '3363499529',
