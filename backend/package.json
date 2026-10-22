@@ -6,8 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
-    "migrate": "sequelize-cli db:migrate",
-    "seed": "sequelize-cli db:seed:all",
+    "migrate": "sequelize-cli db:migrate --config config/config.cjs --migrations-path migrations",
+    "seed": "sequelize-cli db:seed:all --config config/config.cjs --seeders-path seeders",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write ."
   },
