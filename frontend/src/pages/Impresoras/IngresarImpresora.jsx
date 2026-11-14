@@ -9,7 +9,7 @@ export default function IngresarImpresora() {
     marca,
     modelo,
     proveedor,
-    serie,
+    series,
     remito,
     marcas,
     modelos,
@@ -17,7 +17,9 @@ export default function IngresarImpresora() {
     setMarca,
     setModelo,
     setProveedor,
-    setSerie,
+    agregarSerie,
+    quitarSerie,
+    actualizarSerie,
     setRemito,
     handleCancelar,
     IngresarImpresora,
@@ -77,13 +79,38 @@ export default function IngresarImpresora() {
           disabled={!marca?.id || modelos.length === 0}
         />
 
-        {/* Input Serie */}
-        <InputGeneric
-          placeholder="Número de serie"
-          value={serie}
-          onChange={(e) => setSerie(e.target.value.toUpperCase())}
-          icono="bi-upc-scan"
-        />
+        {/* Números de serie (uno por unidad física) */}
+        <div className="space-y-2">
+          <label className="text-sm text-gray-600">
+            Números de serie ({series.length})
+          </label>
+
+          {series.map((serie, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <div className="flex-1 [&>div]:mb-0">
+                <InputGeneric
+                  placeholder={`Número de serie ${index + 1}`}
+                  value={serie}
+                  onChange={(e) => actualizarSerie(index, e.target.value)}
+                  icono="bi-upc-scan"
+                />
+              </div>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => quitarSerie(index)}
+                disabled={series.length === 1}
+                title="Quitar esta serie"
+              >
+                <i className="bi bi-dash-lg" />
+              </Button>
+            </div>
+          ))}
+
+          <Button type="button" variant="secondary" onClick={agregarSerie}>
+            <i className="bi bi-plus-lg" /> Agregar otra serie
+          </Button>
+        </div>
 
         {/* Botones */}
         <div className="flex justify-between pt-4">
@@ -95,10 +122,15 @@ export default function IngresarImpresora() {
             type="submit"
             variant="primary"
             disabled={
-              !marca?.id || !modelo?.id || !proveedor?.id || !serie.trim()
+              !marca?.id ||
+              !modelo?.id ||
+              !proveedor?.id ||
+              series.every((s) => !s.trim())
             }
           >
-            Ingresar
+            Ingresar {series.filter((s) => s.trim()).length > 1
+              ? `(${series.filter((s) => s.trim()).length})`
+              : ""}
           </Button>
         </div>
       </form>

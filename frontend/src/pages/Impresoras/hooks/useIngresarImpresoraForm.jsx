@@ -19,7 +19,7 @@ export default function useIngresarImpresoraForm() {
   const [modelo, setModelo] = useState(null);
   const [proveedor, setProveedor] = useState(null);
 
-  const [serie, setSerie] = useState("");
+  const [series, setSeries] = useState([""]);
   const [remito, setRemito] = useState("");
 
   const { addToast } = useToast();
@@ -87,8 +87,28 @@ export default function useIngresarImpresoraForm() {
     }
   };
 
+  // --- Manejo del array de series ---
+  const agregarSerie = () => {
+    setSeries((prev) => [...prev, ""]);
+  };
+
+  const quitarSerie = (index) => {
+    setSeries((prev) =>
+      prev.length === 1 ? prev : prev.filter((_, i) => i !== index)
+    );
+  };
+
+  const actualizarSerie = (index, value) => {
+    setSeries((prev) =>
+      prev.map((s, i) => (i === index ? value.toUpperCase() : s))
+    );
+  };
+
   const IngresarImpresora = async () => {
-    if (!marca?.id || !modelo?.id || !proveedor?.id || !serie.trim()) {
+    const seriesLimpias = series.map((s) => s.trim()).filter(Boolean);
+    const seriesUnicas = new Set(seriesLimpias);
+
+    if (!marca?.id || !modelo?.id || !proveedor?.id || seriesLimpias.length === 0) {
       addToast(
         "❌ Todos los campos obligatorios deben estar completos",
         "danger"
@@ -96,18 +116,21 @@ export default function useIngresarImpresoraForm() {
       return;
     }
 
+    if (seriesUnicas.size !== seriesLimpias.length) {
+      addToast("❌ Hay números de serie repetidos en la carga", "danger");
+      return;
+    }
+
     try {
+      // Paso 1: buscar o crear la impresora (marca+modelo)
       const buscarRes = await axios.get(
         `${impresoraUrl}?marcaId=${marca.id}&modeloId=${modelo.id}`
       );
-      //console.log("Respuesta buscar impresora:", buscarRes.data);
       let impresoraId = null;
 
       if (Array.isArray(buscarRes.data) && buscarRes.data.length > 0) {
         impresoraId = buscarRes.data[0].id;
-        //console.log("ID de la Impresora encontrada:", impresoraId);
       } else {
-        // Paso 2: crear si no existe
         const crearRes = await axios.post(impresoraUrl, {
           marcaId: marca.id,
           modeloId: modelo.id,
@@ -115,19 +138,29 @@ export default function useIngresarImpresoraForm() {
         impresoraId = crearRes.data.id;
       }
 
-      // Paso 3: crear impresora física
-      await axios.post(impresoraFisicaUrl, {
-        numeroSerie: serie.trim(),
-        remito: remito.trim() || null,
+      // Paso 2: alta masiva de impresoras físicas para ese modelo
+      const res = await axios.post(`${impresoraFisicaUrl}/bulk`, {
         proveedorId: proveedor.id,
-        impresoraId: impresoraId,
+        remito: remito.trim() || null,
+        impresoraId,
+        numerosSerie: seriesLimpias,
       });
 
-      addToast("✅ Impresora ingresada correctamente", "success");
-      handleCancelar();
+      addToast(
+        `✅ ${res.data.cantidad} impresora(s) ingresada(s) correctamente`,
+        "success"
+      );
+
+      // Reseteamos marca/modelo/series para permitir cargar otro modelo
+      // del mismo remito sin tener que volver a tipear proveedor/remito
+      setMarca(null);
+      setModelo(null);
+      setSeries([""]);
     } catch (error) {
-      console.error("Error al ingresar impresora:", error);
-      addToast("❌ Error al guardar impresora", "danger");
+      console.error("Error al ingresar impresoras:", error);
+      const mensaje =
+        error?.response?.data?.error || "Error al guardar las impresoras";
+      addToast(`❌ ${mensaje}`, "danger");
     }
   };
 
@@ -135,7 +168,7 @@ export default function useIngresarImpresoraForm() {
     setMarca(null);
     setModelo(null);
     setProveedor(null);
-    setSerie("");
+    setSeries([""]);
     setRemito("");
     navigate("/");
   };
@@ -144,7 +177,7 @@ export default function useIngresarImpresoraForm() {
     marca,
     modelo,
     proveedor,
-    serie,
+    series,
     remito,
     marcas,
     modelos,
@@ -152,7 +185,9 @@ export default function useIngresarImpresoraForm() {
     setMarca,
     setModelo,
     setProveedor,
-    setSerie,
+    agregarSerie,
+    quitarSerie,
+    actualizarSerie,
     setRemito,
     handleCancelar,
     IngresarImpresora,

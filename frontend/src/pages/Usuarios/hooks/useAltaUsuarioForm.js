@@ -10,6 +10,7 @@ export default function useAltaUsuarioForm() {
   const [rolSeleccionado, setRolSeleccionado] = useState(null);
   const [password, setPassword] = useState("");
   const [nombre, setNombre] = useState("");
+  const [pendienteReactivar, setPendienteReactivar] = useState(null);
   const { addToast } = useToast();
   const navigate = useNavigate();
 
@@ -49,20 +50,48 @@ export default function useAltaUsuarioForm() {
       addToast("✅ Usuario creado correctamente", "success");
       handleCancelar();
     } catch (error) {
+      const data = error?.response?.data;
+
+      // El usuario ya existe pero está dado de baja: en vez de mostrar el
+      // error tal cual, le preguntamos si quiere reactivarlo con el rol y
+      // la contraseña que acaba de tipear.
+      if (data?.code === "EXISTS_DISABLED" && data?.data) {
+        setPendienteReactivar(data.data);
+        return;
+      }
+
       const status = error?.response?.status;
       const msg =
-        error?.response?.data?.error ||
-        error?.response?.data?.message ||
-        "❌ Error al crear usuario";
+        data?.error || data?.message || "❌ Error al crear usuario";
 
       addToast(msg, mapErrorToToastType(status));
     }
   };
 
+  const confirmarReactivar = async () => {
+    if (!pendienteReactivar) return;
+    try {
+      await axios.patch(`${usuariosUrl}/${pendienteReactivar.id}/reactivar`, {
+        rolId: rolSeleccionado.id,
+        password: password.trim(),
+      });
+      addToast("✅ Usuario reactivado correctamente", "success");
+      handleCancelar();
+    } catch (error) {
+      const msg = error?.response?.data?.error || "❌ Error al reactivar usuario";
+      addToast(msg, mapErrorToToastType(error?.response?.status));
+    } finally {
+      setPendienteReactivar(null);
+    }
+  };
+
+  const cancelarReactivar = () => setPendienteReactivar(null);
+
   const handleCancelar = () => {
     setRolSeleccionado(null);
     setNombre("");
     setPassword("");
+    setPendienteReactivar(null);
     navigate("/");
   };
 
@@ -76,5 +105,8 @@ export default function useAltaUsuarioForm() {
     setNombre,
     handleSubmit,
     handleCancelar,
+    pendienteReactivar,
+    confirmarReactivar,
+    cancelarReactivar,
   };
 }

@@ -1,4 +1,4 @@
-import { getAll, getByModelo, getImpresorasByServicio, create, update, remove } from "../services/servicioService.js";
+import { getAll, getByModelo, getImpresorasByServicio, create, update, remove, reactivar } from "../services/servicioService.js";
 
 // Listar servicios
 export async function listarServicios(req, res, next) {
@@ -59,6 +59,16 @@ export async function eliminarServicio(req, res, next) {
   try {
     const resultado = await remove(req.params.id);
     res.json(resultado);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Reactivar servicio dado de baja
+export async function reactivarServicio(req, res, next) {
+  try {
+    const reactivado = await reactivar(req.params.id);
+    res.json(reactivado);
   } catch (err) {
     next(err);
   }

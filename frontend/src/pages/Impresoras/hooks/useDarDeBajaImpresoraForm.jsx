@@ -160,12 +160,11 @@ export default function useDarDeBajaImpresoraForm() {
     setProcesando(true);
 
     try {
+      // Al dar de baja, el backend ya cierra automáticamente la entrega
+      // activa (fechaRetiro) dentro de la misma transacción, así que no
+      // hace falta un segundo llamado a /retirar.
       await axios.put(`${impresoraFisicaUrl}/baja`, {
         impresoraFisicaId: serie.id,
-      });
-      await axios.put(`${impresorasServicioUrl}/retirar`, {
-        impresoraFisicaId: serie.id,
-        servicioId: servicio.id,
       });
 
       addToast("✅ Impresora dada de baja correctamente", "success");

@@ -20,15 +20,15 @@ export default function useAgregarMarcasForm() {
 
     const normalizado = marca.trim().toUpperCase();
 
-    try {
-      const yaExiste = marcas.some(
-        (m) => m.marca.trim().toUpperCase() === normalizado
-      );
-      if (yaExiste) {
-        addToast("⚠️ La marca ya existe", "warning");
-        return;
-      }
+    const yaExiste = marcas.some(
+      (m) => m.marca.trim().toUpperCase() === normalizado
+    );
+    if (yaExiste) {
+      addToast("⚠️ La marca ya existe", "warning");
+      return;
+    }
 
+    try {
       await axios.post(marcaUrl, { marca: normalizado });
       addToast("✅ Marca creada con éxito", "success");
 

@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/proveedorService.js";
+import { getAll, create, update, remove, reactivar } from "../services/proveedorService.js";
 
 // Listar proveedores
 export async function listarProveedores(req, res, next) {
@@ -36,6 +36,16 @@ export async function eliminarProveedor(req, res, next) {
   try {
     const resultado = await remove(req.params.id);
     res.json(resultado);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Reactivar proveedor dado de baja
+export async function reactivarProveedor(req, res, next) {
+  try {
+    const reactivado = await reactivar(req.params.id);
+    res.json(reactivado);
   } catch (err) {
     next(err);
   }

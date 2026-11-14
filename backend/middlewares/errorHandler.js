@@ -19,7 +19,11 @@ export function errorHandler(err, req, res, next) {
       timestamp: new Date().toISOString(),
     });
 
-    return res.status(err.httpStatus || 400).json({ error: err.message });
+    return res.status(err.httpStatus || 400).json({
+      error: err.message,
+      code: err.code || null,
+      ...(err.data !== undefined ? { data: err.data } : {}),
+    });
   }
 
   logger.error({

@@ -33,6 +33,11 @@ export async function createOrAssociate(modeloId, insumos, stock_minimo) {
         insumo: normalizado,
         stock_minimo: stock_minimo ?? 5,
       });
+    } else if (!insumo.flagHabilitado) {
+      // El insumo existe pero estaba dado de baja: al volver a cargarlo
+      // (típicamente en una lista junto con otros) lo reactivamos directo,
+      // sin pedir confirmación por cada uno como en Marca/Proveedor/Servicio.
+      await insumo.update({ flagHabilitado: true });
     }
 
     const existe = await ModeloInsumo.findOne({
@@ -106,25 +111,54 @@ export async function update(id, data) {
   return insumo;
 }
 
-export async function getInsumosBajoStock() {
+export async function getInsumosBajoStock({ marcaId, modeloId, insumoId } = {}) {
+  const condiciones = [];
+  const replacements = {};
+
+  if (marcaId) {
+    condiciones.push(`ma.id = :marcaId`);
+    replacements.marcaId = parseInt(marcaId, 10);
+  }
+  if (modeloId) {
+    condiciones.push(`mo.id = :modeloId`);
+    replacements.modeloId = parseInt(modeloId, 10);
+  }
+  if (insumoId) {
+    condiciones.push(`i.id = :insumoId`);
+    replacements.insumoId = parseInt(insumoId, 10);
+  }
+
+  const filtroExtra = condiciones.length ? `AND ${condiciones.join(" AND ")}` : "";
+
   const query = `
     WITH stock_calculado AS (
-      SELECT 
+      SELECT
         "insumoId",
         SUM(cantidad * CASE WHEN tipo = 'ingreso' THEN 1 ELSE -1 END) AS stock_actual
       FROM movimiento_insumo
       GROUP BY "insumoId"
     )
-    SELECT 
-      i.id,
-      i.insumo AS nombre,
-      COALESCE(m.stock_actual, 0) AS stock_actual,
+    SELECT
+      i.id AS "insumoId",
+      i.insumo AS insumo,
+      mo.id AS "modeloId",
+      mo.modelo AS modelo,
+      ma.id AS "marcaId",
+      ma.marca AS marca,
+      COALESCE(sc.stock_actual, 0) AS stock_actual,
       i.stock_minimo
     FROM insumos i
-    LEFT JOIN stock_calculado AS m ON m."insumoId" = i.id
+    LEFT JOIN modelo_insumo mi ON mi."insumoId" = i.id
+    LEFT JOIN modelos mo ON mo.id = mi."modeloId"
+    LEFT JOIN marcas ma ON ma.id = mo."marcaId"
+    LEFT JOIN stock_calculado sc ON sc."insumoId" = i.id
     WHERE i."flagHabilitado" = true
-      AND COALESCE(m.stock_actual, 0) < i.stock_minimo
-  ORDER BY i.insumo;`
+      AND COALESCE(sc.stock_actual, 0) < i.stock_minimo
+      ${filtroExtra}
+    ORDER BY ma.marca NULLS LAST, mo.modelo NULLS LAST, i.insumo;`;
 
-  return await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
+  return await sequelize.query(query, {
+    replacements,
+    type: sequelize.QueryTypes.SELECT,
+  });
 }

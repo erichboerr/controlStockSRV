@@ -99,7 +99,8 @@ export async function eliminarInsumo(req, res, next) {
 // Obtener insumos bajo stock
 export async function obtenerInsumosBajoStock(req, res, next) {
   try {
-    const data = await getInsumosBajoStock();
+    const { marcaId, modeloId, insumoId } = req.query;
+    const data = await getInsumosBajoStock({ marcaId, modeloId, insumoId });
     res.json(data);
   } catch (err) {
     next(err);

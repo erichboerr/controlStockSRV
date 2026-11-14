@@ -72,9 +72,14 @@ import IngresoRepuesto from "../pages/Repuestos/IngresoRepuestos.jsx";
 import EgresoRepuesto from "../pages/Repuestos/EgresoRepuestos.jsx";
 import AjusteRepuestos from "../pages/Repuestos/AjusteRepuestos.jsx";
 import StockRepuestos from "../pages/Repuestos/StockRepuestos.jsx";
+import StockBajoRepuestos from "../pages/Repuestos/StockBajoRepuestos.jsx";
 
 //Logs
 import Logs from "../pages/Logs/PageLogs.jsx";
+
+//Sistema
+import RestaurarBackup from "../pages/Sistema/RestaurarBackup.jsx";
+import HacerBackup from "../pages/Sistema/HacerBackup.jsx";
 
 export default function AppRouter() {
   return (
@@ -178,9 +183,16 @@ export default function AppRouter() {
         <Route path="/EgresoRepuesto" element={<EgresoRepuesto />} />
         <Route path="/AjusteRepuestos" element={<AjusteRepuestos />} />
         <Route path="/StockRepuestos" element={<StockRepuestos />} />
+        <Route path="/StockBajoRepuestos" element={<StockBajoRepuestos />} />
         
         {/*Logs*/}
         <Route path="/logs" element={<Logs />} />
+
+        {/* Sistema */}
+        <Route element={<RoleGuard allowedRoles={[ROLES.ROOT, ROLES.ADMIN]} />}>
+          <Route path="/HacerBackup" element={<HacerBackup />} />
+          <Route path="/RestaurarBackup" element={<RestaurarBackup />} />
+        </Route>
       </Route>
     </Routes>
   );

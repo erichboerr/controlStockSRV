@@ -8,6 +8,3 @@ node_modules/
 # Logs
 *.log
 logs/
-
-# PM2
-ecosystem.config.cjs

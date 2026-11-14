@@ -7,6 +7,7 @@ import {
   crearServicio,
   editarServicio,
   eliminarServicio,
+  reactivarServicio,
 } from "../controllers/servicioController.js";
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.get( "/por-modelo/:modeloId",authMiddleware, listarServiciosPorModelo);
 router.get( "/:servicioId/impresoras",authMiddleware, listarImpresorasPorServicio);
 router.post( "/",authMiddleware, crearServicio);
 router.put( "/:id",authMiddleware, editarServicio);
+router.patch( "/:id/reactivar",authMiddleware, reactivarServicio);
 router.delete( "/:id",authMiddleware, eliminarServicio);
 
 export default router;

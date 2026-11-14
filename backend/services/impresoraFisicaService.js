@@ -2,6 +2,7 @@ import { createError } from "../utils/createError.js";
 import ImpresoraFisica from "../models/ImpresoraFisica.js";
 import ImpresoraServicio from "../models/ImpresoraServicio.js";
 import Impresora from "../models/Impresora.js";
+import sequelize from "../config/db.js";
 
 export async function getAll() {
   return await ImpresoraFisica.findAll({
@@ -34,6 +35,65 @@ export async function create({ proveedorId, numeroSerie, remito, impresoraId }) 
   }
 }
 
+export async function createBulk({ proveedorId, remito, impresoraId, numerosSerie }) {
+  if (
+    !proveedorId ||
+    !remito ||
+    !impresoraId ||
+    !Array.isArray(numerosSerie) ||
+    numerosSerie.length === 0
+  ) {
+    throw createError("Datos incompletos", 400, "MISSING_DATA");
+  }
+
+  // Normalizar (trim + mayúsculas) y sacar duplicados dentro del propio lote
+  const seriesNormalizadas = numerosSerie
+    .map((s) => (s || "").trim().toUpperCase())
+    .filter(Boolean);
+
+  const seriesUnicas = [...new Set(seriesNormalizadas)];
+  if (seriesUnicas.length !== seriesNormalizadas.length) {
+    throw createError(
+      "Hay números de serie repetidos en la carga",
+      400,
+      "DUPLICATE_IN_BATCH"
+    );
+  }
+
+  // Verificar que ninguna serie ya exista en la base antes de insertar
+  const existentes = await ImpresoraFisica.findAll({
+    where: { numeroSerie: seriesUnicas },
+  });
+  if (existentes.length > 0) {
+    const seriesExistentes = existentes.map((e) => e.numeroSerie).join(", ");
+    throw createError(
+      `Las siguientes series ya están registradas: ${seriesExistentes}`,
+      409,
+      "DUPLICATE_SERIE"
+    );
+  }
+
+  const registros = seriesUnicas.map((numeroSerie) => ({
+    proveedorId,
+    remito,
+    impresoraId,
+    numeroSerie,
+  }));
+
+  const t = await sequelize.transaction();
+  try {
+    const creadas = await ImpresoraFisica.bulkCreate(registros, {
+      transaction: t,
+    });
+    await t.commit();
+    return creadas;
+  } catch (err) {
+    await t.rollback();
+    if (err.isCustom) throw err;
+    throw createError("Error al registrar las impresoras", 500, "DB_ERROR");
+  }
+}
+
 export async function obtenerSeriesDisponibles({ marcaId, modeloId }) {
   const impresoras = await ImpresoraFisica.findAll({
     where: { flagHabilitado: true },
@@ -60,16 +120,39 @@ export async function darDeBajaImpresoraService(impresoraFisicaId) {
     throw createError("Falta impresoraFisicaId", 400, "MISSING_ID");
   }
 
-  const impresora = await ImpresoraFisica.findByPk(impresoraFisicaId);
-  if (!impresora) {
-    throw createError("Impresora física no encontrada", 404, "NOT_FOUND");
+  const t = await sequelize.transaction();
+
+  try {
+    const impresora = await ImpresoraFisica.findByPk(impresoraFisicaId, { transaction: t });
+    if (!impresora) {
+      throw createError("Impresora física no encontrada", 404, "NOT_FOUND");
+    }
+
+    const fechaBaja = new Date();
+
+    impresora.flagHabilitado = false;
+    impresora.fechaBaja = fechaBaja;
+    await impresora.save({ transaction: t });
+
+    // Si la impresora estaba entregada a un servicio, cerramos esa entrega
+    // (fechaRetiro) para que no quede una asignación "activa" fantasma:
+    // si el día de mañana se reactiva la impresora física, no debería
+    // aparecer como entregada a un servicio del que nunca la retiraron.
+    await ImpresoraServicio.update(
+      { fechaRetiro: fechaBaja, flagHabilitado: false },
+      {
+        where: { impresoraFisicaId, fechaRetiro: null },
+        transaction: t,
+      }
+    );
+
+    await t.commit();
+    return impresora;
+  } catch (err) {
+    await t.rollback();
+    if (err.isCustom) throw err;
+    throw createError("Error al dar de baja la impresora física", 500, "DB_ERROR");
   }
-
-  impresora.flagHabilitado = false;
-  impresora.fechaBaja = new Date();
-  await impresora.save();
-
-  return impresora;
 }
 
 export async function updateSerie(id, numeroSerie) {

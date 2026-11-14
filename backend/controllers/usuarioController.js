@@ -1,4 +1,4 @@
-import { getAll, create, update, remove } from "../services/usuarioService.js";
+import { getAll, create, update, remove, reactivar } from "../services/usuarioService.js";
 
 export async function listarUsuarios(req, res, next) {
   try {
@@ -33,6 +33,17 @@ export async function eliminarUsuario(req, res, next) {
   try {
     const resultado = await remove(req.params.id);
     res.json(resultado);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Reactivar usuario dado de baja
+export async function reactivarUsuario(req, res, next) {
+  try {
+    const { rolId, password } = req.body;
+    const reactivado = await reactivar(req.params.id, { rolId, password });
+    res.json(reactivado);
   } catch (err) {
     next(err);
   }

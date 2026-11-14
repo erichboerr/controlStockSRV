@@ -2,6 +2,7 @@ import FormularioMarco from "../../common/components/FormularioMarco.jsx";
 import SelectGeneric from "../../common/components/SelectGeneric.jsx";
 import InputGeneric from "../../common/components/InputGeneric.jsx";
 import Button from "../../common/components/Button";
+import ConfirmModal from "../../common/components/ConfirmModal.jsx";
 import useAltaUsuarioForm from "./hooks/useAltaUsuarioForm.js";
 
 
@@ -16,6 +17,9 @@ export default function AgregarUsuario() {
     setNombre,
     handleSubmit,
     handleCancelar,
+    pendienteReactivar,
+    confirmarReactivar,
+    cancelarReactivar,
   } = useAltaUsuarioForm();
 
   return (
@@ -59,6 +63,24 @@ export default function AgregarUsuario() {
           </Button>
         </div>
       </form>
+
+      <ConfirmModal
+        show={!!pendienteReactivar}
+        onHide={cancelarReactivar}
+        onConfirm={confirmarReactivar}
+        titulo="Usuario dado de baja"
+        mensaje={
+          pendienteReactivar && (
+            <>
+              Ya existe el usuario <strong>{pendienteReactivar.nombre}</strong>,
+              pero está dado de baja. ¿Querés reactivarlo con el rol y la
+              contraseña que acabás de ingresar, en vez de crear uno nuevo?
+            </>
+          )
+        }
+        textoConfirmar="Reactivar"
+        varianteConfirmar="success"
+      />
     </FormularioMarco>
   );
 }

@@ -5,7 +5,6 @@ import {
   listarModelMarca,
   crearModelo,
   editarModelo,
-  eliminarModelo,
 } from "../controllers/modeloController.js";
 
 const router = express.Router();
@@ -16,7 +15,5 @@ router.get( "/porMarca",authMiddleware, listarModelMarca);
 router.post( "/",authMiddleware, crearModelo);
 
 router.put( "/:id",authMiddleware, editarModelo);
-
-router.delete( "/:id",authMiddleware, eliminarModelo);
 
 export default router;

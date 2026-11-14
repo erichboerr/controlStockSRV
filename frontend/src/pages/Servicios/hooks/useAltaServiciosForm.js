@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "../../../common/config/axiosInstance.js";
 import { serviciosUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
+import { useReactivarConfirm } from "../../../common/hooks/useReactivarConfirm.js";
 
 export default function useAltaServiciosForm() {
   const [servicios] = useState([]);
   const [servicio, setServicio] = useState("");
   const { addToast } = useToast();
   const navigate = useNavigate();
+  const { pendiente, intentarCrear, confirmarReactivar, cancelarReactivar } =
+    useReactivarConfirm(serviciosUrl);
 
   const handleCancelar = () => {
     setServicio("");
@@ -35,15 +37,14 @@ export default function useAltaServiciosForm() {
       return;
     }
 
-    try {
-      await axios.post(serviciosUrl, { servicio: servicioNormalizado });
-      addToast("✅ Servicio agregado correctamente", "success");
-      handleCancelar();
-    } catch (error) {
-      const msg =
-        error?.response?.data?.error || "❌ Error al agregar servicio";
-      addToast(msg, "danger");
-    }
+    await intentarCrear(
+      { servicio: servicioNormalizado },
+      () => {
+        addToast("✅ Servicio agregado correctamente", "success");
+        handleCancelar();
+      },
+      (msg) => addToast(msg, "danger")
+    );
   };
 
   return {
@@ -51,5 +52,8 @@ export default function useAltaServiciosForm() {
     setServicio,
     handleCancelar,
     agregarServicio,
+    pendienteReactivar: pendiente,
+    confirmarReactivar: () => confirmarReactivar(handleCancelar),
+    cancelarReactivar,
   };
 }
