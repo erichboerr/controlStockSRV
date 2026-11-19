@@ -2,15 +2,14 @@
 
 Este documento resume los pasos necesarios para desplegar la aplicación en el servidor y asegurar que PM2 mantenga los procesos activos incluso después de un reinicio.
 
-1. Actualizar el código desde el repositorio
+## 1. Actualizar el código desde el repositorio
 
 git pull origin main
 npm install
 
-2. Reiniciar procesos con PM2
+## 2. Reiniciar procesos con PM2
 
 pm2 restart controlStock-Backend
-
 
 Si usás un archivo de configuración:
 
@@ -20,13 +19,13 @@ Verificar estado:
 
 pm2 list
 
-3. Guardar estado de procesos
+## 3. Guardar estado de procesos
 
 pm2 save
 
 Esto asegura que la lista de procesos quede registrada en ~/.pm2/dump.pm2.
 
-4. Configurar arranque automático
+## 4. Configurar arranque automático
 
 Generar script de inicio con systemd:
 
@@ -36,13 +35,13 @@ El comando mostrará una línea que debe ejecutarse con sudo. Ejemplo:
 
 sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u erich --hp /home/erich
 
-5. Verificar servicio
+## 5. Verificar servicio
 
 systemctl status pm2-erich
 
 Debe aparecer como active (running).
 
-6. Probar reinicio del servidor
+## 6. Probar reinicio del servidor
 
 sudo reboot
 
@@ -65,7 +64,8 @@ Reiniciar servidor y confirmar con pm2 list.
 Con esto tu backend queda desplegado y protegido contra reinicios del servidor.
 
 🚀 Actualizar código del frontend
-1. Traer la última versión del repositorio para compilar el build.
+
+## 1. Traer la última versión del repositorio para compilar el build
 
 En el directorio del frontend
 
@@ -73,11 +73,12 @@ git pull origin main
 
 npm install
 
-2. Generar build de producción
+## 2. Generar build de producción
 
 En el directorio del frontend
 
 npm run build
 
-3. Reiniciar Nginx
+## 3. Reiniciar Nginx
+
 sudo systemctl restart nginx

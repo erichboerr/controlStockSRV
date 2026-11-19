@@ -1,14 +1,17 @@
-## 🧪 Comandos de Migración
+# 🧪 Comandos de Migración
 
-```bash
-# Eliminar todas las migraciones
+## Eliminar todas las migraciones
+
 npx sequelize-cli db:migrate:undo:all
 
-# Aplicar todas las migraciones
+## Aplicar todas las migraciones
+
 npx sequelize-cli db:migrate
 
-# Crear nueva migración
+## Crear nueva migración
+
 npx sequelize-cli migration:generate --name nombre_tabla
 
-# Crear nuevo modelo
+## Crear nuevo modelo
+
 npx sequelize-cli model:generate --name Nombre --attributes campo:tipo,...

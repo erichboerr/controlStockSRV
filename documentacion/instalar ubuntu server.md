@@ -1,18 +1,21 @@
 # 📑 Guía de instalación y configuración de Ubuntu Server para ControlStock
 
 ## 1. No usar root directamente
+
 - Lo ideal es crear un usuario normal con privilegios sudo.  
 - Root se usa solo para tareas puntuales, pero no conviene trabajar siempre con él (por seguridad y buenas prácticas).
 
-# Crear usuario (ejemplo: erich)
+## Crear usuario (ejemplo: erich)
+
 sudo adduser erich
 
-# Darle permisos sudo
+## Darle permisos sudo
+
 sudo usermod -aG sudo erich
 
-# Luego cerrás sesión y entrás con tu usuario:
-su - erich
+## Luego cerrás sesión y entrás con tu usuario
 
+su - erich
 
 ## 2. Actualizar el sistema
 
@@ -29,12 +32,15 @@ sudo ufw enable
 Esto asegura que podés entrar por SSH si lo necesitás.
 
 ### Zona horaria y localización
+
 sudo timedatectl set-timezone America/Argentina/Buenos_Aires
 
 ### Paquetes esenciales
+
 sudo apt install build-essential curl git -y
 
 ## 4. Asignar IP fija
+
 Ubuntu Server usa **Netplan** para configurar la red.  
 Editá el archivo de configuración (la ruta puede variar según la versión, normalmente `/etc/netplan/01-netcfg.yaml` o `/etc/netplan/00-installer-config.yaml`):
 
@@ -68,24 +74,29 @@ ping 8.8.8.8
 
 ## 5. Preparar entorno para Node.js y PM2
 
-# Instalar Node.js LTS
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+## Instalar Node.js LTS
+
+curl -fsSL <https://deb.nodesource.com/setup_20.x> | sudo -E bash -
 sudo apt install -y nodejs
 
-# Instalar PM2 global
+## Instalar PM2 global
+
 sudo npm install -g pm2
 pm2 install pm2-logrotate
 
 ## 6. Instalar Nginx
+
 sudo apt install nginx -y
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
 ## 7. Crear estructura de proyectos
+
 mkdir -p ~/controlstock/backend
 mkdir -p ~/controlstock/frontend
 
 ## 8. Configuración del frontend con Nginx
+
 cd ~/controlstockv2/frontend
 npm install
 npm run build
@@ -122,6 +133,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 ## 9. Correr PM2
+
 pm2 start ecosystem.config.cjs --env production
 pm2 save
 pm2 startup
