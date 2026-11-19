@@ -6,6 +6,16 @@
 
 ---
 
+## 0. Rama de trabajo: siempre `dev`
+<!-- Regla principal de Git: dónde se trabaja y dónde no. -->
+- Todo el trabajo se hace sobre la rama **`dev`**: leer el código, editar y commitear.
+- Antes de empezar cualquier tarea, verificá que estás en `dev` (`git branch --show-current`)
+  y que está al día (`git pull origin dev`). Si no estás en `dev`, avisame antes de seguir.
+- **No** commitees ni subas cambios a `main` ni a ninguna otra rama, salvo que yo lo pida
+  explícitamente. El pase de `dev` a `main` (merge) lo decido yo.
+- Si leés el repo desde GitHub y la rama por defecto es `main`, usá `dev`: `main` puede estar
+  desactualizada respecto del trabajo real.
+
 ## 1. Qué es el proyecto
 <!-- Para qué sirve el sistema, en pocas líneas. -->
 Sistema web (intranet) para controlar el inventario de impresoras, insumos y repuestos de un hospital.
@@ -35,7 +45,6 @@ controlStockSRV/
 └── backup_db.sh
 
 ## 3. Stack (desarrollo local)
-
 <!-- Versiones principales, para no proponer cosas incompatibles. -->
 - **Backend:** Node.js con **ES modules** (`import`/`export`, con extensión `.js` en los imports),
   Express 5, Sequelize 6 + PostgreSQL (`pg`), Joi, JWT (`jsonwebtoken`), bcrypt, Helmet, CORS,
