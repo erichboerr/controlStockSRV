@@ -25,7 +25,7 @@ reportes, logs y backup.
 
 ## 2. Estructura del repo
 <!-- Dónde vive cada cosa. -->
-
+```text
 controlStockSRV/
 ├── backend/          API REST
 │   ├── routes/       define las URL de cada módulo
@@ -43,6 +43,7 @@ controlStockSRV/
 │   └── src/          pages, routes, layout, common, config, utils
 ├── documentacion/    guías de instalación, migraciones, HTTPS, backup
 └── backup_db.sh
+```
 
 ## 3. Stack (desarrollo local)
 <!-- Versiones principales, para no proponer cosas incompatibles. -->
