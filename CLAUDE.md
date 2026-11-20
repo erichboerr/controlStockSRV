@@ -13,8 +13,10 @@
   y que está al día (`git pull origin dev`). Si no estás en `dev`, avisame antes de seguir.
 - **No** commitees ni subas cambios a `main` ni a ninguna otra rama, salvo que yo lo pida
   explícitamente. El pase de `dev` a `main` (merge) lo decido yo.
-- Si leés el repo desde GitHub y la rama por defecto es `main`, usá `dev`: `main` puede estar
-  desactualizada respecto del trabajo real.
+- Solo se lee y se trabaja sobre `dev`. Si leés el repo desde GitHub y la rama por defecto es
+  `main`, usá `dev`.
+- `main` y `sync-server` corresponden al servidor en producción: no se leen ni se tocan hasta
+  que yo lo indique (cuando todo esté bien y haya sincronizado los cambios).
 
 ## 1. Qué es el proyecto
 <!-- Para qué sirve el sistema, en pocas líneas. -->
