@@ -65,7 +65,7 @@ export const MENU_CONFIG = [
       { label: "Ingreso Impresora", route: "/IngresarImpresora" },
       { label: "Entregar Impresora", route: "/EntregarImpresora" },
       { label: "Retirar Impresora", route: "/RetirarImpresora" },
-      { label: "Baja Impresora", route: "/BajaImpresora" },
+      { label: "Baja Impresora", route: "/BajaImpresora", roles: [ROLES.ROOT, ROLES.ADMIN] },
       { label: "Actualizar Serie", route: "/cambioSerieImpresora" },
     ],
   },

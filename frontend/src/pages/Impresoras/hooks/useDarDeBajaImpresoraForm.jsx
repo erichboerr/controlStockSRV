@@ -1,24 +1,47 @@
+// ============================================================================
+// pages/Impresoras/hooks/useDarDeBajaImpresoraForm.jsx
+// Lógica de la pantalla Impresoras → Baja Impresora.
+//
+// Ahora la baja es de la IMPRESORA LÓGICA (marca + modelo), no de una unidad
+// física por serie. Todo el trabajo pesado lo hace el backend:
+//   1. GET  /impresoras/baja-logica/previa → qué pasaría (no modifica nada)
+//   2. PUT  /impresoras/baja-logica        → hace la baja (transacción)
+//
+// Secciones:
+//   1. Imports
+//   2. Estado
+//   3. Carga de marcas y modelos
+//   4. Acciones: solicitar baja (previa), confirmar baja, cancelar
+//   5. Valor que devuelve el hook
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// 1. Imports
+// ---------------------------------------------------------------------------
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "../../../common/config/axiosInstance.js";
-import {
-  serviciosUrl,
-  impresorasServicioUrl,
-  impresoraFisicaUrl,
-} from "../../../config/env.js";
+import { marcaUrl, modeloUrl, impresoraUrl } from "../../../config/env.js";
 import { useToast } from "../../../common/hooks/useToast.js";
 
+// Código que devuelve el backend cuando todavía hay servicios con impresoras
+// de ese modelo asignadas (ver impresoraService.darDeBajaLogica).
+const CODIGO_CON_SERVICIOS = "IMPRESORA_CON_SERVICIOS";
+
 export default function useDarDeBajaImpresoraForm() {
-  const [servicios, setServicios] = useState([]);
-  const [impresorasActivas, setImpresorasActivas] = useState([]);
+  // -------------------------------------------------------------------------
+  // 2. Estado
+  // -------------------------------------------------------------------------
   const [marcas, setMarcas] = useState([]);
   const [modelos, setModelos] = useState([]);
-  const [series, setSeries] = useState([]);
 
-  const [servicio, setServicio] = useState(null);
   const [marca, setMarca] = useState(null);
   const [modelo, setModelo] = useState(null);
-  const [serie, setSerie] = useState(null);
+
+  // Respuesta de la consulta previa. null = todavía no se consultó.
+  // Forma: { marca, modelo, puedeDarseDeBaja, servicios, unidadesEnDeposito,
+  //          insumos, marcaQuedaVacia }
+  const [previa, setPrevia] = useState(null);
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [procesando, setProcesando] = useState(false);
@@ -26,185 +49,162 @@ export default function useDarDeBajaImpresoraForm() {
   const { addToast } = useToast();
   const navigate = useNavigate();
 
+  // -------------------------------------------------------------------------
+  // 3. Carga de marcas y modelos
+  // -------------------------------------------------------------------------
+
+  // Al entrar: traer las marcas habilitadas.
   useEffect(() => {
-    cargarServicios();
+    let cancelado = false;
+
+    const cargarMarcas = async () => {
+      try {
+        const res = await axios.get(marcaUrl);
+        const raw = Array.isArray(res.data) ? res.data : res.data.marca;
+        if (!cancelado) setMarcas((raw || []).filter((m) => m.flagHabilitado));
+      } catch {
+        if (!cancelado) setMarcas([]);
+      }
+    };
+
+    cargarMarcas();
+    return () => {
+      cancelado = true;
+    };
   }, []);
 
+  // Al elegir (o cambiar) la marca: limpiar modelo y resultado anterior, y
+  // traer los modelos habilitados de esa marca.
   useEffect(() => {
-    if (servicio?.id) {
-      cargarImpresorasActivas(servicio.id);
-      setMarca(null);
-      setModelo(null);
-      setSerie(null);
-    } else {
-      setImpresorasActivas([]);
-      setMarcas([]);
-      setModelos([]);
-      setSeries([]);
-    }
-  }, [servicio?.id]);
+    let cancelado = false;
+    setModelo(null);
+    setPrevia(null);
 
-  // Derivar marcas
-  useEffect(() => {
-    const nuevasMarcas = [];
-    impresorasActivas.forEach((i) => {
-      const marcaObj = i?.impresoraFisica?.impresora?.marca;
-      if (marcaObj && !nuevasMarcas.find((m) => m.id === marcaObj.id)) {
-        nuevasMarcas.push(marcaObj);
-      }
-    });
-    setMarcas(nuevasMarcas);
-
-    if (marca && !nuevasMarcas.find((m) => m.id === marca.id)) {
-      setMarca(null);
-      setModelo(null);
-      setSerie(null);
-    }
-  }, [impresorasActivas, marca]);
-
-  // Derivar modelos
-  useEffect(() => {
     if (!marca?.id) {
       setModelos([]);
-      setModelo(null);
-      setSeries([]);
-      setSerie(null);
       return;
     }
 
-    const nuevosModelos = [];
-    impresorasActivas
-      .filter((i) => i?.impresoraFisica?.impresora?.marca?.id === marca.id)
-      .forEach((i) => {
-        const modeloObj = i?.impresoraFisica?.impresora?.modelo;
-        if (modeloObj && !nuevosModelos.find((m) => m.id === modeloObj.id)) {
-          nuevosModelos.push(modeloObj);
-        }
-      });
+    const cargarModelos = async () => {
+      try {
+        const res = await axios.get(`${modeloUrl}/porMarca?idMarca=${marca.id}`);
+        const raw = Array.isArray(res.data) ? res.data : res.data.modelo;
+        // "cancelado" evita pisar la lista si el usuario cambió de marca
+        // mientras esta respuesta todavía viajaba.
+        if (!cancelado) setModelos((raw || []).filter((m) => m.flagHabilitado));
+      } catch {
+        if (!cancelado) setModelos([]);
+      }
+    };
 
-    setModelos(nuevosModelos);
+    cargarModelos();
+    return () => {
+      cancelado = true;
+    };
+  }, [marca?.id]);
 
-    if (modelo && !nuevosModelos.find((m) => m.id === modelo.id)) {
-      setModelo(null);
-      setSerie(null);
-    }
-  }, [marca, modelo, impresorasActivas]);
-
-  // Derivar series
+  // Al cambiar el modelo, el resultado de la consulta anterior ya no vale.
   useEffect(() => {
-    if (!marca?.id || !modelo?.id) {
-      setSeries([]);
-      setSerie(null);
-      return;
-    }
+    setPrevia(null);
+  }, [modelo?.id]);
 
-    const nuevasSeries = impresorasActivas
-      .filter(
-        (i) =>
-          i?.impresoraFisica?.impresora?.marca?.id === marca.id &&
-          i?.impresoraFisica?.impresora?.modelo?.id === modelo.id
-      )
-      .map((i) => ({
-        id: i.impresoraFisica.id,
-        numeroSerie: i.impresoraFisica.numeroSerie,
-      }));
+  // -------------------------------------------------------------------------
+  // 4. Acciones
+  // -------------------------------------------------------------------------
 
-    setSeries(nuevasSeries);
-
-    if (serie && !nuevasSeries.find((s) => s.id === serie.id)) {
-      setSerie(null);
-    }
-  }, [marca, modelo, serie, impresorasActivas]);
-
-  const cargarServicios = async () => {
-    try {
-      const res = await axios.get(serviciosUrl);
-      setServicios(res.data || []);
-    } catch {
-      setServicios([]);
-    }
+  // Muestra el mensaje de error que mandó el backend (o uno genérico).
+  const mostrarError = (error, mensajeGenerico) => {
+    console.error(mensajeGenerico, error);
+    addToast(`❌ ${error.response?.data?.error || mensajeGenerico}`, "danger");
   };
 
-  const cargarImpresorasActivas = async (servicioId) => {
+  // Botón "Baja": primero consulta qué pasaría.
+  //  - Si hay servicios con impresoras de ese modelo → se muestra la lista
+  //    (la pantalla la dibuja a partir de `previa`) y NO se pide confirmación.
+  //  - Si no hay → se abre la confirmación con el detalle de lo que se dará
+  //    de baja.
+  const solicitarConfirmacion = async () => {
+    if (!marca?.id || !modelo?.id || procesando) return;
+
+    setProcesando(true);
     try {
-      const res = await axios.get(
-        `${impresorasServicioUrl}/activas/${servicioId}`
-      );
-      setImpresorasActivas(res.data || []);
+      const res = await axios.get(`${impresoraUrl}/baja-logica/previa`, {
+        params: { marcaId: marca.id, modeloId: modelo.id },
+      });
+      setPrevia(res.data);
+      if (res.data.puedeDarseDeBaja) setShowConfirm(true);
     } catch (error) {
-      console.error("Error al cargar impresoras activas:", error);
-      setImpresorasActivas([]);
+      mostrarError(error, "Error al consultar la baja de la impresora");
+    } finally {
+      setProcesando(false);
     }
   };
 
-  // ✅ Abrir modal
-  const solicitarConfirmacion = () => {
-    if (!serie?.id) {
-      addToast("❌ Debes seleccionar una impresora", "danger");
-      return;
-    }
-    setShowConfirm(true);
-  };
-
-  // ✅ Cerrar modal
   const cancelarConfirmacion = () => {
     setShowConfirm(false);
   };
 
-  // ✅ Ejecutar baja (solo si el usuario confirma)
+  // El usuario confirmó: se ejecuta la baja en el backend.
   const confirmarBaja = async () => {
     setShowConfirm(false);
-
-    if (!serie?.id || procesando) return;
+    if (!marca?.id || !modelo?.id || procesando) return;
 
     setProcesando(true);
-
     try {
-      // Al dar de baja, el backend ya cierra automáticamente la entrega
-      // activa (fechaRetiro) dentro de la misma transacción, así que no
-      // hace falta un segundo llamado a /retirar.
-      await axios.put(`${impresoraFisicaUrl}/baja`, {
-        impresoraFisicaId: serie.id,
+      const res = await axios.put(`${impresoraUrl}/baja-logica`, {
+        marcaId: marca.id,
+        modeloId: modelo.id,
       });
 
-      addToast("✅ Impresora dada de baja correctamente", "success");
-
-      // recargar combos y limpiar set
-      cargarServicios();
+      const r = res.data;
+      addToast(
+        `✅ Impresora ${r.marca} ${r.modelo} dada de baja` +
+          (r.marcaDadaDeBaja ? ` (también la marca ${r.marca})` : ""),
+        "success"
+      );
       handleCancelar();
-
     } catch (error) {
-      console.error("Error al dar de baja impresora:", error);
-      addToast("❌ Error al dar de baja impresora", "danger");
+      const data = error.response?.data;
+
+      if (
+        error.response?.status === 409 &&
+        data?.code === CODIGO_CON_SERVICIOS
+      ) {
+        // Entre la consulta y la confirmación alguien entregó una impresora
+        // de este modelo: mostramos la lista actualizada de servicios.
+        setPrevia({
+          ...previa,
+          puedeDarseDeBaja: false,
+          servicios: data.data?.servicios || [],
+        });
+      } else {
+        mostrarError(error, "Error al dar de baja la impresora");
+      }
     } finally {
       setProcesando(false);
     }
   };
 
   const handleCancelar = () => {
-    setServicio(null);
     setMarca(null);
     setModelo(null);
-    setSerie(null);
+    setPrevia(null);
     navigate("/");
   };
 
+  // -------------------------------------------------------------------------
+  // 5. Valor que devuelve el hook
+  // -------------------------------------------------------------------------
   return {
-    servicio,
     marca,
     modelo,
-    serie,
-    servicios,
     marcas,
     modelos,
-    series,
-    setServicio,
+    previa,
+    procesando,
     setMarca,
     setModelo,
-    setSerie,
     handleCancelar,
-
-    // ✅ NUEVO
     showConfirm,
     solicitarConfirmacion,
     cancelarConfirmacion,

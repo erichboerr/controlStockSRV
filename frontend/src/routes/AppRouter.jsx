@@ -121,7 +121,10 @@ export default function AppRouter() {
         <Route path="/IngresarImpresora" element={<IngresarImpresora />} />
         <Route path="/EntregarImpresora" element={<EntrgarImpresora />} />
         <Route path="/RetirarImpresora" element={<RetirarImpresora />} />
-        <Route path="/BajaImpresora" element={<BajaImpresora />} />
+        {/* Baja de impresora (marca + modelo): solo Root o Administrador */}
+        <Route element={<RoleGuard allowedRoles={[ROLES.ROOT, ROLES.ADMIN]} />}>
+          <Route path="/BajaImpresora" element={<BajaImpresora />} />
+        </Route>
         <Route
           path="/CambioSerieImpresora"
           element={<CambioSerieImpresora />}
